@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Nuestros Planes — Kick Off Scholars</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --gold: #C9A84C;
+      --gold-light: #F0C040;
+      --gold-dark: #9A7A1A;
+      --dark: #111111;
+      --dark2: #1a1a1a;
+      --white: #ffffff;
+      --gray-light: #f5f5f5;
+      --gray: #888;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Open Sans', sans-serif; color: var(--dark); background: var(--white); overflow-x: hidden; }
+
+    /* ─── NAVBAR ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(255,255,255,0.97); backdrop-filter: blur(10px);
+      border-bottom: 2px solid var(--gold);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px; height: 72px; transition: box-shadow .3s;
+    }
+    nav.scrolled { box-shadow: 0 4px 20px rgba(0,0,0,.15); }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; }
+    .nav-logo img { height: 56px; mix-blend-mode: multiply; filter: contrast(1.1); }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 14px; text-decoration: none; color: var(--dark); text-transform: uppercase; letter-spacing: .5px; transition: color .2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+    .lang-switcher { display: flex; gap: 4px; }
+    .lang-btn { padding: 5px 10px; border: 1px solid var(--gold); background: transparent; color: var(--dark); font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 700; cursor: pointer; border-radius: 3px; transition: all .2s; text-transform: uppercase; }
+    .lang-btn.active, .lang-btn:hover { background: var(--gold); color: var(--white); }
+    .nav-cta { background: var(--gold); color: var(--white); padding: 9px 20px; border: none; border-radius: 4px; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: .5px; cursor: pointer; text-decoration: none; transition: background .2s; }
+    .nav-cta:hover { background: var(--gold-dark); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { width: 24px; height: 2px; background: var(--dark); }
+
+    /* ─── HERO ─── */
+    #hero {
+      background: var(--dark); min-height: 60vh;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 120px 40px 80px;
+      position: relative; overflow: hidden;
+    }
+    #hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: repeating-linear-gradient(-45deg, rgba(201,168,76,.04) 0, rgba(201,168,76,.04) 1px, transparent 1px, transparent 28px);
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 800px; }
+    .hero-badge { display: inline-block; background: var(--gold); color: var(--dark); font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 3px; padding: 6px 18px; border-radius: 2px; margin-bottom: 20px; }
+    .hero-title { font-family: 'Montserrat', sans-serif; font-size: clamp(36px, 6vw, 72px); font-weight: 900; color: var(--white); text-transform: uppercase; line-height: 1; margin-bottom: 20px; letter-spacing: -1px; }
+    .hero-title span { color: var(--gold-light); }
+    .hero-subtitle { font-size: clamp(15px, 2vw, 20px); color: rgba(255,255,255,.7); max-width: 580px; margin: 0 auto; line-height: 1.7; }
+
+    /* ─── TAB SWITCHER ─── */
+    .tab-section { background: var(--gray-light); padding: 0; }
+    .tab-bar { display: flex; justify-content: center; gap: 0; max-width: 600px; margin: 0 auto; position: relative; top: 0; background: var(--dark); border-bottom: 3px solid var(--gold); }
+    .tab-btn {
+      flex: 1; padding: 20px 32px; border: none; background: transparent;
+      font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,.5);
+      cursor: pointer; transition: all .25s; position: relative;
+    }
+    .tab-btn.active { color: var(--gold); }
+    .tab-btn.active::after { content: ''; position: absolute; bottom: -3px; left: 0; right: 0; height: 3px; background: var(--gold); }
+    .tab-btn:hover { color: rgba(255,255,255,.85); }
+    .tab-content { display: none; padding: 80px 40px; }
+    .tab-content.active { display: block; animation: fadeIn .35s; }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
+
+    /* ─── SECTION HEADER ─── */
+    .section-header { text-align: center; margin-bottom: 60px; }
+    .section-badge { display: inline-block; color: var(--gold); font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 12px; }
+    .section-title { font-family: 'Montserrat', sans-serif; font-size: clamp(26px, 4vw, 42px); font-weight: 900; color: var(--dark); text-transform: uppercase; line-height: 1.1; margin-bottom: 16px; }
+    .section-title span { color: var(--gold); }
+    .section-line { width: 60px; height: 3px; background: var(--gold); margin: 0 auto; border-radius: 2px; }
+    .section-desc { max-width: 560px; margin: 20px auto 0; color: var(--gray); font-size: 15px; line-height: 1.7; }
+
+    /* ─── PLANS GRID ─── */
+    .plans-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1200px; margin: 0 auto; }
+    .plans-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; max-width: 800px; margin: 0 auto; }
+
+    .plan-card {
+      background: var(--white); border-radius: 12px;
+      border: 2px solid #e8e8e8; overflow: hidden;
+      transition: all .3s; display: flex; flex-direction: column;
+      position: relative;
+    }
+    .plan-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,0,0,.12); border-color: #ddd; }
+    .plan-card.featured { border-color: var(--gold); box-shadow: 0 8px 32px rgba(201,168,76,.2); }
+    .plan-card.featured:hover { box-shadow: 0 20px 56px rgba(201,168,76,.3); }
+
+    .plan-badge-top {
+      position: absolute; top: 16px; right: 16px;
+      background: var(--gold); color: var(--dark);
+      font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 1px; padding: 4px 10px; border-radius: 20px;
+    }
+
+    .plan-header { padding: 32px 28px 24px; border-bottom: 1px solid #f0f0f0; }
+    .plan-card.featured .plan-header { background: var(--dark); }
+    .plan-icon { width: 52px; height: 52px; border-radius: 12px; background: var(--gray-light); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+    .plan-card.featured .plan-icon { background: rgba(201,168,76,.15); }
+    .plan-icon svg { width: 26px; height: 26px; fill: none; stroke: var(--gold); stroke-width: 2; }
+    .plan-name { font-family: 'Montserrat', sans-serif; font-size: 22px; font-weight: 900; color: var(--dark); text-transform: uppercase; margin-bottom: 6px; }
+    .plan-card.featured .plan-name { color: var(--white); }
+    .plan-tagline { font-size: 13px; color: var(--gray); font-style: italic; line-height: 1.5; }
+    .plan-card.featured .plan-tagline { color: rgba(255,255,255,.55); }
+
+    .plan-body { padding: 28px; flex: 1; }
+    .plan-features { list-style: none; margin-bottom: 28px; }
+    .plan-features li { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 1px solid #f5f5f5; font-size: 14px; color: #444; line-height: 1.5; }
+    .plan-features li:last-child { border-bottom: none; }
+    .plan-check { width: 20px; height: 20px; border-radius: 50%; background: rgba(201,168,76,.15); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+    .plan-check svg { width: 11px; height: 11px; fill: none; stroke: var(--gold); stroke-width: 2.5; }
+
+    .plan-cost-note { font-size: 12px; color: var(--gray); background: var(--gray-light); padding: 10px 14px; border-radius: 6px; margin-bottom: 20px; font-style: italic; }
+    .plan-cost-note.included { background: rgba(76,175,80,.08); color: #2e7d32; font-style: normal; font-weight: 600; }
+
+    .plan-cta { display: block; text-align: center; background: var(--dark); color: var(--white); padding: 14px 24px; border-radius: 6px; text-decoration: none; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; transition: background .2s; }
+    .plan-cta:hover { background: var(--gold); }
+    .plan-card.featured .plan-cta { background: var(--gold); color: var(--dark); }
+    .plan-card.featured .plan-cta:hover { background: var(--gold-light); }
+
+    /* ─── PROCESS ─── */
+    #process { padding: 80px 40px; background: var(--white); }
+    .process-steps { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; max-width: 1200px; margin: 0 auto; position: relative; }
+    .process-steps::before { content: ''; position: absolute; top: 30px; left: 60px; right: 60px; height: 2px; background: linear-gradient(to right, var(--gold), rgba(201,168,76,.2)); z-index: 0; }
+    .step { text-align: center; position: relative; z-index: 1; }
+    .step-num { width: 60px; height: 60px; border-radius: 50%; background: var(--dark); color: var(--gold); font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 900; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; border: 3px solid var(--gold); }
+    .step-title { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--dark); margin-bottom: 8px; }
+    .step-text { font-size: 12px; color: var(--gray); line-height: 1.5; }
+
+    /* ─── FAQ ─── */
+    #faq { padding: 80px 40px; background: var(--gray-light); }
+    .faq-list { max-width: 800px; margin: 0 auto; }
+    .faq-item { border-radius: 8px; margin-bottom: 12px; overflow: hidden; border: 1px solid #e0e0e0; background: var(--white); }
+    .faq-q { display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; cursor: pointer; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 15px; color: var(--dark); transition: background .2s; gap: 16px; }
+    .faq-q:hover { background: var(--gray-light); }
+    .faq-item.open .faq-q { background: var(--dark); color: var(--white); }
+    .faq-icon { font-size: 20px; flex-shrink: 0; transition: transform .3s; font-weight: 300; color: var(--gold); }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+    .faq-item.open .faq-a { max-height: 300px; }
+    .faq-a p { padding: 16px 24px 20px; font-size: 14px; color: #555; line-height: 1.8; border-top: 1px solid #f0f0f0; }
+
+    /* ─── CTA BAND ─── */
+    #cta { background: linear-gradient(135deg, var(--dark) 0%, #2a2000 50%, var(--dark) 100%); padding: 80px 40px; text-align: center; position: relative; overflow: hidden; }
+    #cta::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(-45deg,rgba(201,168,76,.03) 0,rgba(201,168,76,.03) 1px,transparent 1px,transparent 20px); }
+    .cta-title { font-family: 'Montserrat', sans-serif; font-size: clamp(26px, 4vw, 48px); font-weight: 900; color: var(--white); text-transform: uppercase; margin-bottom: 14px; position: relative; }
+    .cta-title span { color: var(--gold); }
+    .cta-sub { color: rgba(255,255,255,.65); font-size: 17px; margin-bottom: 36px; position: relative; }
+    .cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; position: relative; }
+    .btn-primary { background: var(--gold); color: var(--dark); padding: 16px 36px; border-radius: 4px; text-decoration: none; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 15px; text-transform: uppercase; letter-spacing: 1px; transition: all .2s; border: 2px solid var(--gold); display: inline-block; }
+    .btn-primary:hover { background: var(--gold-light); border-color: var(--gold-light); transform: translateY(-2px); }
+    .btn-outline { background: transparent; color: var(--white); padding: 16px 36px; border-radius: 4px; text-decoration: none; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 15px; text-transform: uppercase; letter-spacing: 1px; transition: all .2s; border: 2px solid rgba(255,255,255,.6); display: inline-block; }
+    .btn-outline:hover { background: rgba(255,255,255,.1); border-color: var(--white); }
+
+    /* ─── FOOTER ─── */
+    footer { background: var(--dark2); padding: 48px 40px 24px; border-top: 3px solid var(--gold); }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 40px; }
+    .footer-brand img { height: 60px; mix-blend-mode: multiply; filter: invert(1) contrast(1.2) brightness(1.1); margin-bottom: 16px; }
+    .footer-brand p { color: rgba(255,255,255,.5); font-size: 14px; line-height: 1.7; max-width: 280px; }
+    .footer-col h4 { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul li a { color: rgba(255,255,255,.5); text-decoration: none; font-size: 14px; transition: color .2s; }
+    .footer-col ul li a:hover { color: var(--gold); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,.1); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; }
+    .footer-copy { color: rgba(255,255,255,.35); font-size: 13px; }
+    .footer-social { display: flex; gap: 12px; }
+    .social-btn { width: 36px; height: 36px; border-radius: 6px; background: rgba(255,255,255,.08); display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all .2s; }
+    .social-btn svg { width: 18px; height: 18px; fill: none; stroke: rgba(255,255,255,.5); stroke-width: 2; }
+    .social-btn:hover { background: var(--gold); }
+    .social-btn:hover svg { stroke: var(--dark); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1024px) { .plans-grid { grid-template-columns: repeat(2, 1fr); } .process-steps { grid-template-columns: repeat(3, 1fr); } .process-steps::before { display: none; } }
+    @media (max-width: 768px) { nav { padding: 0 20px; } .nav-links { display: none; } .hamburger { display: flex; } .plans-grid { grid-template-columns: 1fr; } .plans-grid-2 { grid-template-columns: 1fr; } .process-steps { grid-template-columns: repeat(2, 1fr); } .footer-top { grid-template-columns: 1fr; gap: 32px; } .footer-bottom { flex-direction: column; gap: 16px; text-align: center; } .tab-btn { font-size: 12px; padding: 16px 16px; } }
+    @media (max-width: 480px) { nav { height: 60px; } .nav-logo img { height: 44px; } .process-steps { grid-template-columns: 1fr 1fr; } }
+
+    .mobile-nav { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--dark); z-index: 999; flex-direction: column; align-items: center; justify-content: center; gap: 32px; }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a { font-family: 'Montserrat', sans-serif; font-size: 24px; font-weight: 800; text-transform: uppercase; text-decoration: none; color: var(--white); letter-spacing: 2px; transition: color .2s; }
+    .mobile-nav a:hover { color: var(--gold); }
+    .mobile-nav-close { position: absolute; top: 24px; right: 24px; background: none; border: none; color: var(--white); font-size: 32px; cursor: pointer; }
+    .mobile-lang { display: flex; gap: 8px; margin-top: 16px; }
+  </style>
+</head>
+<body>
+
+<!-- MOBILE NAV -->
+<div id="mobilenav" class="mobile-nav">
+  <button class="mobile-nav-close" onclick="closeMobileNav()">✕</button>
+  <a href="index.html" data-i18n="nav_home" onclick="closeMobileNav()">Inicio</a>
+  <a href="quienes-somos.html" data-i18n="nav_about" onclick="closeMobileNav()">Quiénes Somos</a>
+  <a href="nuestros-servicios.html" data-i18n="nav_services" onclick="closeMobileNav()">Servicios</a>
+  <a href="index.html#contact" data-i18n="nav_contact" onclick="closeMobileNav()">Contacto</a>
+  <div class="mobile-lang">
+    <button class="lang-btn active" onclick="setLang('es')">ES</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('fr')">FR</button>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a class="nav-logo" href="index.html">
+    <img src="img/logo.png" alt="Kick Off Scholars"/>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html" data-i18n="nav_home">Inicio</a></li>
+    <li><a href="quienes-somos.html" data-i18n="nav_about">Quiénes Somos</a></li>
+    <li><a href="nuestros-servicios.html" class="active" data-i18n="nav_services">Servicios</a></li>
+    <li><a href="index.html#contact" data-i18n="nav_contact">Contacto</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('es')">ES</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('fr')">FR</button>
+    </div>
+    <a href="index.html#contact" class="nav-cta" data-i18n="nav_cta">Empezar</a>
+    <div class="hamburger" onclick="openMobileNav()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-badge" data-i18n="hero_badge">Planes & Servicios</div>
+    <h1 class="hero-title" data-i18n="hero_title">Tu Camino a <span>USA</span></h1>
+    <p class="hero-subtitle" data-i18n="hero_subtitle">Elige el plan que mejor se adapta a tu momento y objetivos. Estamos contigo en cada paso.</p>
+  </div>
+</section>
+
+<!-- TABS -->
+<div class="tab-section">
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('freshman')" data-i18n="tab_freshman">Primer Año</button>
+    <button class="tab-btn" onclick="switchTab('transfer')" data-i18n="tab_transfer">Transfer</button>
+  </div>
+
+  <!-- ── PRIMER AÑO ── -->
+  <div class="tab-content active" id="tab-freshman">
+    <div class="section-header">
+      <span class="section-badge" data-i18n="fr_badge">Estudiantes de Primer Año</span>
+      <h2 class="section-title" data-i18n="fr_title">Planes para <span>Primer Año</span></h2>
+      <div class="section-line"></div>
+      <p class="section-desc" data-i18n="fr_desc">Diseñados para atletas que buscan ingresar directamente a una universidad americana por primera vez.</p>
+    </div>
+    <div class="plans-grid" id="freshman-plans-grid">
+      <!-- plans rendered by JS -->
+    </div>
+  </div>
+
+  <!-- ── TRANSFER ── -->
+  <div class="tab-content" id="tab-transfer">
+    <div class="section-header">
+      <span class="section-badge" data-i18n="tr_badge">Atletas en Transferencia</span>
+      <h2 class="section-title" data-i18n="tr_title">Planes para <span>Transfer</span></h2>
+      <div class="section-line"></div>
+      <p class="section-desc" data-i18n="tr_desc">Para atletas que ya están en una universidad americana y buscan cambiar de programa o institución.</p>
+    </div>
+    <div class="plans-grid-2" id="transfer-plans-grid">
+      <!-- plans rendered by JS -->
+    </div>
+  </div>
+</div>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="section-header">
+    <span class="section-badge" data-i18n="proc_badge">¿Cómo funciona?</span>
+    <h2 class="section-title" data-i18n="proc_title">Nuestro <span>Proceso</span></h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="process-steps" id="process-steps">
+    <!-- rendered by JS -->
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="section-header">
+    <span class="section-badge" data-i18n="faq_badge">Preguntas Frecuentes</span>
+    <h2 class="section-title" data-i18n="faq_title">Preguntas <span>Frecuentes</span></h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="faq-list" id="faq-list">
+    <!-- rendered by JS -->
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <h2 class="cta-title" data-i18n="cta_title">¿Listo para dar el <span>salto</span>?</h2>
+  <p class="cta-sub" data-i18n="cta_sub">Contáctanos hoy y comenzamos tu proceso sin compromiso.</p>
+  <div class="cta-btns">
+    <a href="index.html#contact" class="btn-primary" data-i18n="cta_btn1">Contactarnos ahora</a>
+    <a href="https://wa.me/17869223853" target="_blank" class="btn-outline" data-i18n="cta_btn2">WhatsApp</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <img src="img/logo.png" alt="Kick Off Scholars"/>
+      <p data-i18n="footer_desc">Conectando el talento de soccer latinoamericano y europeo con las universidades de Estados Unidos.</p>
+    </div>
+    <div class="footer-col">
+      <h4 data-i18n="footer_links">Navegación</h4>
+      <ul>
+        <li><a href="index.html" data-i18n="nav_home">Inicio</a></li>
+        <li><a href="quienes-somos.html" data-i18n="nav_about">Quiénes Somos</a></li>
+        <li><a href="nuestros-servicios.html" data-i18n="nav_services">Servicios</a></li>
+        <li><a href="index.html#contact" data-i18n="nav_contact">Contacto</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4 data-i18n="footer_contact">Contacto</h4>
+      <ul>
+        <li><a href="mailto:kickoffscholars@gmail.com">kickoffscholars@gmail.com</a></li>
+        <li><a href="https://wa.me/17869223853" target="_blank">+1 786 922 3853 (WhatsApp)</a></li>
+        <li><a href="https://instagram.com/kickoffscholars.usa" target="_blank">@kickoffscholars.usa</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2025 Kick Off Scholars. <span data-i18n="footer_rights">Todos los derechos reservados.</span></span>
+    <div class="footer-social">
+      <a href="https://wa.me/17869223853" target="_blank" class="social-btn">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.998-1.312A9.96 9.96 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="https://instagram.com/kickoffscholars.usa" target="_blank" class="social-btn">
+        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      </a>
+      <a href="mailto:kickoffscholars@gmail.com" class="social-btn">
+        <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ════════════════════════════════════
+   CONTENT DATA — trilingual
+   ════════════════════════════════════ */
+const content = {
+  es: {
+    nav_home:"Inicio", nav_about:"Quiénes Somos", nav_services:"Servicios", nav_contact:"Contacto", nav_cta:"Empezar",
+    hero_badge:"Planes & Servicios", hero_title:"Tu Camino a USA", hero_subtitle:"Elige el plan que mejor se adapta a tu momento y objetivos. Estamos contigo en cada paso.",
+    tab_freshman:"Primer Año", tab_transfer:"Transfer",
+    fr_badge:"Estudiantes de Primer Año", fr_title:"Planes para Primer Año",
+    fr_desc:"Diseñados para atletas que buscan ingresar directamente a una universidad americana por primera vez.",
+    tr_badge:"Atletas en Transferencia", tr_title:"Planes para Transfer",
+    tr_desc:"Para atletas que ya están en una universidad americana y buscan cambiar de programa o institución.",
+    proc_badge:"¿Cómo funciona?", proc_title:"Nuestro Proceso",
+    faq_badge:"Preguntas Frecuentes", faq_title:"Preguntas Frecuentes",
+    cta_title:"¿Listo para dar el salto?", cta_sub:"Contáctanos hoy y comenzamos tu proceso sin compromiso.",
+    cta_btn1:"Contactarnos ahora", cta_btn2:"WhatsApp",
+    footer_desc:"Conectando el talento de soccer latinoamericano y europeo con las universidades de Estados Unidos.",
+    footer_links:"Navegación", footer_contact:"Contacto", footer_rights:"Todos los derechos reservados.",
+    costs_not_included:"* Los costes de traducciones, aplicación y elegibilidad no están incluidos.",
+    costs_included:"✔ Todos los costes están incluidos en este plan.",
+    learn_more:"Consultar plan",
+
+    freshman_plans: [
+      {
+        name: "Plan Básico",
+        tagline: "El punto de partida ideal para tu aventura universitaria en USA.",
+        featured: false,
+        badge: "",
+        features: [
+          "Evaluación completa del perfil deportivo y académico",
+          "Difusión del perfil a nuestra red de contactos universitarios",
+          "Presentación de ofertas concretas de universidades interesadas"
+        ],
+        costNote: "costs_not_included"
+      },
+      {
+        name: "Plan Scholars",
+        tagline: "Gestión integral: beca, admisión y toda la documentación cubierta.",
+        featured: true,
+        badge: "Popular",
+        features: [
+          "Todo lo incluido en el Plan Básico",
+          "Acompañamiento completo en el proceso de admisión universitaria",
+          "Garantía de admisión formal a la universidad seleccionada",
+          "Cobertura de costes de traducción oficial de documentos",
+          "Pago de tasas de aplicación a la universidad",
+          "Gestión del proceso de elegibilidad (NCAA/NAIA/NJCAA)"
+        ],
+        costNote: "costs_not_included"
+      },
+      {
+        name: "Plan Golden Scholars",
+        tagline: "Servicio premium con acompañamiento total, desde la oferta hasta tu llegada a USA.",
+        featured: false,
+        badge: "Premium",
+        features: [
+          "Todo lo incluido en el Plan Scholars",
+          "Tramitación del formulario I-20 y registro en SEVIS",
+          "Coordinación de la cita consular para visa de estudiante F-1",
+          "Mock interviews: simulacros de la entrevista de visa",
+          "Proceso de elegibilidad completamente cubierto",
+          "Atención personalizada 24/7 durante tu estancia en USA",
+          "Todos los costes del proceso están incluidos"
+        ],
+        costNote: "costs_included"
+      }
+    ],
+
+    transfer_plans: [
+      {
+        name: "Plan Standard",
+        tagline: "Encuentra tu próxima oportunidad universitaria con el respaldo de nuestra red.",
+        featured: false,
+        badge: "",
+        features: [
+          "Evaluación actualizada del perfil deportivo y académico",
+          "Búsqueda y presentación de nuevas ofertas universitarias",
+          "Asesoramiento en la selección del programa adecuado"
+        ],
+        costNote: "costs_not_included"
+      },
+      {
+        name: "Plan Elite",
+        tagline: "Gestión completa del proceso de transferencia, incluyendo admisión y visa.",
+        featured: true,
+        badge: "Recomendado",
+        features: [
+          "Todo lo incluido en el Plan Standard",
+          "Acompañamiento completo en el proceso de admisión a la nueva universidad",
+          "Gestión de la documentación de transferencia de créditos",
+          "Asesoramiento y tramitación en asuntos de visa (cambio de status si aplica)"
+        ],
+        costNote: "costs_not_included"
+      }
+    ],
+
+    process_steps: [
+      { title: "Evaluación", text: "Analizamos tu perfil deportivo y académico en detalle." },
+      { title: "Estrategia", text: "Definimos los niveles y universidades que mejor se adaptan a ti." },
+      { title: "Contacto", text: "Presentamos tu perfil a los entrenadores de nuestra red." },
+      { title: "Ofertas", text: "Recibes y comparas propuestas concretas de universidades." },
+      { title: "Decisión", text: "Te asesoramos para elegir la mejor opción para tu futuro." },
+      { title: "Admisión", text: "Gestionamos toda la documentación hasta tu llegada a USA." }
+    ],
+
+    faqs: [
+      { q: "¿Cuánto tiempo tarda el proceso?", a: "El proceso completo puede tomar entre 3 y 9 meses dependiendo del nivel y del plan elegido. Cuanto antes empieces, más opciones tendrás disponibles." },
+      { q: "¿Necesito hablar inglés perfectamente?", a: "Un nivel funcional de inglés es necesario, pero no tiene que ser perfecto. Muchas universidades ofrecen programas de apoyo idiomático. Te asesoramos sobre los requisitos específicos según el programa." },
+      { q: "¿Qué nivel deportivo necesito tener?", a: "Trabajamos con atletas de distintos niveles. Lo importante es tener historial competitivo documentado (videos, estadísticas, referencias de entrenadores). Hacemos una evaluación honesta de tu perfil desde el principio." },
+      { q: "¿Puedo estudiar cualquier carrera en USA?", a: "Sí. Independientemente del deporte, puedes elegir cualquier área académica disponible en la universidad. La beca deportiva es compatible con cualquier programa de estudios." },
+      { q: "¿Cuáles son los costes del proceso?", a: "Los costes varían según el plan. El Plan Básico y el Plan Scholars requieren que el atleta cubra ciertos gastos administrativos. El Plan Golden Scholars incluye todos los costes. Consúltanos para obtener información personalizada." }
+    ]
+  },
+
+  en: {
+    nav_home:"Home", nav_about:"About Us", nav_services:"Services", nav_contact:"Contact", nav_cta:"Get Started",
+    hero_badge:"Plans & Services", hero_title:"Your Path to USA", hero_subtitle:"Choose the plan that best fits your goals. We're with you every step of the way.",
+    tab_freshman:"Freshman", tab_transfer:"Transfer",
+    fr_badge:"First-Year Students", fr_title:"Freshman Plans",
+    fr_desc:"Designed for athletes looking to enter a US university for the first time.",
+    tr_badge:"Transfer Athletes", tr_title:"Transfer Plans",
+    tr_desc:"For athletes already in a US university looking to change program or institution.",
+    proc_badge:"How does it work?", proc_title:"Our Process",
+    faq_badge:"FAQ", faq_title:"Frequently Asked Questions",
+    cta_title:"Ready to make the leap?", cta_sub:"Contact us today and we'll start your process with no commitment.",
+    cta_btn1:"Contact us now", cta_btn2:"WhatsApp",
+    footer_desc:"Connecting Latin American and European soccer talent with US universities.",
+    footer_links:"Navigation", footer_contact:"Contact", footer_rights:"All rights reserved.",
+    costs_not_included:"* Translation, application, and eligibility costs are not included.",
+    costs_included:"✔ All costs are included in this plan.",
+    learn_more:"Inquire about this plan",
+
+    freshman_plans: [
+      {
+        name: "Basic Plan",
+        tagline: "The perfect starting point for your US university journey.",
+        featured: false,
+        badge: "",
+        features: [
+          "Comprehensive evaluation of your athletic and academic profile",
+          "Distribution of your profile to our university network",
+          "Presentation of concrete offers from interested universities"
+        ],
+        costNote: "costs_not_included"
+      },
+      {
+        name: "Scholars Plan",
+        tagline: "Full management: scholarship, admission, and all paperwork covered.",
+        featured: true,
+        badge: "Popular",
+        features: [
+          "Everything in the Basic Plan",
+          "Full support throughout the university admission process",
+          "Guaranteed formal admission to the selected university",
+          "Coverage of official document translation costs",
+          "Payment of university application fees",
+          "Management of eligibility certification (NCAA/NAIA/NJCAA)"
+        ],
+        costNote: "costs_not_included"
+      },
+      {
+        name: "Golden Scholars Plan",
+        tagline: "Premium service with full support from offer to arrival in the USA.",
+        featured: false,
+        badge: "Premium",
+        features: [
+          "Everything in the Scholars Plan",
+          "Processing of the I-20 form and SEVIS registration",
+          "Coordination of the F-1 student visa consular appointment",
+          "Mock interviews: visa interview practice sessions",
+          "Eligibility process fully covered",
+          "Personalized 24/7 support during your stay in the USA",
+          "All process costs are included"
+        ],
+        costNote: "costs_included"
+      }
+    ],
+
+    transfer_plans: [
+      {
+        name: "Standard Plan",
+        tagline: "Find your next university opportunity backed by our network.",
+        featured: false,
+        badge: "",
+        features: [
+          "Updated evaluation of your athletic and academic profile",
+          "Search and presentation of new university offers",
+          "Guidance in selecting the right program"
+        ],
+        costNote: "costs_not_included"
+      },
+      {
+        name: "Elite Plan",
+        tagline: "Complete management of the transfer process, including admission and visa.",
+        featured: true,
+        badge: "Recommended",
+        features: [
+          "Everything in the Standard Plan",
+          "Full support throughout the admission process at the new university",
+          "Management of credit transfer documentation",
+          "Visa counseling and processing (status change if applicable)"
+        ],
+        costNote: "costs_not_included"
+      }
+    ],
+
+    process_steps: [
+      { title: "Evaluation", text: "We analyze your athletic and academic profile in detail." },
+      { title: "Strategy", text: "We identify the levels and universities that suit you best." },
+      { title: "Outreach", text: "We present your profile to coaches in our network." },
+      { title: "Offers", text: "You receive and compare concrete proposals from universities." },
+      { title: "Decision", text: "We advise you in choosing the best option for your future." },
+      { title: "Admission", text: "We manage all the paperwork until your arrival in the USA." }
+    ],
+
+    faqs: [
+      { q: "How long does the process take?", a: "The full process can take between 3 and 9 months depending on the level and plan chosen. The earlier you start, the more options you'll have available." },
+      { q: "Do I need to speak English perfectly?", a: "A functional level of English is necessary, but it doesn't have to be perfect. Many universities offer language support programs. We advise on specific requirements by program." },
+      { q: "What athletic level do I need?", a: "We work with athletes of different levels. What matters most is a documented competitive history (videos, stats, coach references). We provide an honest evaluation of your profile from the start." },
+      { q: "Can I study any major in the USA?", a: "Yes. Regardless of the sport, you can choose any academic area available at the university. The athletic scholarship is compatible with any field of study." },
+      { q: "What are the costs involved?", a: "Costs vary by plan. The Basic and Scholars Plans require the athlete to cover certain administrative expenses. The Golden Scholars Plan includes all costs. Contact us for personalized information." }
+    ]
+  },
+
+  fr: {
+    nav_home:"Accueil", nav_about:"Qui Sommes-Nous", nav_services:"Services", nav_contact:"Contact", nav_cta:"Commencer",
+    hero_badge:"Plans & Services", hero_title:"Votre Chemin vers les USA", hero_subtitle:"Choisissez le plan qui correspond le mieux à vos objectifs. Nous vous accompagnons à chaque étape.",
+    tab_freshman:"Première Année", tab_transfer:"Transfer",
+    fr_badge:"Étudiants de Première Année", fr_title:"Plans Première Année",
+    fr_desc:"Conçus pour les athlètes qui souhaitent intégrer une université américaine pour la première fois.",
+    tr_badge:"Athlètes en Transfert", tr_title:"Plans Transfer",
+    tr_desc:"Pour les athlètes déjà dans une université américaine qui souhaitent changer de programme ou d'institution.",
+    proc_badge:"Comment ça marche ?", proc_title:"Notre Processus",
+    faq_badge:"Questions Fréquentes", faq_title:"Questions Fréquemment Posées",
+    cta_title:"Prêt à franchir le pas ?", cta_sub:"Contactez-nous aujourd'hui et commençons votre processus sans engagement.",
+    cta_btn1:"Nous contacter", cta_btn2:"WhatsApp",
+    footer_desc:"Connecter les talents du football latino-américain et européen avec les universités américaines.",
+    footer_links:"Navigation", footer_contact:"Contact", footer_rights:"Tous droits réservés.",
+    costs_not_included:"* Les frais de traduction, de candidature et d'éligibilité ne sont pas inclus.",
+    costs_included:"✔ Tous les frais sont inclus dans ce plan.",
+    learn_more:"Renseignez-vous sur ce plan",
+
+    freshman_plans: [
+      {
+        name: "Plan Basique",
+        tagline: "Le point de départ idéal pour votre aventure universitaire aux USA.",
+        featured: false,
+        badge: "",
+        features: [
+          "Évaluation complète du profil sportif et académique",
+          "Diffusion du profil à notre réseau de contacts universitaires",
+          "Présentation d'offres concrètes d'universités intéressées"
+        ],
+        costNote: "costs_not_included"
+      },
+      {
+        name: "Plan Scholars",
+        tagline: "Gestion intégrale : bourse, admission et toute la documentation couverte.",
+        featured: true,
+        badge: "Populaire",
+        features: [
+          "Tout ce qui est inclus dans le Plan Basique",
+          "Accompagnement complet dans le processus d'admission universitaire",
+          "Garantie d'admission formelle à l'université sélectionnée",
+          "Prise en charge des frais de traduction officielle de documents",
+          "Paiement des frais de candidature à l'université",
+          "Gestion du processus d'éligibilité (NCAA/NAIA/NJCAA)"
+        ],
+        costNote: "costs_not_included"
+      },
+      {
+        name: "Plan Golden Scholars",
+        tagline: "Service premium avec un accompagnement total, de l'offre à votre arrivée aux USA.",
+        featured: false,
+        badge: "Premium",
+        features: [
+          "Tout ce qui est inclus dans le Plan Scholars",
+          "Traitement du formulaire I-20 et inscription au SEVIS",
+          "Coordination du rendez-vous consulaire pour le visa étudiant F-1",
+          "Mock interviews : simulations de l'entretien de visa",
+          "Processus d'éligibilité entièrement pris en charge",
+          "Assistance personnalisée 24h/24 pendant votre séjour aux USA",
+          "Tous les frais du processus sont inclus"
+        ],
+        costNote: "costs_included"
+      }
+    ],
+
+    transfer_plans: [
+      {
+        name: "Plan Standard",
+        tagline: "Trouvez votre prochaine opportunité universitaire grâce à notre réseau.",
+        featured: false,
+        badge: "",
+        features: [
+          "Évaluation actualisée du profil sportif et académique",
+          "Recherche et présentation de nouvelles offres universitaires",
+          "Conseils pour la sélection du programme adapté"
+        ],
+        costNote: "costs_not_included"
+      },
+      {
+        name: "Plan Élite",
+        tagline: "Gestion complète du processus de transfert, y compris admission et visa.",
+        featured: true,
+        badge: "Recommandé",
+        features: [
+          "Tout ce qui est inclus dans le Plan Standard",
+          "Accompagnement complet dans le processus d'admission à la nouvelle université",
+          "Gestion de la documentation pour le transfert de crédits",
+          "Conseils et démarches visa (changement de statut si applicable)"
+        ],
+        costNote: "costs_not_included"
+      }
+    ],
+
+    process_steps: [
+      { title: "Évaluation", text: "Nous analysons votre profil sportif et académique en détail." },
+      { title: "Stratégie", text: "Nous identifions les niveaux et universités qui vous conviennent le mieux." },
+      { title: "Contact", text: "Nous présentons votre profil aux entraîneurs de notre réseau." },
+      { title: "Offres", text: "Vous recevez et comparez des propositions concrètes d'universités." },
+      { title: "Décision", text: "Nous vous conseillons pour choisir la meilleure option pour votre avenir." },
+      { title: "Admission", text: "Nous gérons tous les documents jusqu'à votre arrivée aux USA." }
+    ],
+
+    faqs: [
+      { q: "Combien de temps dure le processus ?", a: "Le processus complet peut prendre entre 3 et 9 mois selon le niveau et le plan choisi. Plus tôt vous commencez, plus vous aurez d'options disponibles." },
+      { q: "Faut-il parler anglais parfaitement ?", a: "Un niveau fonctionnel d'anglais est nécessaire, mais pas parfait. Beaucoup d'universités proposent des programmes de soutien linguistique. Nous vous conseillons sur les exigences spécifiques selon le programme." },
+      { q: "Quel niveau sportif faut-il avoir ?", a: "Nous travaillons avec des athlètes de différents niveaux. L'essentiel est d'avoir un historique compétitif documenté (vidéos, statistiques, références d'entraîneurs). Nous faisons une évaluation honnête de votre profil dès le départ." },
+      { q: "Puis-je étudier n'importe quelle filière aux USA ?", a: "Oui. Quel que soit le sport, vous pouvez choisir n'importe quel domaine académique disponible dans l'université. La bourse sportive est compatible avec tout programme d'études." },
+      { q: "Quels sont les coûts du processus ?", a: "Les coûts varient selon le plan. Les Plans Basique et Scholars nécessitent que l'athlète couvre certains frais administratifs. Le Plan Golden Scholars inclut tous les frais. Contactez-nous pour des informations personnalisées." }
+    ]
+  }
+};
+
+/* ════════════════════════════════════
+   RENDER FUNCTIONS
+   ════════════════════════════════════ */
+function checkIcon() {
+  return `<div class="plan-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>`;
+}
+
+function renderPlans(plans, gridId, lang) {
+  const d = content[lang];
+  const grid = document.getElementById(gridId);
+  if (!grid) return;
+  grid.innerHTML = plans.map(plan => `
+    <div class="plan-card ${plan.featured ? 'featured' : ''}">
+      ${plan.badge ? `<div class="plan-badge-top">${plan.badge}</div>` : ''}
+      <div class="plan-header">
+        <div class="plan-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="plan-name">${plan.name}</div>
+        <div class="plan-tagline">${plan.tagline}</div>
+      </div>
+      <div class="plan-body">
+        <ul class="plan-features">
+          ${plan.features.map(f => `<li>${checkIcon()}<span>${f}</span></li>`).join('')}
+        </ul>
+        <div class="plan-cost-note ${plan.costNote === 'costs_included' ? 'included' : ''}">${d[plan.costNote]}</div>
+        <a href="index.html#contact" class="plan-cta">${d.learn_more}</a>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderProcess(steps, lang) {
+  const el = document.getElementById('process-steps');
+  if (!el) return;
+  el.innerHTML = steps.map((s, i) => `
+    <div class="step">
+      <div class="step-num">${String(i+1).padStart(2,'0')}</div>
+      <div class="step-title">${s.title}</div>
+      <p class="step-text">${s.text}</p>
+    </div>
+  `).join('');
+}
+
+function renderFAQ(faqs) {
+  const el = document.getElementById('faq-list');
+  if (!el) return;
+  el.innerHTML = faqs.map((item, i) => `
+    <div class="faq-item" id="faq-${i}">
+      <div class="faq-q" onclick="toggleFAQ(${i})">
+        <span>${item.q}</span>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a"><p>${item.a}</p></div>
+    </div>
+  `).join('');
+}
+
+function toggleFAQ(i) {
+  const el = document.getElementById('faq-'+i);
+  const wasOpen = el.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(x => x.classList.remove('open'));
+  if (!wasOpen) el.classList.add('open');
+}
+
+/* ════════════════════════════════════
+   LANGUAGE
+   ════════════════════════════════════ */
+let currentLang = 'es';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent.trim().toLowerCase() === lang));
+  const d = content[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const k = el.getAttribute('data-i18n');
+    if (d[k] !== undefined) el.textContent = d[k];
+  });
+  renderPlans(d.freshman_plans, 'freshman-plans-grid', lang);
+  renderPlans(d.transfer_plans, 'transfer-plans-grid', lang);
+  renderProcess(d.process_steps, lang);
+  renderFAQ(d.faqs);
+}
+
+/* ════════════════════════════════════
+   TABS
+   ════════════════════════════════════ */
+function switchTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach((b, i) => {
+    b.classList.toggle('active', (i === 0 && tab === 'freshman') || (i === 1 && tab === 'transfer'));
+  });
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+}
+
+/* ════════════════════════════════════
+   INIT
+   ════════════════════════════════════ */
+setLang('es');
+
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+});
+
+function openMobileNav() { document.getElementById('mobilenav').classList.add('open'); document.body.style.overflow = 'hidden'; }
+function closeMobileNav() { document.getElementById('mobilenav').classList.remove('open'); document.body.style.overflow = ''; }
+</script>
+</body>
+</html>
