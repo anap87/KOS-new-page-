@@ -125,7 +125,8 @@
 
     .plan-cost-note { font-size: 12px; color: var(--gray); background: var(--gray-light); padding: 10px 14px; border-radius: 6px; margin-bottom: 20px; font-style: italic; }
     .plan-cost-note.included { background: rgba(76,175,80,.08); color: #2e7d32; font-style: normal; font-weight: 600; }
-
+    .plan-cost-note.included2 { background: rgba(255,152,0,.10); color: #ef6c00; font-style: normal; font-weight: 600; }
+    
     .plan-cta { display: block; text-align: center; background: var(--dark); color: var(--white); padding: 14px 24px; border-radius: 6px; text-decoration: none; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; transition: background .2s; }
     .plan-cta:hover { background: var(--gold); }
     .plan-card.featured .plan-cta { background: var(--gold); color: var(--dark); }
@@ -486,6 +487,7 @@ const content = {
     footer_links:"Navigation", footer_contact:"Contact", footer_rights:"All rights reserved.",
     costs_not_included:"* Translation, application, and eligibility costs are not included.",
     costs_included:"✔ All costs are included in this plan.",
+    costs_included2:"✔ The admission, eligibility, and document translation costs are included in this plan.",
     learn_more:"Inquire about this plan",
 
     freshman_plans: [
@@ -514,7 +516,7 @@ const content = {
           "Payment of university application fees",
           "Management of eligibility certification (NCAA/NAIA/NJCAA)"
         ],
-        costNote: "costs_not_included"
+        costNote: "costs_included2"
       },
       {
         name: "Golden Scholars Plan",
@@ -596,6 +598,7 @@ const content = {
     footer_links:"Navigation", footer_contact:"Contact", footer_rights:"Tous droits réservés.",
     costs_not_included:"* Les frais de traduction, de candidature et d'éligibilité ne sont pas inclus.",
     costs_included:"✔ Tous les frais sont inclus dans ce plan.",
+    costs_included2:"✔ Les frais d'admission, d'éligibilité et de traduction des documents sont inclus dans ce plan.",
     learn_more:"Renseignez-vous sur ce plan",
 
     freshman_plans: [
@@ -624,7 +627,7 @@ const content = {
           "Paiement des frais de candidature à l'université",
           "Gestion du processus d'éligibilité (NCAA/NAIA/NJCAA)"
         ],
-        costNote: "costs_not_included"
+        costNote: "costs_included2"
       },
       {
         name: "Plan Golden Scholars",
@@ -716,7 +719,7 @@ function renderPlans(plans, gridId, lang) {
         <ul class="plan-features">
           ${plan.features.map(f => `<li>${checkIcon()}<span>${f}</span></li>`).join('')}
         </ul>
-        <div class="plan-cost-note ${plan.costNote === 'costs_included' ? 'included' : ''}">${d[plan.costNote]}</div>
+        <div class="plan-cost-note ${plan.costNote === 'costs_included' ? 'included' : plan.costNote === 'costs_included2' ? 'costs_included2' : ''}">${d[plan.costNote]}</div>
         <a href="index.html#contact" class="plan-cta">${d.learn_more}</a>
       </div>
     </div>
