@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Kick Off Scholars</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --gold: #C9A84C;
+      --gold-light: #F0C040;
+      --gold-dark: #9A7A1A;
+      --dark: #111111;
+      --dark2: #1a1a1a;
+      --white: #ffffff;
+      --gray-light: #f5f5f5;
+      --gray: #888;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Open Sans', sans-serif; color: var(--dark); background: var(--white); overflow-x: hidden; }
+
+    /* ─── NAVBAR ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(10px);
+      border-bottom: 2px solid var(--gold);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px; height: 72px;
+      transition: box-shadow .3s;
+    }
+    nav.scrolled { box-shadow: 0 4px 20px rgba(0,0,0,.15); }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; }
+    .nav-logo img { height: 56px; mix-blend-mode: multiply; filter: contrast(1.1); }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 14px;
+      text-decoration: none; color: var(--dark); text-transform: uppercase;
+      letter-spacing: .5px; transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+    .lang-switcher { display: flex; gap: 4px; }
+    .lang-btn {
+      padding: 5px 10px; border: 1px solid var(--gold);
+      background: transparent; color: var(--dark);
+      font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 700;
+      cursor: pointer; border-radius: 3px; transition: all .2s; text-transform: uppercase;
+    }
+    .lang-btn.active, .lang-btn:hover { background: var(--gold); color: var(--white); }
+    .nav-cta {
+      background: var(--gold); color: var(--white);
+      padding: 9px 20px; border: none; border-radius: 4px;
+      font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 13px;
+      text-transform: uppercase; letter-spacing: .5px;
+      cursor: pointer; text-decoration: none; transition: background .2s;
+    }
+    .nav-cta:hover { background: var(--gold-dark); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { width: 24px; height: 2px; background: var(--dark); transition: all .3s; }
+
+    /* ─── HERO ─── */
+    #hero {
+      position: relative; min-height: 100vh;
+      display: flex; align-items: center; justify-content: center; overflow: hidden;
+    }
+    .hero-video {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      object-fit: cover; z-index: 0;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(135deg, rgba(0,0,0,.75) 0%, rgba(0,0,0,.55) 50%, rgba(201,168,76,.2) 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 2; text-align: center;
+      padding: 0 20px; max-width: 900px;
+    }
+    .hero-badge {
+      display: inline-block; background: var(--gold); color: var(--dark);
+      font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 3px;
+      padding: 6px 18px; border-radius: 2px; margin-bottom: 20px;
+    }
+    .hero-title {
+      font-family: 'Montserrat', sans-serif; font-size: clamp(40px, 7vw, 88px);
+      font-weight: 900; color: var(--white); line-height: 1.0;
+      text-transform: uppercase; letter-spacing: -1px; margin-bottom: 20px;
+      text-shadow: 0 2px 20px rgba(0,0,0,.5);
+    }
+    .hero-title span { color: var(--gold-light); }
+    .hero-subtitle {
+      font-size: clamp(16px, 2.5vw, 22px); color: rgba(255,255,255,.88);
+      margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.6;
+    }
+    .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--gold); color: var(--dark);
+      padding: 16px 36px; border-radius: 4px; text-decoration: none;
+      font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 15px;
+      text-transform: uppercase; letter-spacing: 1px;
+      transition: all .2s; border: 2px solid var(--gold); display: inline-block;
+    }
+    .btn-primary:hover { background: var(--gold-light); border-color: var(--gold-light); transform: translateY(-2px); }
+    .btn-outline {
+      background: transparent; color: var(--white);
+      padding: 16px 36px; border-radius: 4px; text-decoration: none;
+      font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 15px;
+      text-transform: uppercase; letter-spacing: 1px;
+      transition: all .2s; border: 2px solid rgba(255,255,255,.6); display: inline-block;
+    }
+    .btn-outline:hover { background: rgba(255,255,255,.1); border-color: var(--white); }
+    .hero-scroll {
+      position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+      z-index: 2; display: flex; flex-direction: column; align-items: center;
+      gap: 8px; color: rgba(255,255,255,.6); font-size: 12px;
+      font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 2px;
+    }
+    .hero-scroll::after {
+      content: ''; width: 1px; height: 40px;
+      background: linear-gradient(to bottom, rgba(255,255,255,.5), transparent);
+      animation: scrollPulse 2s infinite;
+    }
+    @keyframes scrollPulse { 0%,100%{opacity:.4} 50%{opacity:1} }
+
+    /* ─── STATS ─── */
+    #stats { background: var(--dark); padding: 80px 40px; }
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      max-width: 1200px; margin: 0 auto;
+      border-left: 1px solid rgba(201,168,76,.2);
+    }
+    .stat-item {
+      text-align: center; padding: 40px 20px;
+      border-right: 1px solid rgba(201,168,76,.2);
+      border-top: 1px solid rgba(201,168,76,.2);
+      border-bottom: 1px solid rgba(201,168,76,.2);
+    }
+    .stat-number {
+      font-family: 'Montserrat', sans-serif; font-size: clamp(48px, 6vw, 80px);
+      font-weight: 900; color: var(--gold); line-height: 1; margin-bottom: 8px;
+    }
+    .stat-suffix { font-size: 0.55em; color: var(--gold-light); }
+    .stat-label {
+      font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 600;
+      color: rgba(255,255,255,.6); text-transform: uppercase; letter-spacing: 2px; margin-top: 8px;
+    }
+
+    /* ─── SECTION HEADERS ─── */
+    .section-header { text-align: center; margin-bottom: 60px; }
+    .section-badge {
+      display: inline-block; color: var(--gold);
+      font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 3px; margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Montserrat', sans-serif; font-size: clamp(28px, 4vw, 48px);
+      font-weight: 900; color: var(--dark); text-transform: uppercase;
+      line-height: 1.1; margin-bottom: 16px;
+    }
+    .section-title.light { color: var(--white); }
+    .section-title span { color: var(--gold); }
+    .section-line { width: 60px; height: 3px; background: var(--gold); margin: 0 auto; border-radius: 2px; }
+    .section-desc { max-width: 600px; margin: 20px auto 0; color: var(--gray); font-size: 16px; line-height: 1.7; }
+    .section-desc.light { color: rgba(255,255,255,.6); }
+
+    /* ─── LEVELS ─── */
+    #levels { padding: 100px 40px; background: var(--gray-light); }
+    .levels-grid {
+      display: grid; grid-template-columns: repeat(5, 1fr);
+      gap: 16px; max-width: 1200px; margin: 0 auto;
+    }
+    .level-card {
+      background: var(--white); border-radius: 8px; padding: 32px 20px; text-align: center;
+      cursor: pointer; transition: all .3s; border: 2px solid transparent;
+      box-shadow: 0 4px 20px rgba(0,0,0,.06); position: relative; overflow: hidden;
+    }
+    .level-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--gold);
+    }
+    .level-card:hover { transform: translateY(-6px); border-color: var(--gold); box-shadow: 0 12px 40px rgba(201,168,76,.25); }
+    .level-icon {
+      width: 64px; height: 64px; background: var(--dark); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; transition: background .3s;
+    }
+    .level-card:hover .level-icon { background: var(--gold); }
+    .level-icon svg { width: 32px; height: 32px; fill: none; stroke: var(--gold); stroke-width: 2; transition: stroke .3s; }
+    .level-card:hover .level-icon svg { stroke: var(--dark); }
+    .level-name { font-family: 'Montserrat', sans-serif; font-size: 18px; font-weight: 800; color: var(--dark); margin-bottom: 6px; text-transform: uppercase; }
+    .level-sub { font-size: 12px; color: var(--gray); font-family: 'Montserrat', sans-serif; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 14px; }
+    .level-beca { display: inline-block; background: var(--gold); color: var(--dark); font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 800; padding: 5px 14px; border-radius: 20px; margin-bottom: 16px; }
+    .level-more { font-size: 13px; color: var(--gold); font-weight: 700; font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; justify-content: center; gap: 6px; }
+
+    /* ─── MODAL ─── */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,.75);
+      z-index: 2000; display: none; align-items: center; justify-content: center; padding: 20px;
+    }
+    .modal-overlay.open { display: flex; animation: fadeIn .25s; }
+    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+    .modal {
+      background: var(--white); border-radius: 12px; max-width: 700px; width: 100%;
+      max-height: 90vh; overflow-y: auto; animation: slideUp .3s;
+    }
+    @keyframes slideUp { from{transform:translateY(30px);opacity:0} to{transform:none;opacity:1} }
+    .modal-header { background: var(--dark); padding: 32px 36px 24px; position: sticky; top: 0; z-index: 1; }
+    .modal-close { position: absolute; top: 20px; right: 24px; background: none; border: none; color: var(--white); font-size: 28px; cursor: pointer; line-height: 1; opacity: .7; transition: opacity .2s; }
+    .modal-close:hover { opacity: 1; }
+    .modal-level-badge { display: inline-block; background: var(--gold); color: var(--dark); font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; padding: 4px 12px; border-radius: 2px; margin-bottom: 10px; }
+    .modal-title { font-family: 'Montserrat', sans-serif; font-size: 32px; font-weight: 900; color: var(--white); text-transform: uppercase; margin-bottom: 4px; }
+    .modal-subtitle { color: rgba(255,255,255,.6); font-size: 15px; }
+    .modal-body { padding: 32px 36px; }
+    .modal-desc { font-size: 15px; color: #444; line-height: 1.8; margin-bottom: 28px; }
+    .modal-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 28px; }
+    .modal-stat { text-align: center; padding: 20px 12px; background: var(--gray-light); border-radius: 8px; border-top: 3px solid var(--gold); }
+    .modal-stat-val { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 900; color: var(--gold); margin-bottom: 4px; }
+    .modal-stat-lbl { font-size: 12px; color: var(--gray); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+    .modal-features { list-style: none; }
+    .modal-features li { display: flex; align-items: flex-start; gap: 12px; padding: 10px 0; border-bottom: 1px solid #f0f0f0; font-size: 14px; color: #444; line-height: 1.5; }
+    .modal-features li::before { content: '✦'; color: var(--gold); font-size: 12px; flex-shrink: 0; margin-top: 2px; }
+
+    /* ─── SUCCESS STORIES ─── */
+    #success { padding: 100px 0; background: var(--dark); overflow: hidden; }
+    #success .section-header { padding: 0 40px; }
+    .carousel-wrapper { position: relative; }
+    .carousel-track-outer { overflow: hidden; position: relative; padding: 20px 0; }
+    .carousel-track { display: flex; gap: 20px; padding: 0 40px; transition: transform .45s cubic-bezier(.25,.46,.45,.94); }
+    .carousel-slide { flex: 0 0 calc(25% - 15px); min-width: 260px; border-radius: 10px; overflow: hidden; cursor: pointer; position: relative; }
+    .carousel-slide img { width: 100%; display: block; aspect-ratio: 3/4; object-fit: cover; transition: transform .4s ease; }
+    .carousel-slide:hover img { transform: scale(1.05); }
+    .carousel-slide-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,.85) 0%, transparent 100%); padding: 20px 16px 16px; opacity: 0; transition: opacity .3s; }
+    .carousel-slide:hover .carousel-slide-overlay { opacity: 1; }
+    .carousel-slide-name { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 800; color: var(--white); display: block; margin-bottom: 4px; }
+    .carousel-slide-school { font-size: 12px; color: var(--gold-light); font-weight: 600; }
+    .carousel-nav { display: flex; justify-content: center; gap: 16px; margin-top: 32px; padding: 0 40px; }
+    .carousel-btn { width: 52px; height: 52px; border-radius: 50%; background: rgba(255,255,255,.08); border: 2px solid rgba(201,168,76,.4); color: var(--gold); font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .25s; }
+    .carousel-btn:hover { background: var(--gold); color: var(--dark); border-color: var(--gold); }
+    .carousel-dots { display: flex; justify-content: center; gap: 8px; margin-top: 20px; }
+    .carousel-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,.25); transition: all .3s; cursor: pointer; }
+    .carousel-dot.active { background: var(--gold); width: 24px; border-radius: 4px; }
+
+    /* ─── WHY US ─── */
+    #why { padding: 100px 40px; background: var(--white); }
+    .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; max-width: 1100px; margin: 0 auto; }
+    .why-card { padding: 36px 28px; border-radius: 8px; border: 1px solid #e8e8e8; text-align: center; transition: all .3s; position: relative; overflow: hidden; }
+    .why-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--gold); transform: scaleX(0); transition: transform .3s; }
+    .why-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,.1); }
+    .why-card:hover::after { transform: scaleX(1); }
+    .why-num { font-family: 'Montserrat', sans-serif; font-size: 64px; font-weight: 900; color: rgba(201,168,76,.15); line-height: 1; margin-bottom: -10px; }
+    .why-icon { width: 60px; height: 60px; background: var(--dark); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
+    .why-icon svg { width: 28px; height: 28px; fill: none; stroke: var(--gold); stroke-width: 2; }
+    .why-title { font-family: 'Montserrat', sans-serif; font-size: 18px; font-weight: 800; color: var(--dark); text-transform: uppercase; margin-bottom: 12px; }
+    .why-text { font-size: 14px; color: var(--gray); line-height: 1.7; }
+
+    /* ─── CTA ─── */
+    #cta { background: linear-gradient(135deg, var(--dark) 0%, #2a2000 50%, var(--dark) 100%); padding: 80px 40px; text-align: center; position: relative; overflow: hidden; }
+    #cta::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(-45deg,rgba(201,168,76,.03) 0px,rgba(201,168,76,.03) 1px,transparent 1px,transparent 20px); }
+    .cta-title { font-family: 'Montserrat', sans-serif; font-size: clamp(28px, 4vw, 52px); font-weight: 900; color: var(--white); text-transform: uppercase; margin-bottom: 16px; position: relative; }
+    .cta-title span { color: var(--gold); }
+    .cta-sub { color: rgba(255,255,255,.65); font-size: 17px; margin-bottom: 36px; position: relative; }
+    .cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; position: relative; }
+
+    /* ─── CONTACT ─── */
+    #contact { padding: 100px 40px; background: var(--gray-light); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; max-width: 1000px; margin: 0 auto; }
+    .contact-info h3 { font-family: 'Montserrat', sans-serif; font-size: 24px; font-weight: 800; color: var(--dark); text-transform: uppercase; margin-bottom: 20px; }
+    .contact-item { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; font-size: 15px; }
+    .contact-icon { width: 44px; height: 44px; background: var(--dark); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .contact-icon svg { width: 20px; height: 20px; fill: none; stroke: var(--gold); stroke-width: 2; }
+    .contact-item a { color: var(--dark); text-decoration: none; font-weight: 600; }
+    .contact-item a:hover { color: var(--gold); }
+    .contact-form { display: flex; flex-direction: column; gap: 16px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--dark); }
+    .form-group input, .form-group select, .form-group textarea { padding: 12px 16px; border: 1.5px solid #ddd; border-radius: 6px; font-family: 'Open Sans', sans-serif; font-size: 14px; color: var(--dark); background: var(--white); transition: border-color .2s; outline: none; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--gold); }
+    .form-group textarea { min-height: 120px; resize: vertical; }
+    .btn-submit { background: var(--dark); color: var(--white); padding: 14px 32px; border: none; border-radius: 4px; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: background .2s; align-self: flex-start; }
+    .btn-submit:hover { background: var(--gold); }
+
+    /* ─── FORM SUCCESS ─── */
+    .form-success {
+      display: none; background: #f0faf0; border: 2px solid #4caf50;
+      border-radius: 8px; padding: 28px 24px; text-align: center;
+    }
+    .form-success.show { display: block; animation: fadeIn .4s; }
+    .form-success-icon { font-size: 40px; margin-bottom: 12px; }
+    .form-success h4 { font-family: 'Montserrat', sans-serif; font-size: 18px; font-weight: 800; color: #2e7d32; margin-bottom: 8px; }
+    .form-success p { font-size: 14px; color: #444; margin-bottom: 16px; }
+    .form-success-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+    .btn-wa { background: #25d366; color: var(--white); padding: 10px 20px; border-radius: 4px; text-decoration: none; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 13px; text-transform: uppercase; }
+    .btn-wa:hover { background: #1ebe5d; }
+
+    /* ─── FOOTER ─── */
+    footer { background: var(--dark2); padding: 48px 40px 24px; border-top: 3px solid var(--gold); }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 40px; }
+    .footer-brand img { height: 60px; mix-blend-mode: multiply; filter: invert(1) contrast(1.2) brightness(1.1); margin-bottom: 16px; }
+    .footer-brand p { color: rgba(255,255,255,.5); font-size: 14px; line-height: 1.7; max-width: 280px; }
+    .footer-col h4 { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul li a { color: rgba(255,255,255,.5); text-decoration: none; font-size: 14px; transition: color .2s; }
+    .footer-col ul li a:hover { color: var(--gold); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,.1); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; }
+    .footer-copy { color: rgba(255,255,255,.35); font-size: 13px; }
+    .footer-social { display: flex; gap: 12px; }
+    .social-btn { width: 36px; height: 36px; border-radius: 6px; background: rgba(255,255,255,.08); display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all .2s; }
+    .social-btn svg { width: 18px; height: 18px; fill: none; stroke: rgba(255,255,255,.5); stroke-width: 2; transition: stroke .2s; }
+    .social-btn:hover { background: var(--gold); }
+    .social-btn:hover svg { stroke: var(--dark); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1024px) { .levels-grid { grid-template-columns: repeat(3, 1fr); } .stats-grid { grid-template-columns: repeat(2, 1fr); } .carousel-slide { flex-basis: calc(33.33% - 14px); } }
+    @media (max-width: 768px) { nav { padding: 0 20px; } .nav-links { display: none; } .hamburger { display: flex; } .levels-grid { grid-template-columns: repeat(2, 1fr); } .why-grid { grid-template-columns: 1fr; } .contact-grid { grid-template-columns: 1fr; } .footer-top { grid-template-columns: 1fr; gap: 32px; } .footer-bottom { flex-direction: column; gap: 16px; text-align: center; } .carousel-slide { flex-basis: calc(50% - 10px); } .form-row { grid-template-columns: 1fr; } .hero-btns { flex-direction: column; align-items: center; } .modal-stats { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px) { .levels-grid { grid-template-columns: 1fr 1fr; } .carousel-slide { flex-basis: calc(90% - 10px); } nav { height: 60px; } .nav-logo img { height: 44px; } }
+
+    /* ─── MOBILE NAV ─── */
+    .mobile-nav { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--dark); z-index: 999; flex-direction: column; align-items: center; justify-content: center; gap: 32px; }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a { font-family: 'Montserrat', sans-serif; font-size: 24px; font-weight: 800; text-transform: uppercase; text-decoration: none; color: var(--white); letter-spacing: 2px; transition: color .2s; }
+    .mobile-nav a:hover { color: var(--gold); }
+    .mobile-nav-close { position: absolute; top: 24px; right: 24px; background: none; border: none; color: var(--white); font-size: 32px; cursor: pointer; }
+    .mobile-lang { display: flex; gap: 8px; margin-top: 16px; }
+  </style>
+</head>
+<body>
+
+<!-- ─── MOBILE NAV ─── -->
+<div id="mobilenav" class="mobile-nav">
+  <button class="mobile-nav-close" onclick="closeMobileNav()">✕</button>
+  <a href="index.html" data-i18n="nav_home" onclick="closeMobileNav()">Inicio</a>
+  <a href="quienes-somos.html" data-i18n="nav_about" onclick="closeMobileNav()">Quiénes Somos</a>
+  <a href="nuestros-servicios.html" data-i18n="nav_services" onclick="closeMobileNav()">Servicios</a>
+  <a href="#contact" data-i18n="nav_contact" onclick="closeMobileNav()">Contacto</a>
+  <div class="mobile-lang">
+    <button class="lang-btn active" onclick="setLang('es')">ES</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('fr')">FR</button>
+  </div>
+</div>
+
+<!-- ─── NAVBAR ─── -->
+<nav id="navbar">
+  <a class="nav-logo" href="index.html">
+    <img src="img/logo.png" alt="Kick Off Scholars"/>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html" data-i18n="nav_home">Inicio</a></li>
+    <li><a href="quienes-somos.html" data-i18n="nav_about">Quiénes Somos</a></li>
+    <li><a href="nuestros-servicios.html" data-i18n="nav_services">Servicios</a></li>
+    <li><a href="#contact" data-i18n="nav_contact">Contacto</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('es')">ES</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('fr')">FR</button>
+    </div>
+    <a href="#contact" class="nav-cta" data-i18n="nav_cta">Empezar</a>
+    <div class="hamburger" onclick="openMobileNav()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section id="hero">
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="video/campo.mp4" type="video/mp4"/>
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge" data-i18n="hero_badge">Soccer · Scholarships · USA</div>
+    <h1 class="hero-title">Kick Off<br/><span data-i18n="hero_title_span">Scholars</span></h1>
+    <p class="hero-subtitle" data-i18n="hero_subtitle">Conectamos atletas internacionales de fútbol con universidades en Estados Unidos. Tu talento te lleva más lejos de lo que imaginas.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary" data-i18n="hero_btn1">Comenzar mi proceso</a>
+      <a href="#levels" class="btn-outline" data-i18n="hero_btn2">Ver niveles universitarios</a>
+    </div>
+  </div>
+  <div class="hero-scroll" data-i18n="hero_scroll">Scroll</div>
+</section>
+
+<!-- ─── STATS ─── -->
+<section id="stats">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <div class="stat-number"><span class="counter" data-target="600">0</span><span class="stat-suffix">+</span></div>
+      <div class="stat-label" data-i18n="stat1">Universidades</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number"><span class="counter" data-target="150">0</span><span class="stat-suffix">+</span></div>
+      <div class="stat-label" data-i18n="stat2">Atletas Colocados</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number"><span class="counter" data-target="25">0</span><span class="stat-suffix">+</span></div>
+      <div class="stat-label" data-i18n="stat3">Países</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number"><span class="counter" data-target="85">0</span><span class="stat-suffix">%</span></div>
+      <div class="stat-label" data-i18n="stat4">Beca Promedio</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── LEVELS ─── -->
+<section id="levels">
+  <div class="section-header">
+    <span class="section-badge" data-i18n="levels_badge">Sistema Universitario USA</span>
+    <h2 class="section-title" data-i18n="levels_title">Los <span>5 Niveles</span> de Soccer en USA</h2>
+    <div class="section-line"></div>
+    <p class="section-desc" data-i18n="levels_desc">Haz clic en cada nivel para conocer las oportunidades de beca, el nivel competitivo y cómo encajas.</p>
+  </div>
+  <div class="levels-grid">
+    <div class="level-card" onclick="openModal('ncaa1')">
+      <div class="level-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+      <div class="level-name">NCAA DI</div><div class="level-sub">División I</div>
+      <div class="level-beca" data-i18n="beca_ncaa1">hasta 100%</div>
+      <div class="level-more" data-i18n="ver_mas">Ver más →</div>
+    </div>
+    <div class="level-card" onclick="openModal('ncaa2')">
+      <div class="level-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+      <div class="level-name">NCAA DII</div><div class="level-sub">División II</div>
+      <div class="level-beca">hasta 80%</div>
+      <div class="level-more" data-i18n="ver_mas">Ver más →</div>
+    </div>
+    <div class="level-card" onclick="openModal('ncaa3')">
+      <div class="level-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+      <div class="level-name">NCAA DIII</div><div class="level-sub">División III</div>
+      <div class="level-beca" data-i18n="beca_ncaa3">Becas académicas</div>
+      <div class="level-more" data-i18n="ver_mas">Ver más →</div>
+    </div>
+    <div class="level-card" onclick="openModal('naia')">
+      <div class="level-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+      <div class="level-name">NAIA</div><div class="level-sub">Nat'l Assoc.</div>
+      <div class="level-beca">hasta 90%</div>
+      <div class="level-more" data-i18n="ver_mas">Ver más →</div>
+    </div>
+    <div class="level-card" onclick="openModal('njcaa')">
+      <div class="level-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+      <div class="level-name">NJCAA</div><div class="level-sub">Junior Colleges</div>
+      <div class="level-beca">hasta 100%</div>
+      <div class="level-more" data-i18n="ver_mas">Ver más →</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── MODALS ─── -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal" id="modal-box">
+    <div class="modal-header">
+      <button class="modal-close" onclick="closeModalBtn()">✕</button>
+      <div class="modal-level-badge" id="modal-badge">NCAA</div>
+      <h2 class="modal-title" id="modal-title"></h2>
+      <p class="modal-subtitle" id="modal-subtitle"></p>
+    </div>
+    <div class="modal-body">
+      <p class="modal-desc" id="modal-desc"></p>
+      <div class="modal-stats" id="modal-stats"></div>
+      <ul class="modal-features" id="modal-features"></ul>
+    </div>
+  </div>
+</div>
+
+<!-- ─── SUCCESS STORIES ─── -->
+<section id="success">
+  <div class="section-header">
+    <span class="section-badge" data-i18n="success_badge">Resultados Reales</span>
+    <h2 class="section-title light" data-i18n="success_title">Trayectorias de <span>Excelencia</span></h2>
+    <div class="section-line"></div>
+    <p class="section-desc light" data-i18n="success_desc">Atletas de todo el mundo que convirtieron su sueño en realidad con Kick Off Scholars.</p>
+  </div>
+  <div class="carousel-wrapper">
+    <div class="carousel-track-outer">
+      <div class="carousel-track" id="carouselTrack">
+        <div class="carousel-slide"><img src="img/compromisos/ines.jpeg" alt="Inès Balaghni"/><div class="carousel-slide-overlay"><span class="carousel-slide-name">Inès Balaghni</span><span class="carousel-slide-school">GSW · NCAA DII · Francia</span></div></div>
+        <div class="carousel-slide"><img src="img/compromisos/juan.jpeg" alt="Juan Díaz"/><div class="carousel-slide-overlay"><span class="carousel-slide-name">Juan Díaz</span><span class="carousel-slide-school">Treasure Valley CC · NJCAA · Colombia</span></div></div>
+        <div class="carousel-slide"><img src="img/compromisos/rayan.jpeg" alt="Rayan Bouziyane"/><div class="carousel-slide-overlay"><span class="carousel-slide-name">Rayan Bouziyane</span><span class="carousel-slide-school">WV Tech · NAIA · Francia</span></div></div>
+        <div class="carousel-slide"><img src="img/compromisos/emma.jpeg" alt="Emma Fournié"/><div class="carousel-slide-overlay"><span class="carousel-slide-name">Emma Fournié</span><span class="carousel-slide-school">NJCAA DI · Francia</span></div></div>
+        <div class="carousel-slide"><img src="img/compromisos/gabriela.jpeg" alt="Gabriela Cabadas"/><div class="carousel-slide-overlay"><span class="carousel-slide-name">Gabriela Cabadas</span><span class="carousel-slide-school">Highland CC · NJCAA DII · Brasil</span></div></div>
+        <div class="carousel-slide"><img src="img/compromisos/ana.jpeg" alt="Ana Zamorano"/><div class="carousel-slide-overlay"><span class="carousel-slide-name">Ana Zamorano</span><span class="carousel-slide-school">Cumberland Univ. · NAIA · Colombia</span></div></div>
+        <div class="carousel-slide"><img src="img/compromisos/valeria.jpeg" alt="Valeria Agudelo"/><div class="carousel-slide-overlay"><span class="carousel-slide-name">Valeria Agudelo</span><span class="carousel-slide-school">UTEP · NCAA DI · Colombia</span></div></div>
+        <div class="carousel-slide"><img src="img/compromisos/amelie.jpeg" alt="Amelie Prie"/><div class="carousel-slide-overlay"><span class="carousel-slide-name">Amelie Prie</span><span class="carousel-slide-school">SFA · NCAA DI · Francia</span></div></div>
+        <div class="carousel-slide"><img src="img/compromisos/chanell.jpeg" alt="Chanell Makusu"/><div class="carousel-slide-overlay"><span class="carousel-slide-name">Chanell Makusu</span><span class="carousel-slide-school">Niagara Univ. · NCAA DI</span></div></div>
+        <div class="carousel-slide"><img src="img/compromisos/louis.jpeg" alt="Louis Kruger"/><div class="carousel-slide-overlay"><span class="carousel-slide-name">Louis Kruger</span><span class="carousel-slide-school">SIUE · NCAA DI · Sudáfrica</span></div></div>
+        <div class="carousel-slide"><img src="img/compromisos/lutho.jpeg" alt="Lutho Mkaba"/><div class="carousel-slide-overlay"><span class="carousel-slide-name">Lutho Mkaba</span><span class="carousel-slide-school">NAIA · Sudáfrica</span></div></div>
+      </div>
+    </div>
+    <div class="carousel-nav">
+      <button class="carousel-btn" onclick="slideCarousel(-1)">←</button>
+      <button class="carousel-btn" onclick="slideCarousel(1)">→</button>
+    </div>
+    <div class="carousel-dots" id="carouselDots"></div>
+  </div>
+</section>
+
+<!-- ─── WHY US ─── -->
+<section id="why">
+  <div class="section-header">
+    <span class="section-badge" data-i18n="why_badge">¿Por qué elegirnos?</span>
+    <h2 class="section-title" data-i18n="why_title">Tu <span>Ventaja</span> Competitiva</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-num">01</div>
+      <div class="why-icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+      <div class="why-title" data-i18n="why1_title">Acompañamiento Completo</div>
+      <p class="why-text" data-i18n="why1_text">Desde la evaluación de tu perfil hasta la firma del compromiso. Estamos contigo en cada paso del proceso de reclutamiento universitario.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-num">02</div>
+      <div class="why-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+      <div class="why-title" data-i18n="why2_title">Red de +600 Universidades</div>
+      <p class="why-text" data-i18n="why2_text">Acceso directo a entrenadores en todos los niveles: NCAA DI, DII, DIII, NAIA y NJCAA. Encontramos el programa que mejor se adapta a ti.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-num">03</div>
+      <div class="why-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <div class="why-title" data-i18n="why3_title">Becas Reales Garantizadas</div>
+      <p class="why-text" data-i18n="why3_text">Negociamos directamente con los programas universitarios para maximizar tu beca deportiva y académica. Nuestros atletas obtienen en promedio un 85% de financiación.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA ─── -->
+<section id="cta">
+  <h2 class="cta-title" data-i18n="cta_title">¿Listo para jugar en <span>USA</span>?</h2>
+  <p class="cta-sub" data-i18n="cta_sub">Tu carrera universitaria en soccer comienza con una conversación.</p>
+  <div class="cta-btns">
+    <a href="nuestros-servicios.html" class="btn-primary" data-i18n="cta_btn1">Ver nuestros planes</a>
+    <a href="#contact" class="btn-outline" data-i18n="cta_btn2">Contactarnos ahora</a>
+  </div>
+</section>
+
+<!-- ─── CONTACT ─── -->
+<section id="contact">
+  <div class="section-header">
+    <span class="section-badge" data-i18n="contact_badge">Contáctanos</span>
+    <h2 class="section-title" data-i18n="contact_title">Hablemos de tu <span>Futuro</span></h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <h3 data-i18n="contact_info_title">Información de contacto</h3>
+      <div class="contact-item">
+        <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+        <div>
+          <div style="font-size:12px;color:var(--gray);text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:2px" data-i18n="contact_email_label">Email</div>
+          <a href="mailto:kickoffscholars@gmail.com">kickoffscholars@gmail.com</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.998-1.312A9.96 9.96 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <div style="font-size:12px;color:var(--gray);text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:2px">WhatsApp</div>
+          <a href="https://wa.me/17869223853" target="_blank">+1 786 922 3853</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
+        <div>
+          <div style="font-size:12px;color:var(--gray);text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:2px">Instagram</div>
+          <a href="https://instagram.com/kickoffscholars.usa" target="_blank">@kickoffscholars.usa</a>
+        </div>
+      </div>
+      <div class="contact-item" style="align-items:flex-start;">
+        <div class="contact-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg></div>
+        <div>
+          <div style="font-size:12px;color:var(--gray);text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:4px" data-i18n="contact_hours_label">Respuesta</div>
+          <span style="font-size:14px" data-i18n="contact_hours">Respondemos en menos de 24 horas</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORM -->
+    <div>
+      <form class="contact-form" id="contactForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label data-i18n="form_name">Nombre</label>
+            <input type="text" id="f-name" placeholder="Tu nombre" required/>
+          </div>
+          <div class="form-group">
+            <label data-i18n="form_email">Email</label>
+            <input type="email" id="f-email" placeholder="tu@email.com" required/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label data-i18n="form_country">País de origen</label>
+          <input type="text" id="f-country" placeholder="Colombia, Francia, Brasil..."/>
+        </div>
+        <div class="form-group">
+          <label data-i18n="form_level">Nivel académico actual</label>
+          <select id="f-level">
+            <option value="" data-i18n="form_select">Selecciona...</option>
+            <option data-i18n="form_level1">Secundaria / High School</option>
+            <option data-i18n="form_level2">Universitario / College</option>
+            <option data-i18n="form_level3">Transfer</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label data-i18n="form_message">Mensaje</label>
+          <textarea id="f-msg" placeholder="Cuéntanos sobre ti y tu experiencia en soccer..."></textarea>
+        </div>
+        <button type="submit" class="btn-submit" data-i18n="form_send">Enviar mensaje →</button>
+      </form>
+
+      <!-- SUCCESS STATE -->
+      <div class="form-success" id="formSuccess">
+        <div class="form-success-icon">✅</div>
+        <h4 data-i18n="form_success_title">¡Mensaje enviado!</h4>
+        <p data-i18n="form_success_text">Tu correo se ha abierto con el mensaje listo. Si prefieres, también puedes escribirnos directamente por WhatsApp.</p>
+        <div class="form-success-actions">
+          <a href="https://wa.me/17869223853" target="_blank" class="btn-wa">💬 WhatsApp</a>
+          <button onclick="resetForm()" style="background:none;border:1px solid #ccc;padding:10px 20px;border-radius:4px;cursor:pointer;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;" data-i18n="form_new">Nuevo mensaje</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <img src="img/logo.png" alt="Kick Off Scholars"/>
+      <p data-i18n="footer_desc">Conectando el talento de soccer latinoamericano y europeo con las universidades de Estados Unidos.</p>
+    </div>
+    <div class="footer-col">
+      <h4 data-i18n="footer_links">Navegación</h4>
+      <ul>
+        <li><a href="index.html" data-i18n="nav_home">Inicio</a></li>
+        <li><a href="quienes-somos.html" data-i18n="nav_about">Quiénes Somos</a></li>
+        <li><a href="nuestros-servicios.html" data-i18n="nav_services">Servicios</a></li>
+        <li><a href="#levels" data-i18n="nav_levels">Niveles Universitarios</a></li>
+        <li><a href="#success" data-i18n="nav_success">Trayectorias de Éxito</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4 data-i18n="footer_contact">Contacto</h4>
+      <ul>
+        <li><a href="mailto:kickoffscholars@gmail.com">kickoffscholars@gmail.com</a></li>
+        <li><a href="https://wa.me/17869223853" target="_blank">+1 786 922 3853 (WhatsApp)</a></li>
+        <li><a href="https://instagram.com/kickoffscholars.usa" target="_blank">@kickoffscholars.usa</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2025 Kick Off Scholars. <span data-i18n="footer_rights">Todos los derechos reservados.</span></span>
+    <div class="footer-social">
+      <a href="https://wa.me/17869223853" target="_blank" class="social-btn" title="WhatsApp">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.998-1.312A9.96 9.96 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="https://instagram.com/kickoffscholars.usa" target="_blank" class="social-btn" title="Instagram">
+        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      </a>
+      <a href="mailto:kickoffscholars@gmail.com" class="social-btn" title="Email">
+        <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ─── TRANSLATIONS ─── */
+const i18n = {
+  es: {
+    nav_home:"Inicio",nav_about:"Quiénes Somos",nav_services:"Servicios",nav_contact:"Contacto",nav_cta:"Empezar",nav_levels:"Niveles",nav_success:"Éxitos",
+    hero_badge:"Soccer · Becas · USA",hero_title_span:"Scholars",
+    hero_subtitle:"Conectamos atletas internacionales de fútbol con universidades en Estados Unidos. Tu talento te lleva más lejos de lo que imaginas.",
+    hero_btn1:"Comenzar mi proceso",hero_btn2:"Ver niveles universitarios",hero_scroll:"Scroll",
+    stat1:"Universidades",stat2:"Atletas Colocados",stat3:"Países",stat4:"Beca Promedio",
+    levels_badge:"Sistema Universitario USA",levels_title:"Los 5 Niveles de Soccer en USA",
+    levels_desc:"Haz clic en cada nivel para conocer las oportunidades de beca, el nivel competitivo y cómo encajas.",
+    beca_ncaa1:"hasta 100%",beca_ncaa3:"Becas académicas",ver_mas:"Ver más →",
+    success_badge:"Resultados Reales",success_title:"Trayectorias de Excelencia",
+    success_desc:"Atletas de todo el mundo que convirtieron su sueño en realidad con Kick Off Scholars.",
+    why_badge:"¿Por qué elegirnos?",why_title:"Tu Ventaja Competitiva",
+    why1_title:"Acompañamiento Completo",why1_text:"Desde la evaluación de tu perfil hasta la firma del compromiso. Estamos contigo en cada paso del proceso de reclutamiento universitario.",
+    why2_title:"Red de +600 Universidades",why2_text:"Acceso directo a entrenadores en todos los niveles: NCAA DI, DII, DIII, NAIA y NJCAA. Encontramos el programa que mejor se adapta a ti.",
+    why3_title:"Becas Reales Garantizadas",why3_text:"Negociamos directamente con los programas universitarios para maximizar tu beca deportiva y académica. Nuestros atletas obtienen en promedio un 85% de financiación.",
+    cta_title:"¿Listo para jugar en USA?",cta_sub:"Tu carrera universitaria en soccer comienza con una conversación.",cta_btn1:"Ver nuestros planes",cta_btn2:"Contactarnos ahora",
+    contact_badge:"Contáctanos",contact_title:"Hablemos de tu Futuro",contact_info_title:"Información de contacto",
+    contact_email_label:"Email",contact_hours_label:"Respuesta",contact_hours:"Respondemos en menos de 24 horas",
+    form_name:"Nombre",form_email:"Email",form_country:"País de origen",form_level:"Nivel académico actual",
+    form_select:"Selecciona...",form_level1:"Secundaria / High School",form_level2:"Universitario / College",form_level3:"Transfer",
+    form_message:"Mensaje",form_send:"Enviar mensaje →",
+    form_success_title:"¡Mensaje enviado!",form_success_text:"Tu correo se ha abierto con el mensaje listo. Si prefieres, también puedes escribirnos directamente por WhatsApp.",
+    form_new:"Nuevo mensaje",
+    footer_desc:"Conectando el talento de soccer latinoamericano y europeo con las universidades de Estados Unidos.",
+    footer_links:"Navegación",footer_contact:"Contacto",footer_rights:"Todos los derechos reservados."
+  },
+  en: {
+    nav_home:"Home",nav_about:"About Us",nav_services:"Services",nav_contact:"Contact",nav_cta:"Get Started",nav_levels:"Levels",nav_success:"Success",
+    hero_badge:"Soccer · Scholarships · USA",hero_title_span:"Scholars",
+    hero_subtitle:"We connect international soccer athletes with universities in the United States. Your talent can take you further than you imagine.",
+    hero_btn1:"Start my process",hero_btn2:"View university levels",hero_scroll:"Scroll",
+    stat1:"Universities",stat2:"Athletes Placed",stat3:"Countries",stat4:"Avg. Scholarship",
+    levels_badge:"US University System",levels_title:"The 5 Soccer Levels in USA",
+    levels_desc:"Click each level to learn about scholarship opportunities, competition level, and how you fit.",
+    beca_ncaa1:"up to 100%",beca_ncaa3:"Academic aid",ver_mas:"Learn more →",
+    success_badge:"Real Results",success_title:"Journeys of Excellence",
+    success_desc:"Athletes from around the world who turned their dream into reality with Kick Off Scholars.",
+    why_badge:"Why choose us?",why_title:"Your Competitive Edge",
+    why1_title:"Full Support",why1_text:"From profile evaluation to signing day. We're with you every step of the college recruitment process.",
+    why2_title:"Network of +600 Universities",why2_text:"Direct access to coaches at all levels: NCAA DI, DII, DIII, NAIA and NJCAA. We find the program that fits you best.",
+    why3_title:"Real Scholarships",why3_text:"We negotiate directly with university programs to maximize your athletic and academic scholarship. Our athletes average 85% funding.",
+    cta_title:"Ready to play in the USA?",cta_sub:"Your college soccer career starts with one conversation.",cta_btn1:"See our plans",cta_btn2:"Contact us now",
+    contact_badge:"Contact Us",contact_title:"Let's Talk About Your Future",contact_info_title:"Contact Information",
+    contact_email_label:"Email",contact_hours_label:"Response time",contact_hours:"We respond within 24 hours",
+    form_name:"Name",form_email:"Email",form_country:"Country of origin",form_level:"Current academic level",
+    form_select:"Select...",form_level1:"High School",form_level2:"University / College",form_level3:"Transfer",
+    form_message:"Message",form_send:"Send message →",
+    form_success_title:"Message sent!",form_success_text:"Your email app has opened with the message ready. You can also reach us directly on WhatsApp.",
+    form_new:"New message",
+    footer_desc:"Connecting Latin American and European soccer talent with US universities.",
+    footer_links:"Navigation",footer_contact:"Contact",footer_rights:"All rights reserved."
+  },
+  fr: {
+    nav_home:"Accueil",nav_about:"Qui Sommes-Nous",nav_services:"Services",nav_contact:"Contact",nav_cta:"Commencer",nav_levels:"Niveaux",nav_success:"Succès",
+    hero_badge:"Soccer · Bourses · USA",hero_title_span:"Scholars",
+    hero_subtitle:"Nous connectons les athlètes internationaux de football avec les universités américaines. Votre talent peut vous mener plus loin que vous ne l'imaginez.",
+    hero_btn1:"Commencer mon parcours",hero_btn2:"Voir les niveaux universitaires",hero_scroll:"Défiler",
+    stat1:"Universités",stat2:"Athlètes Placés",stat3:"Pays",stat4:"Bourse Moyenne",
+    levels_badge:"Système Universitaire USA",levels_title:"Les 5 Niveaux de Soccer aux USA",
+    levels_desc:"Cliquez sur chaque niveau pour découvrir les opportunités de bourse, le niveau compétitif et comment vous vous intégrez.",
+    beca_ncaa1:"jusqu'à 100%",beca_ncaa3:"Aides académiques",ver_mas:"En savoir plus →",
+    success_badge:"Résultats Réels",success_title:"Parcours d'Excellence",
+    success_desc:"Des athlètes du monde entier qui ont réalisé leur rêve avec Kick Off Scholars.",
+    why_badge:"Pourquoi nous choisir ?",why_title:"Votre Avantage Compétitif",
+    why1_title:"Accompagnement Complet",why1_text:"De l'évaluation de votre profil jusqu'à la signature. Nous sommes à vos côtés à chaque étape du recrutement universitaire.",
+    why2_title:"Réseau de +600 Universités",why2_text:"Accès direct aux entraîneurs de tous les niveaux : NCAA DI, DII, DIII, NAIA et NJCAA. Nous trouvons le programme qui vous correspond.",
+    why3_title:"Bourses Réelles Garanties",why3_text:"Nous négocions directement avec les programmes universitaires pour maximiser votre bourse sportive et académique. Nos athlètes obtiennent en moyenne 85% de financement.",
+    cta_title:"Prêt à jouer aux USA ?",cta_sub:"Votre carrière universitaire en soccer commence par une conversation.",cta_btn1:"Voir nos plans",cta_btn2:"Nous contacter maintenant",
+    contact_badge:"Contactez-nous",contact_title:"Parlons de Votre Avenir",contact_info_title:"Informations de contact",
+    contact_email_label:"Email",contact_hours_label:"Délai de réponse",contact_hours:"Nous répondons en moins de 24 heures",
+    form_name:"Nom",form_email:"Email",form_country:"Pays d'origine",form_level:"Niveau académique actuel",
+    form_select:"Sélectionner...",form_level1:"Lycée / High School",form_level2:"Universitaire / College",form_level3:"Transfer",
+    form_message:"Message",form_send:"Envoyer le message →",
+    form_success_title:"Message envoyé !",form_success_text:"Votre application email s'est ouverte avec le message prêt. Vous pouvez aussi nous écrire directement sur WhatsApp.",
+    form_new:"Nouveau message",
+    footer_desc:"Connecter les talents du football latino-américain et européen avec les universités américaines.",
+    footer_links:"Navigation",footer_contact:"Contact",footer_rights:"Tous droits réservés."
+  }
+};
+
+/* ─── MODAL DATA ─── */
+const modalData = {
+  ncaa1:{badge:"NCAA",title:"NCAA División I",subtitle_es:"La élite del deporte universitario americano",subtitle_en:"The elite of American college sports",subtitle_fr:"L'élite du sport universitaire américain",desc_es:"La División I de la NCAA es el nivel más competitivo del deporte universitario en Estados Unidos. Los programas de soccer cuentan con instalaciones de primer nivel, entrenadores de alta calidad y amplia exposición mediática.",desc_en:"NCAA Division I is the most competitive level of college sports in the USA. Soccer programs feature top-tier facilities, high-quality coaches and broad media exposure.",desc_fr:"La Division I de la NCAA est le niveau le plus compétitif du sport universitaire aux États-Unis. Les programmes de soccer disposent d'installations de premier ordre et d'une large exposition médiatique.",stats:[{val:"350+",lbl_es:"Programas",lbl_en:"Programs",lbl_fr:"Programmes"},{val:"9.9",lbl_es:"Becas/Equipo",lbl_en:"Scholarships/Team",lbl_fr:"Bourses/Équipe"},{val:"5–100%",lbl_es:"Beca posible",lbl_en:"Possible scholarship",lbl_fr:"Bourse possible"}],features_es:["Máxima exposición a scouts profesionales","Instalaciones de clase mundial","Posibilidad de beca completa (hasta 100%)","Nivel competitivo muy alto — se requiere perfil destacado","Acceso a una red de alumni de gran valor","Programas académicos de primer nivel"],features_en:["Maximum exposure to professional scouts","World-class facilities","Full scholarship possibility (up to 100%)","Very high competitive level — strong profile required","Access to a highly valuable alumni network","Top-tier academic programs"],features_fr:["Exposition maximale aux scouts professionnels","Installations de classe mondiale","Possibilité de bourse complète (jusqu'à 100%)","Niveau compétitif très élevé","Accès à un réseau d'anciens élèves de grande valeur","Programmes académiques de premier ordre"]},
+  ncaa2:{badge:"NCAA",title:"NCAA División II",subtitle_es:"Competitividad y calidad de vida equilibradas",subtitle_en:"Competitiveness and quality of life balanced",subtitle_fr:"Compétitivité et qualité de vie équilibrées",desc_es:"La División II ofrece un excelente balance entre deporte competitivo y vida académica. Con hasta 9.9 becas por equipo, hay importantes oportunidades de financiación para atletas internacionales de buen nivel.",desc_en:"Division II offers an excellent balance between competitive sport and academic life. With up to 9.9 scholarships per team, there are significant funding opportunities for international athletes.",desc_fr:"La Division II offre un excellent équilibre entre sport compétitif et vie académique. Avec jusqu'à 9,9 bourses par équipe, il y a d'importantes opportunités de financement.",stats:[{val:"300+",lbl_es:"Programas",lbl_en:"Programs",lbl_fr:"Programmes"},{val:"9.9",lbl_es:"Becas/Equipo",lbl_en:"Scholarships/Team",lbl_fr:"Bourses/Équipe"},{val:"40–80%",lbl_es:"Beca típica",lbl_en:"Typical scholarship",lbl_fr:"Bourse typique"}],features_es:["Gran balance deporte-vida académica","Menor presión competitiva que DI","Becas deportivas significativas (hasta 80%)","Excelente calidad académica","Transición más suave para atletas internacionales","Posibilidad de crecer al nivel DI"],features_en:["Great sport-academic life balance","Less competitive pressure than DI","Significant athletic scholarships (up to 80%)","Excellent academic quality","Smoother transition for international athletes","Possibility to grow to DI level"],features_fr:["Excellent équilibre sport-vie académique","Moins de pression compétitive que DI","Bourses sportives significatives (jusqu'à 80%)","Excellente qualité académique","Transition plus douce pour les athlètes internationaux","Possibilité d'évoluer vers le niveau DI"]},
+  ncaa3:{badge:"NCAA",title:"NCAA División III",subtitle_es:"El nivel más grande del deporte universitario",subtitle_en:"The largest division in college sports",subtitle_fr:"La plus grande division du sport universitaire",desc_es:"Con más de 400 programas, es la división más numerosa de la NCAA. Aunque no ofrece becas deportivas directas, las universidades de DIII son reconocidas por excelentes paquetes de ayuda financiera académica.",desc_en:"With over 400 programs, it's the largest NCAA division. Although no direct athletic scholarships are offered, DIII schools are known for excellent academic financial aid packages.",desc_fr:"Avec plus de 400 programmes, c'est la plus grande division de la NCAA. Les universités DIII sont reconnues pour d'excellents packages d'aide financière académique.",stats:[{val:"400+",lbl_es:"Programas",lbl_en:"Programs",lbl_fr:"Programmes"},{val:"N/A",lbl_es:"Beca deportiva",lbl_en:"Athletic scholarship",lbl_fr:"Bourse sportive"},{val:"Alta",lbl_es:"Ayuda académica",lbl_en:"Academic aid",lbl_fr:"Aide académique"}],features_es:["Mayor número de programas disponibles","Enfocado en el desarrollo académico","Ayudas financieras académicas significativas","Ambiente más equilibrado","Escuelas de alto prestigio académico","Ideal para quienes priorizan los estudios"],features_en:["Largest number of available programs","Focused on academic development","Significant academic financial aid","More balanced environment","Schools with high academic prestige","Ideal for those who prioritize studies"],features_fr:["Plus grand nombre de programmes disponibles","Axé sur le développement académique","Aides financières académiques significatives","Environnement plus équilibré","Écoles à haut prestige académique","Idéal pour ceux qui privilégient les études"]},
+  naia:{badge:"NAIA",title:"NAIA",subtitle_es:"El camino más rápido hacia una beca completa",subtitle_en:"The fastest path to a full scholarship",subtitle_fr:"La voie la plus rapide vers une bourse complète",desc_es:"La NAIA es una excelente alternativa a la NCAA. Con hasta 12 becas por equipo y un proceso de reclutamiento más ágil, muchos atletas internacionales encuentran aquí su mejor oportunidad.",desc_en:"The NAIA is an excellent alternative to the NCAA. With up to 12 scholarships per team and a more agile recruitment process, many international athletes find their best opportunity here.",desc_fr:"La NAIA est une excellente alternative à la NCAA. Avec jusqu'à 12 bourses par équipe et un processus de recrutement plus agile.",stats:[{val:"250+",lbl_es:"Universidades",lbl_en:"Universities",lbl_fr:"Universités"},{val:"12",lbl_es:"Becas/Equipo",lbl_en:"Scholarships/Team",lbl_fr:"Bourses/Équipe"},{val:"50–90%",lbl_es:"Beca posible",lbl_en:"Possible scholarship",lbl_fr:"Bourse possible"}],features_es:["Proceso de reclutamiento más rápido y flexible","Hasta 12 becas por equipo (más que la NCAA)","Ambiente más familiar y cercano","Excelente calidad competitiva","Posibilidad de beca casi completa","Muy accesible para atletas internacionales"],features_en:["Faster, more flexible recruitment process","Up to 12 scholarships per team (more than NCAA)","More family-like, close-knit environment","Excellent competitive quality","Near-full scholarship possibility","Very accessible for international athletes"],features_fr:["Processus de recrutement plus rapide et flexible","Jusqu'à 12 bourses par équipe","Environnement plus familial","Excellente qualité compétitive","Possibilité de bourse presque complète","Très accessible pour les athlètes internationaux"]},
+  njcaa:{badge:"NJCAA",title:"NJCAA",subtitle_es:"La puerta de entrada perfecta a las universidades de 4 años",subtitle_en:"The perfect gateway to 4-year universities",subtitle_fr:"La porte d'entrée parfaite vers les universités de 4 ans",desc_es:"Los Junior Colleges son una vía estratégica: 2 años de becas + la posibilidad de transferir a una universidad de 4 años (NCAA o NAIA). La División I NJCAA ofrece becas completas incluyendo alojamiento y matrícula.",desc_en:"Junior Colleges are a strategic pathway: 2 years of scholarships + the possibility to transfer to a 4-year university (NCAA or NAIA). NJCAA Division I offers full scholarships including housing and tuition.",desc_fr:"Les Junior Colleges sont une voie stratégique : 2 ans de bourses + possibilité de transfert vers une université de 4 ans.",stats:[{val:"500+",lbl_es:"Programas",lbl_en:"Programs",lbl_fr:"Programmes"},{val:"DI: 100%",lbl_es:"Beca posible",lbl_en:"Possible scholarship",lbl_fr:"Bourse possible"},{val:"2 años",lbl_es:"Duración",lbl_en:"Duration",lbl_fr:"Durée"}],features_es:["NJCAA DI: beca completa (matrícula + alojamiento + libros)","NJCAA DII: cobertura de matrícula","Proceso de admisión más accesible","Transición estratégica a universidades de 4 años","Adaptación gradual al sistema americano","Ideal para mejorar inglés y nivel académico"],features_en:["NJCAA DI: full scholarship (tuition + housing + books)","NJCAA DII: tuition coverage","More accessible admission process","Strategic transition to 4-year universities","Gradual adaptation to the American system","Ideal for improving English and academic level"],features_fr:["NJCAA DI: bourse complète (frais + logement + livres)","NJCAA DII: couverture des frais de scolarité","Processus d'admission plus accessible","Transition stratégique vers les universités de 4 ans","Adaptation progressive au système américain","Idéal pour améliorer l'anglais et le niveau académique"]}
+};
+
+let currentLang = 'es';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent.trim().toLowerCase() === lang));
+  const d = i18n[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => { const k = el.getAttribute('data-i18n'); if (d[k]) el.textContent = d[k]; });
+}
+
+/* ─── FORM SUBMIT ─── */
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const name    = document.getElementById('f-name').value.trim();
+  const email   = document.getElementById('f-email').value.trim();
+  const country = document.getElementById('f-country').value.trim();
+  const level   = document.getElementById('f-level').value;
+  const msg     = document.getElementById('f-msg').value.trim();
+
+  const subject = encodeURIComponent('Consulta Kick Off Scholars - ' + name);
+  const body = encodeURIComponent(
+    'Nombre: ' + name + '\n' +
+    'Email: ' + email + '\n' +
+    'País: ' + country + '\n' +
+    'Nivel: ' + level + '\n\n' +
+    'Mensaje:\n' + msg
+  );
+  window.location.href = 'mailto:kickoffscholars@gmail.com?subject=' + subject + '&body=' + body;
+
+  document.getElementById('contactForm').style.display = 'none';
+  document.getElementById('formSuccess').classList.add('show');
+});
+
+function resetForm() {
+  document.getElementById('contactForm').reset();
+  document.getElementById('contactForm').style.display = 'flex';
+  document.getElementById('formSuccess').classList.remove('show');
+}
+
+/* ─── MODAL ─── */
+function openModal(id) {
+  const d = modalData[id]; if (!d) return;
+  const lang = currentLang;
+  document.getElementById('modal-badge').textContent = d.badge;
+  document.getElementById('modal-title').textContent = d.title;
+  document.getElementById('modal-subtitle').textContent = d['subtitle_'+lang] || d.subtitle_es;
+  document.getElementById('modal-desc').textContent = d['desc_'+lang] || d.desc_es;
+  document.getElementById('modal-stats').innerHTML = d.stats.map(s =>
+    `<div class="modal-stat"><div class="modal-stat-val">${s.val}</div><div class="modal-stat-lbl">${s['lbl_'+lang]||s.lbl_es}</div></div>`).join('');
+  const feats = d['features_'+lang] || d.features_es;
+  document.getElementById('modal-features').innerHTML = feats.map(f => `<li>${f}</li>`).join('');
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(e) { if (e.target === document.getElementById('modal-overlay')) closeModalBtn(); }
+function closeModalBtn() { document.getElementById('modal-overlay').classList.remove('open'); document.body.style.overflow = ''; }
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModalBtn(); });
+
+/* ─── CAROUSEL ─── */
+const slides = document.querySelectorAll('.carousel-slide');
+const track = document.getElementById('carouselTrack');
+const dotsEl = document.getElementById('carouselDots');
+let currentPage = 0;
+
+function getSlidesVisible() {
+  if (window.innerWidth < 480) return 1;
+  if (window.innerWidth < 768) return 2;
+  if (window.innerWidth < 1024) return 3;
+  return 4;
+}
+function buildDots() {
+  const vis = getSlidesVisible();
+  const pages = Math.ceil(slides.length / vis);
+  dotsEl.innerHTML = '';
+  for (let i = 0; i < pages; i++) {
+    const d = document.createElement('div');
+    d.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+    d.onclick = () => goToPage(i);
+    dotsEl.appendChild(d);
+  }
+}
+function goToPage(page) {
+  const vis = getSlidesVisible();
+  const pages = Math.ceil(slides.length / vis);
+  currentPage = Math.max(0, Math.min(pages - 1, page));
+  const slideWidth = slides[0].offsetWidth + 20;
+  track.style.transform = `translateX(-${currentPage * vis * slideWidth}px)`;
+  document.querySelectorAll('.carousel-dot').forEach((d,i) => d.classList.toggle('active', i === currentPage));
+}
+function slideCarousel(dir) { goToPage(currentPage + dir); }
+window.addEventListener('resize', () => { buildDots(); goToPage(0); });
+buildDots();
+
+/* ─── COUNTER ANIMATION ─── */
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const el = entry.target;
+    const target = parseInt(el.getAttribute('data-target'));
+    let current = 0;
+    const step = target / (2000 / 16);
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= target) { el.textContent = target; clearInterval(timer); }
+      else el.textContent = Math.floor(current);
+    }, 16);
+    observer.unobserve(el);
+  });
+}, { threshold: 0.3 });
+document.querySelectorAll('.counter').forEach(c => observer.observe(c));
+
+/* ─── NAVBAR SCROLL ─── */
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+});
+
+/* ─── MOBILE NAV ─── */
+function openMobileNav() { document.getElementById('mobilenav').classList.add('open'); document.body.style.overflow = 'hidden'; }
+function closeMobileNav() { document.getElementById('mobilenav').classList.remove('open'); document.body.style.overflow = ''; }
+</script>
+</body>
+</html>
