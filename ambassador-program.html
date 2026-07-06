@@ -1,0 +1,721 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/128/three.min.js"></script>
+
+<style>
+  :root{
+    --navy:#0A1930;
+    --navy-2:#0F2445;
+    --navy-3:#16305C;
+    --pitch:#1F7A4D;
+    --pitch-light:#37B871;
+    --gold:#D9A93B;
+    --gold-light:#F0CD7A;
+    --cream:#F6F4EE;
+    --ink:#10131A;
+    --muted:#8FA0BE;
+    --white:#FFFFFF;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  .kos-amb{
+    font-family:'Inter',sans-serif;
+    color:var(--ink);
+    background:var(--cream);
+    line-height:1.5;
+    overflow-x:hidden;
+  }
+  .kos-amb h1,.kos-amb h2,.kos-amb h3,.kos-amb .display{
+    font-family:'Bebas Neue',sans-serif;
+    letter-spacing:0.03em;
+    font-weight:400;
+    line-height:1.02;
+  }
+  .kos-amb .eyebrow{
+    font-family:'Inter',sans-serif;
+    font-weight:700;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    font-size:12px;
+  }
+  .kos-amb section{padding:88px 24px;}
+  .kos-amb .wrap{max-width:1080px;margin:0 auto;}
+  .kos-amb .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'Inter',sans-serif;font-weight:700;font-size:15px;
+    padding:15px 30px;border-radius:999px;border:none;cursor:pointer;
+    text-decoration:none;transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .kos-amb .btn:hover{transform:translateY(-2px);}
+  .kos-amb .btn:focus-visible{outline:3px solid var(--gold-light);outline-offset:2px;}
+  .kos-amb .btn-gold{background:var(--gold);color:var(--navy);box-shadow:0 8px 24px rgba(217,169,59,.35);}
+  .kos-amb .btn-outline{background:transparent;color:var(--white);border:1.5px solid rgba(255,255,255,.35);}
+  .kos-amb .btn-pitch{background:var(--pitch);color:#fff;box-shadow:0 8px 20px rgba(31,122,77,.3);}
+  .kos-amb .btn-ghost{background:rgba(255,255,255,.08);color:var(--white);border:1px solid rgba(255,255,255,.15);}
+
+  /* HERO */
+  .kos-amb .hero{
+    position:relative;overflow:hidden;
+    background:linear-gradient(180deg,var(--navy) 0%, #071120 100%);
+    color:var(--white);
+    padding:120px 24px 100px;
+    text-align:center;
+  }
+  .kos-amb .hero::after{
+    content:"";position:absolute;left:0;right:0;bottom:0;height:1px;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);
+    z-index:3;
+  }
+  .kos-amb .hero-canvas{position:absolute;inset:0;z-index:1;}
+  .kos-amb .hero-fade{
+    position:absolute;inset:0;z-index:1;pointer-events:none;
+    background:radial-gradient(700px 420px at 50% 30%, transparent 0%, rgba(7,17,32,.55) 78%, rgba(7,17,32,.85) 100%);
+  }
+  .kos-amb .hero-content{position:relative;z-index:2;}
+  .kos-amb .lang-switch{
+    position:absolute;top:20px;right:20px;z-index:5;display:flex;gap:6px;
+    background:rgba(7,17,32,.5);border:1px solid rgba(255,255,255,.15);
+    border-radius:999px;padding:4px;backdrop-filter:blur(6px);
+  }
+  .kos-amb .lang-btn{
+    background:none;border:none;color:var(--muted);font-family:'Inter';font-weight:700;
+    font-size:12px;padding:6px 12px;border-radius:999px;cursor:pointer;letter-spacing:.05em;
+  }
+  .kos-amb .lang-btn.active{background:var(--gold);color:var(--navy);}
+  .kos-amb .badge-line{
+    display:inline-flex;gap:10px;align-items:center;color:var(--gold-light);
+    font-family:'Inter';font-weight:700;letter-spacing:.18em;text-transform:uppercase;font-size:12px;margin-bottom:22px;
+  }
+  .kos-amb .badge-line .dot{width:5px;height:5px;border-radius:50%;background:var(--gold-light);}
+  .kos-amb .hero h1{font-size:clamp(42px,7vw,84px);margin:0 auto 20px;max-width:820px;}
+  .kos-amb .hero h1 span{color:var(--gold-light);}
+  .kos-amb .hero p.sub{max-width:560px;margin:0 auto 8px;color:var(--muted);font-size:18px;}
+  .kos-amb .hero p.reward{max-width:560px;margin:0 auto 34px;color:var(--white);font-size:18px;}
+  .kos-amb .hero p.reward b{color:var(--gold-light);font-size:22px;}
+  .kos-amb .hero .cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+
+  /* WHY */
+  .kos-amb .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px;}
+  .kos-amb .why-card{
+    background:var(--white);border-radius:var(--radius);padding:32px 26px;
+    border:1px solid rgba(10,25,48,.07);
+  }
+  .kos-amb .why-card .icon{font-size:28px;margin-bottom:14px;display:block;}
+  .kos-amb .why-card h3{font-family:'Inter';font-weight:800;font-size:19px;margin:0 0 8px;letter-spacing:0;}
+  .kos-amb .why-card p{margin:0;color:#4A5670;font-size:15px;}
+  .kos-amb .section-head{text-align:center;max-width:620px;margin:0 auto;}
+  .kos-amb .section-head .eyebrow{color:var(--pitch);}
+  .kos-amb .section-head h2{font-size:clamp(32px,4.5vw,46px);margin:8px 0 0;}
+  .kos-amb .dark{background:var(--navy);color:var(--white);}
+  .kos-amb .dark .section-head .eyebrow{color:var(--gold-light);}
+  .kos-amb .dark .why-card{background:var(--navy-2);border-color:rgba(255,255,255,.08);}
+  .kos-amb .dark .why-card h3{color:#fff;}
+  .kos-amb .dark .why-card p{color:var(--muted);}
+
+  /* HOW IT WORKS */
+  .kos-amb .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:56px;position:relative;}
+  .kos-amb .step{text-align:center;padding:0 14px;position:relative;}
+  .kos-amb .step .num{
+    width:52px;height:52px;border-radius:50%;background:var(--pitch);color:#fff;
+    display:flex;align-items:center;justify-content:center;margin:0 auto 18px;
+    font-family:'Bebas Neue';font-size:22px;
+  }
+  .kos-amb .step p{font-size:14.5px;color:#3A4560;max-width:190px;margin:0 auto;}
+  .kos-amb .step-arrow{
+    position:absolute;top:26px;right:-14%;color:#C7CFDE;font-size:22px;
+  }
+  .kos-amb .step:last-child .step-arrow{display:none;}
+
+  /* GET CODE */
+  .kos-amb .lookup-card{
+    max-width:560px;margin:48px auto 0;background:var(--white);border-radius:20px;
+    padding:40px 36px;box-shadow:0 30px 60px -20px rgba(10,25,48,.25);border:1px solid rgba(10,25,48,.06);
+  }
+  .kos-amb .lookup-card label{display:block;font-weight:700;font-size:13px;margin-bottom:8px;color:#334;}
+  .kos-amb .lookup-row{display:flex;gap:10px;}
+  .kos-amb .lookup-row input{
+    flex:1;padding:14px 16px;border-radius:10px;border:1.5px solid #DCE1EA;font-size:15px;font-family:'Inter';
+  }
+  .kos-amb .lookup-row input:focus{outline:none;border-color:var(--pitch);}
+  .kos-amb .lookup-row button{white-space:nowrap;}
+  .kos-amb .lookup-error{color:#B4432F;font-size:13.5px;margin-top:10px;display:none;}
+  .kos-amb .lookup-hint{font-size:12.5px;color:#8892A6;margin-top:10px;}
+
+  /* Ticket / signature element */
+  .kos-amb .ticket{
+    margin-top:26px;display:none;position:relative;
+    background:linear-gradient(135deg,var(--navy) 0%,#0D2140 100%);
+    border-radius:18px;color:#fff;overflow:hidden;
+  }
+  .kos-amb .ticket-top{padding:26px 26px 20px;position:relative;}
+  .kos-amb .ticket-top .welcome{color:var(--muted);font-size:13px;margin:0 0 4px;font-family:'Inter';font-weight:600;}
+  .kos-amb .ticket-top .code-label{color:var(--gold-light);font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;margin:14px 0 4px;font-family:'Inter';}
+  .kos-amb .ticket-top .code{font-family:'Bebas Neue';font-size:44px;letter-spacing:.06em;color:#fff;}
+  .kos-amb .ticket-perf{
+    position:relative;height:0;border-top:2px dashed rgba(255,255,255,.25);margin:0 26px;
+  }
+  .kos-amb .ticket-perf::before,.kos-amb .ticket-perf::after{
+    content:"";position:absolute;top:-11px;width:22px;height:22px;border-radius:50%;background:var(--cream);
+  }
+  .kos-amb .ticket-perf::before{left:-38px;}
+  .kos-amb .ticket-perf::after{right:-38px;}
+  .kos-amb .ticket-bottom{padding:20px 26px 26px;}
+  .kos-amb .ticket-link{
+    background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);
+    border-radius:10px;padding:12px 14px;font-size:13.5px;color:var(--muted);
+    word-break:break-all;margin-bottom:16px;font-family:monospace;
+  }
+  .kos-amb .ticket-actions{display:flex;gap:10px;flex-wrap:wrap;}
+  .kos-amb .ticket-actions .btn{padding:11px 18px;font-size:13.5px;flex:1;justify-content:center;min-width:140px;}
+  .kos-amb .share-row{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap;}
+  .kos-amb .share-row a,.kos-amb .share-row button{
+    flex:1;min-width:110px;text-align:center;padding:11px 12px;border-radius:10px;font-size:13px;font-weight:700;
+    text-decoration:none;font-family:'Inter';border:none;
+  }
+  .kos-amb .share-wa{background:#25D366;color:#06331B;}
+  .kos-amb .share-ig{background:linear-gradient(45deg,#f9ce34,#ee2a7b,#6228d7);color:#fff;}
+  .kos-amb .share-msg{background:#0078FF;color:#fff;}
+  .kos-amb .share-copy{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.2);cursor:pointer;}
+  .kos-amb .copied-msg{font-size:12px;color:var(--pitch-light);margin-top:8px;display:none;font-weight:700;}
+
+  /* BENEFITS */
+  .kos-amb .benefits-list{max-width:620px;margin:44px auto 0;display:grid;gap:14px;}
+  .kos-amb .benefit-item{
+    display:flex;align-items:center;gap:14px;background:var(--white);
+    border-radius:12px;padding:16px 20px;border:1px solid rgba(10,25,48,.07);font-weight:600;font-size:15px;
+  }
+  .kos-amb .benefit-item .check{
+    width:26px;height:26px;border-radius:50%;background:var(--pitch);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;
+  }
+
+  /* FAQ */
+  .kos-amb .faq-list{max-width:700px;margin:44px auto 0;}
+  .kos-amb .faq-item{border-bottom:1px solid rgba(255,255,255,.14);}
+  .kos-amb .faq-q{
+    width:100%;text-align:left;background:none;border:none;padding:22px 4px;
+    font-family:'Inter';font-weight:700;font-size:16px;cursor:pointer;
+    display:flex;justify-content:space-between;align-items:center;color:var(--white);
+  }
+  .kos-amb .faq-q .plus{font-size:20px;color:var(--gold-light);transition:transform .2s ease;flex-shrink:0;margin-left:16px;}
+  .kos-amb .faq-item.open .plus{transform:rotate(45deg);}
+  .kos-amb .faq-a{max-height:0;overflow:hidden;transition:max-height .25s ease;}
+  .kos-amb .faq-a p{margin:0 4px 20px;color:var(--muted);font-size:14.5px;max-width:600px;}
+
+  /* COUNTERS */
+  .kos-amb .counters{
+    background:linear-gradient(180deg,#071120,var(--navy));color:#fff;text-align:center;
+  }
+  .kos-amb .counters .quote{font-family:'Bebas Neue';font-size:clamp(26px,4vw,38px);max-width:760px;margin:0 auto 50px;color:var(--gold-light);}
+  .kos-amb .counter-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;max-width:900px;margin:0 auto;}
+  .kos-amb .counter-item .num{font-family:'Bebas Neue';font-size:44px;color:#fff;}
+  .kos-amb .counter-item .lbl{font-size:12.5px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;font-weight:700;margin-top:6px;}
+
+  .kos-amb footer.kos-foot{background:#071120;color:var(--muted);text-align:center;padding:28px 24px;font-size:13px;}
+
+  @media (max-width:820px){
+    .kos-amb .why-grid{grid-template-columns:1fr;}
+    .kos-amb .steps{grid-template-columns:1fr 1fr;row-gap:36px;}
+    .kos-amb .step-arrow{display:none;}
+    .kos-amb .counter-grid{grid-template-columns:1fr 1fr;row-gap:28px;}
+    .kos-amb .lookup-card{padding:28px 22px;}
+    .kos-amb .lookup-row{flex-direction:column;}
+    .kos-amb .lang-switch{top:12px;right:12px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .kos-amb .btn{transition:none;}
+  }
+</style>
+
+<div class="kos-amb">
+
+  <!-- HERO -->
+  <section class="hero">
+    <canvas class="hero-canvas" id="hero-canvas"></canvas>
+    <div class="hero-fade"></div>
+    <div class="lang-switch">
+      <button class="lang-btn active" data-lang="en">EN</button>
+      <button class="lang-btn" data-lang="es">ES</button>
+      <button class="lang-btn" data-lang="fr">FR</button>
+    </div>
+    <div class="hero-content">
+      <div class="badge-line"><span class="dot"></span> <span data-i18n="badge">KICK OFF SCHOLARS AMBASSADOR PROGRAM</span> <span class="dot"></span></div>
+      <h1><span data-i18n="heroTitle1">Become a Kick Off</span><br><span data-i18n="heroTitleSpan">Scholars Ambassador</span></h1>
+      <p class="sub" data-i18n="heroSub">Help future student-athletes achieve their dream of studying and competing in the U.S.</p>
+      <p class="reward" data-i18n="heroReward">Earn <b>$100 USD</b> for every successful referral.</p>
+      <div class="cta-row">
+        <a href="#get-code" class="btn btn-gold" data-i18n="ctaPrimary">Get My Ambassador Code</a>
+        <a href="#how" class="btn btn-outline" data-i18n="ctaSecondary">See How It Works</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section class="dark" id="why">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow" data-i18n="whyEyebrow">Why join</div>
+        <h2 data-i18n="whyTitle">Why Become an Ambassador?</h2>
+      </div>
+      <div class="why-grid">
+        <div class="why-card">
+          <span class="icon">🤝</span>
+          <h3 data-i18n="why1Title">Make an Impact</h3>
+          <p data-i18n="why1Body">Help other student-athletes reach the same opportunity you already experienced.</p>
+        </div>
+        <div class="why-card">
+          <span class="icon">💰</span>
+          <h3 data-i18n="why2Title">Earn Rewards</h3>
+          <p data-i18n="why2Body">Receive $100 USD for every successful referral — with unlimited referrals.</p>
+        </div>
+        <div class="why-card">
+          <span class="icon">🌎</span>
+          <h3 data-i18n="why3Title">Stay Connected</h3>
+          <p data-i18n="why3Body">Remain part of the Kick Off Scholars family, long after your own recruiting journey ends.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow" data-i18n="howEyebrow">The process</div>
+        <h2 data-i18n="howTitle">How It Works</h2>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="num">1</div>
+          <p data-i18n="step1">Share your Ambassador Code with a future student-athlete.</p>
+          <span class="step-arrow">→</span>
+        </div>
+        <div class="step">
+          <div class="num">2</div>
+          <p data-i18n="step2">Your referral schedules a free consultation.</p>
+          <span class="step-arrow">→</span>
+        </div>
+        <div class="step">
+          <div class="num">3</div>
+          <p data-i18n="step3">They sign with Kick Off Scholars.</p>
+          <span class="step-arrow">→</span>
+        </div>
+        <div class="step">
+          <div class="num">4</div>
+          <p data-i18n="step4">You receive $100 USD.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GET CODE -->
+  <section class="dark" id="get-code">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow" data-i18n="codeEyebrow">Your code</div>
+        <h2 data-i18n="codeTitle">Get Your Ambassador Code</h2>
+        <p style="color:var(--muted);margin-top:10px;font-size:15px;" data-i18n="codeSub">Enter the email you used as a Kick Off Scholars client to retrieve your code.</p>
+      </div>
+
+      <div class="lookup-card">
+        <label for="amb-email" data-i18n="emailLabel">Your email</label>
+        <div class="lookup-row">
+          <input type="email" id="amb-email" placeholder="you@email.com" autocomplete="email" data-i18n-placeholder="emailPlaceholder">
+          <button class="btn btn-pitch" id="amb-search-btn" data-i18n="findBtn">Find My Code</button>
+        </div>
+        <p class="lookup-error" id="amb-error" data-i18n="errorMsg">We couldn't find that email. Double-check it, or reach out on WhatsApp and we'll set you up.</p>
+        <p class="lookup-hint" data-i18n="lookupHint">Prototype demo — try <b>felipe@example.com</b>, <b>ana@example.com</b>, or <b>nico@example.com</b></p>
+
+        <div class="ticket" id="amb-ticket">
+          <div class="ticket-top">
+            <p class="welcome" id="amb-welcome">Welcome back 👋</p>
+            <p class="code-label" data-i18n="codeLabel">Your Ambassador Code</p>
+            <div class="code" id="amb-code">FELIPE23</div>
+          </div>
+          <div class="ticket-perf"></div>
+          <div class="ticket-bottom">
+            <div class="ticket-link" id="amb-link">kickoffscholars.com/apply?ref=felipe23</div>
+            <div class="ticket-actions">
+              <button class="btn btn-ghost" id="copy-code-btn" data-i18n="copyCodeBtn">Copy Code</button>
+              <button class="btn btn-ghost" id="copy-link-btn" data-i18n="copyLinkBtn">Copy Referral Link</button>
+            </div>
+            <div class="share-row">
+              <a href="#" target="_blank" class="share-wa" id="share-wa">WhatsApp</a>
+              <a href="https://instagram.com/kickoffscholars.usa" target="_blank" class="share-ig">Instagram</a>
+              <a href="#" target="_blank" class="share-msg" id="share-msg">Messenger</a>
+              <button class="share-copy" id="share-copy-btn" data-i18n="shareCopy">Copy Link</button>
+            </div>
+            <p class="copied-msg" id="copied-msg" data-i18n="copiedMsg">Copied to clipboard ✓</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFITS -->
+  <section id="benefits">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow" data-i18n="benefitsEyebrow">Perks</div>
+        <h2 data-i18n="benefitsTitle">Ambassador Benefits</h2>
+      </div>
+      <div class="benefits-list">
+        <div class="benefit-item"><span class="check">✓</span> <span data-i18n="b1">Unlimited referrals</span></div>
+        <div class="benefit-item"><span class="check">✓</span> <span data-i18n="b2">$100 per successful referral</span></div>
+        <div class="benefit-item"><span class="check">✓</span> <span data-i18n="b3">Fast payouts via Zelle, PayPal, or Wise</span></div>
+        <div class="benefit-item"><span class="check">✓</span> <span data-i18n="b4">Help athletes achieve their dreams</span></div>
+        <div class="benefit-item"><span class="check">✓</span> <span data-i18n="b5">Exclusive Ambassador Community</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="dark" id="faq">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow" data-i18n="faqEyebrow">Questions</div>
+        <h2 data-i18n="faqTitle">FAQ</h2>
+      </div>
+      <div class="faq-list" id="faq-list">
+        <div class="faq-item">
+          <button class="faq-q"><span data-i18n="q1">When do I get paid?</span> <span class="plus">+</span></button>
+          <div class="faq-a"><p data-i18n="a1">After the student signs their contract and completes their first payment.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q"><span data-i18n="q2">What if two people refer the same student?</span> <span class="plus">+</span></button>
+          <div class="faq-a"><p data-i18n="a2">Credit goes to whichever referral code was registered first.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q"><span data-i18n="q3">Is there a limit on referrals?</span> <span class="plus">+</span></button>
+          <div class="faq-a"><p data-i18n="a3">No — refer as many student-athletes as you'd like.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q"><span data-i18n="q4">Can I refer athletes from other countries?</span> <span class="plus">+</span></button>
+          <div class="faq-a"><p data-i18n="a4">Yes. Kick Off Scholars works with athletes from all over the world.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q"><span data-i18n="q5">How do I get paid?</span> <span class="plus">+</span></button>
+          <div class="faq-a"><p data-i18n="a5">Via Zelle, PayPal, Wise, or bank transfer — whichever works best for you.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COUNTERS -->
+  <section class="counters">
+    <div class="wrap">
+      <p class="quote" data-i18n="quote">"Every athlete you help could change the course of their future."</p>
+      <div class="counter-grid">
+        <div class="counter-item"><div class="num">4</div><div class="lbl" data-i18n="counterAmbassadors">Ambassadors</div></div>
+        <div class="counter-item"><div class="num">6</div><div class="lbl" data-i18n="counterAthletes">Athletes Placed</div></div>
+        <div class="counter-item"><div class="num">$600</div><div class="lbl" data-i18n="counterPaid">Paid in Rewards</div></div>
+        <div class="counter-item"><div class="num">3</div><div class="lbl" data-i18n="counterCountries">Countries</div></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="kos-foot" data-i18n="footer">© 2026 Kick Off Scholars — Ambassador Program</footer>
+</div>
+
+<script>
+(function(){
+  /* ---------- i18n ---------- */
+  var translations = {
+    en: {
+      badge:"KICK OFF SCHOLARS AMBASSADOR PROGRAM",
+      heroTitle1:"Become a Kick Off", heroTitleSpan:"Scholars Ambassador",
+      heroSub:"Help future student-athletes achieve their dream of studying and competing in the U.S.",
+      heroReward:"Earn <b>$100 USD</b> for every successful referral.",
+      ctaPrimary:"Get My Ambassador Code", ctaSecondary:"See How It Works",
+      whyEyebrow:"Why join", whyTitle:"Why Become an Ambassador?",
+      why1Title:"Make an Impact", why1Body:"Help other student-athletes reach the same opportunity you already experienced.",
+      why2Title:"Earn Rewards", why2Body:"Receive $100 USD for every successful referral — with unlimited referrals.",
+      why3Title:"Stay Connected", why3Body:"Remain part of the Kick Off Scholars family, long after your own recruiting journey ends.",
+      howEyebrow:"The process", howTitle:"How It Works",
+      step1:"Share your Ambassador Code with a future student-athlete.",
+      step2:"Your referral schedules a free consultation.",
+      step3:"They sign with Kick Off Scholars.",
+      step4:"You receive $100 USD.",
+      codeEyebrow:"Your code", codeTitle:"Get Your Ambassador Code",
+      codeSub:"Enter the email you used as a Kick Off Scholars client to retrieve your code.",
+      emailLabel:"Your email", emailPlaceholder:"you@email.com", findBtn:"Find My Code",
+      errorMsg:"We couldn't find that email. Double-check it, or reach out on WhatsApp and we'll set you up.",
+      lookupHint:"Prototype demo — try <b>felipe@example.com</b>, <b>ana@example.com</b>, or <b>nico@example.com</b>",
+      welcomePrefix:"Welcome back,",
+      codeLabel:"Your Ambassador Code", copyCodeBtn:"Copy Code", copyLinkBtn:"Copy Referral Link",
+      shareCopy:"Copy Link", copiedMsg:"Copied to clipboard ✓",
+      benefitsEyebrow:"Perks", benefitsTitle:"Ambassador Benefits",
+      b1:"Unlimited referrals", b2:"$100 per successful referral", b3:"Fast payouts via Zelle, PayPal, or Wise",
+      b4:"Help athletes achieve their dreams", b5:"Exclusive Ambassador Community",
+      faqEyebrow:"Questions", faqTitle:"FAQ",
+      q1:"When do I get paid?", a1:"After the student signs their contract and completes their first payment.",
+      q2:"What if two people refer the same student?", a2:"Credit goes to whichever referral code was registered first.",
+      q3:"Is there a limit on referrals?", a3:"No — refer as many student-athletes as you'd like.",
+      q4:"Can I refer athletes from other countries?", a4:"Yes. Kick Off Scholars works with athletes from all over the world.",
+      q5:"How do I get paid?", a5:"Via Zelle, PayPal, Wise, or bank transfer — whichever works best for you.",
+      quote:"\u201cEvery athlete you help could change the course of their future.\u201d",
+      counterAmbassadors:"Ambassadors", counterAthletes:"Athletes Placed", counterPaid:"Paid in Rewards", counterCountries:"Countries",
+      footer:"© 2026 Kick Off Scholars — Ambassador Program"
+    },
+    es: {
+      badge:"PROGRAMA DE EMBAJADORES KICK OFF SCHOLARS",
+      heroTitle1:"Conviértete en", heroTitleSpan:"Embajador Kick Off Scholars",
+      heroSub:"Ayuda a futuros estudiantes-atletas a cumplir su sueño de estudiar y competir en EE.UU.",
+      heroReward:"Gana <b>$100 USD</b> por cada referido exitoso.",
+      ctaPrimary:"Obtener Mi Código de Embajador", ctaSecondary:"Ver Cómo Funciona",
+      whyEyebrow:"Por qué unirte", whyTitle:"¿Por Qué Ser Embajador?",
+      why1Title:"Genera un Impacto", why1Body:"Ayuda a otros estudiantes-atletas a alcanzar la misma oportunidad que tú ya viviste.",
+      why2Title:"Gana Recompensas", why2Body:"Recibe $100 USD por cada referido exitoso, sin límite de referidos.",
+      why3Title:"Mantente Conectado", why3Body:"Sigue siendo parte de la familia Kick Off Scholars, mucho después de terminar tu propio proceso.",
+      howEyebrow:"El proceso", howTitle:"Cómo Funciona",
+      step1:"Comparte tu Código de Embajador con un futuro estudiante-atleta.",
+      step2:"Tu referido agenda una consultoría gratuita.",
+      step3:"Firma con Kick Off Scholars.",
+      step4:"Tú recibes $100 USD.",
+      codeEyebrow:"Tu código", codeTitle:"Obtén Tu Código de Embajador",
+      codeSub:"Ingresa el correo que usaste como cliente de Kick Off Scholars para obtener tu código.",
+      emailLabel:"Tu correo", emailPlaceholder:"tucorreo@email.com", findBtn:"Buscar Mi Código",
+      errorMsg:"No encontramos ese correo. Verifícalo, o escríbenos por WhatsApp y te ayudamos.",
+      lookupHint:"Demo de prototipo — prueba con <b>felipe@example.com</b>, <b>ana@example.com</b> o <b>nico@example.com</b>",
+      welcomePrefix:"Bienvenido de nuevo,",
+      codeLabel:"Tu Código de Embajador", copyCodeBtn:"Copiar Código", copyLinkBtn:"Copiar Enlace de Referido",
+      shareCopy:"Copiar Enlace", copiedMsg:"Copiado ✓",
+      benefitsEyebrow:"Beneficios", benefitsTitle:"Beneficios del Embajador",
+      b1:"Referidos ilimitados", b2:"$100 por cada referido exitoso", b3:"Pagos rápidos por Zelle, PayPal o Wise",
+      b4:"Ayuda a los atletas a cumplir sus sueños", b5:"Comunidad exclusiva de Embajadores",
+      faqEyebrow:"Preguntas", faqTitle:"Preguntas Frecuentes",
+      q1:"¿Cuándo me pagan?", a1:"Después de que el estudiante firme su contrato y complete su primer pago.",
+      q2:"¿Qué pasa si dos personas refieren al mismo estudiante?", a2:"El crédito se otorga al código de referido que se haya registrado primero.",
+      q3:"¿Hay un límite de referidos?", a3:"No — puedes referir a tantos estudiantes-atletas como quieras.",
+      q4:"¿Puedo referir atletas de otros países?", a4:"Sí. Kick Off Scholars trabaja con atletas de todo el mundo.",
+      q5:"¿Cómo me pagan?", a5:"Por Zelle, PayPal, Wise o transferencia bancaria — lo que te resulte más cómodo.",
+      quote:"\u201cCada atleta al que ayudas puede cambiar el rumbo de su futuro.\u201d",
+      counterAmbassadors:"Embajadores", counterAthletes:"Atletas Colocados", counterPaid:"Pagado en Recompensas", counterCountries:"Países",
+      footer:"© 2026 Kick Off Scholars — Programa de Embajadores"
+    },
+    fr: {
+      badge:"PROGRAMME AMBASSADEUR KICK OFF SCHOLARS",
+      heroTitle1:"Devenez un", heroTitleSpan:"Ambassadeur Kick Off Scholars",
+      heroSub:"Aidez de futurs étudiants-athlètes à réaliser leur rêve d'étudier et de jouer aux États-Unis.",
+      heroReward:"Gagnez <b>100 $ USD</b> pour chaque parrainage réussi.",
+      ctaPrimary:"Obtenir Mon Code Ambassadeur", ctaSecondary:"Voir Comment Ça Marche",
+      whyEyebrow:"Pourquoi nous rejoindre", whyTitle:"Pourquoi Devenir Ambassadeur ?",
+      why1Title:"Avoir un Impact", why1Body:"Aidez d'autres étudiants-athlètes à saisir l'opportunité que vous avez déjà vécue.",
+      why2Title:"Gagnez des Récompenses", why2Body:"Recevez 100 $ USD pour chaque parrainage réussi — sans limite de parrainages.",
+      why3Title:"Restez Connecté", why3Body:"Restez membre de la famille Kick Off Scholars, bien après la fin de votre propre parcours.",
+      howEyebrow:"Le processus", howTitle:"Comment Ça Marche",
+      step1:"Partagez votre Code Ambassadeur avec un futur étudiant-athlète.",
+      step2:"Votre filleul planifie une consultation gratuite.",
+      step3:"Il/elle signe avec Kick Off Scholars.",
+      step4:"Vous recevez 100 $ USD.",
+      codeEyebrow:"Votre code", codeTitle:"Obtenez Votre Code Ambassadeur",
+      codeSub:"Entrez l'e-mail que vous avez utilisé en tant que client Kick Off Scholars pour récupérer votre code.",
+      emailLabel:"Votre e-mail", emailPlaceholder:"vous@email.com", findBtn:"Trouver Mon Code",
+      errorMsg:"Nous n'avons pas trouvé cet e-mail. Vérifiez-le, ou contactez-nous sur WhatsApp.",
+      lookupHint:"Démo du prototype — essayez <b>felipe@example.com</b>, <b>ana@example.com</b> ou <b>nico@example.com</b>",
+      welcomePrefix:"Content de te revoir,",
+      codeLabel:"Votre Code Ambassadeur", copyCodeBtn:"Copier le Code", copyLinkBtn:"Copier le Lien de Parrainage",
+      shareCopy:"Copier le Lien", copiedMsg:"Copié ✓",
+      benefitsEyebrow:"Avantages", benefitsTitle:"Avantages Ambassadeur",
+      b1:"Parrainages illimités", b2:"100 $ par parrainage réussi", b3:"Paiements rapides via Zelle, PayPal ou Wise",
+      b4:"Aidez les athlètes à réaliser leurs rêves", b5:"Communauté exclusive d'Ambassadeurs",
+      faqEyebrow:"Questions", faqTitle:"FAQ",
+      q1:"Quand suis-je payé(e) ?", a1:"Après que l'étudiant signe son contrat et effectue son premier paiement.",
+      q2:"Que se passe-t-il si deux personnes parrainent le même étudiant ?", a2:"Le crédit revient au code de parrainage enregistré en premier.",
+      q3:"Y a-t-il une limite de parrainages ?", a3:"Non — parrainez autant d'étudiants-athlètes que vous le souhaitez.",
+      q4:"Puis-je parrainer des athlètes d'autres pays ?", a4:"Oui. Kick Off Scholars travaille avec des athlètes du monde entier.",
+      q5:"Comment suis-je payé(e) ?", a5:"Via Zelle, PayPal, Wise ou virement bancaire — selon ce qui vous convient le mieux.",
+      quote:"\u00abChaque athlète que vous aidez peut changer le cours de son avenir.\u00bb",
+      counterAmbassadors:"Ambassadeurs", counterAthletes:"Athlètes Placés", counterPaid:"Versé en Récompenses", counterCountries:"Pays",
+      footer:"© 2026 Kick Off Scholars — Programme Ambassadeur"
+    }
+  };
+
+  var currentLang = 'en';
+  var lastRecord = null;
+
+  function applyLanguage(lang){
+    currentLang = lang;
+    var dict = translations[lang];
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var key = el.getAttribute('data-i18n');
+      if(dict[key] !== undefined) el.innerHTML = dict[key];
+    });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el){
+      var key = el.getAttribute('data-i18n-placeholder');
+      if(dict[key] !== undefined) el.placeholder = dict[key];
+    });
+    document.querySelectorAll('.lang-btn').forEach(function(b){
+      b.classList.toggle('active', b.dataset.lang === lang);
+    });
+    if(lastRecord) renderTicket(lastRecord);
+  }
+
+  document.querySelectorAll('.lang-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){ applyLanguage(btn.dataset.lang); });
+  });
+
+  /* ---------- Ambassador code lookup ---------- */
+  var ambassadors = {
+    "felipe@example.com": { first: "Felipe", code: "FELIPE23" },
+    "ana@example.com": { first: "Ana", code: "ANAZ" },
+    "nico@example.com": { first: "Nicolás", code: "NICO" }
+  };
+
+  var emailInput = document.getElementById('amb-email');
+  var searchBtn = document.getElementById('amb-search-btn');
+  var errorMsg = document.getElementById('amb-error');
+  var ticket = document.getElementById('amb-ticket');
+  var welcome = document.getElementById('amb-welcome');
+  var codeEl = document.getElementById('amb-code');
+  var linkEl = document.getElementById('amb-link');
+  var copiedMsg = document.getElementById('copied-msg');
+
+  function renderTicket(record){
+    var dict = translations[currentLang];
+    var refCode = record.code.toLowerCase();
+    var refLink = 'kickoffscholars.com/apply?ref=' + refCode;
+    welcome.textContent = dict.welcomePrefix + ' ' + record.first + ' \uD83D\uDC4B';
+    codeEl.textContent = record.code;
+    linkEl.textContent = refLink;
+    ticket.style.display = 'block';
+
+    var fullLink = 'https://' + refLink;
+    var waText = encodeURIComponent('Kick Off Scholars: ' + fullLink);
+    document.getElementById('share-wa').href = 'https://wa.me/?text=' + waText;
+    document.getElementById('share-msg').href = 'fb-messenger://share?link=' + encodeURIComponent(fullLink);
+
+    document.getElementById('copy-code-btn').onclick = function(){ copyText(record.code); };
+    document.getElementById('copy-link-btn').onclick = function(){ copyText(fullLink); };
+    document.getElementById('share-copy-btn').onclick = function(){ copyText(fullLink); };
+  }
+
+  function showCode(email){
+    var record = ambassadors[email.trim().toLowerCase()];
+    if(!record){
+      errorMsg.style.display = 'block';
+      ticket.style.display = 'none';
+      lastRecord = null;
+      return;
+    }
+    errorMsg.style.display = 'none';
+    lastRecord = record;
+    renderTicket(record);
+  }
+
+  function copyText(text){
+    navigator.clipboard.writeText(text).then(function(){
+      copiedMsg.style.display = 'block';
+      setTimeout(function(){ copiedMsg.style.display = 'none'; }, 1800);
+    });
+  }
+
+  searchBtn.addEventListener('click', function(){ showCode(emailInput.value); });
+  emailInput.addEventListener('keydown', function(e){ if(e.key === 'Enter') showCode(emailInput.value); });
+
+  /* ---------- FAQ accordion ---------- */
+  document.querySelectorAll('.faq-item').forEach(function(item){
+    var q = item.querySelector('.faq-q');
+    var a = item.querySelector('.faq-a');
+    q.addEventListener('click', function(){
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(function(i){
+        i.classList.remove('open');
+        i.querySelector('.faq-a').style.maxHeight = null;
+      });
+      if(!isOpen){
+        item.classList.add('open');
+        a.style.maxHeight = a.scrollHeight + 'px';
+      }
+    });
+  });
+
+  /* ---------- 3D hero background (Three.js) ---------- */
+  function initHero3D(){
+    var heroSection = document.querySelector('.kos-amb .hero');
+    var canvas = document.getElementById('hero-canvas');
+    if(!heroSection || !canvas || typeof THREE === 'undefined') return;
+
+    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+
+    var scene = new THREE.Scene();
+    scene.fog = new THREE.Fog(0x071120, 6, 26);
+
+    var camera = new THREE.PerspectiveCamera(55, 1, 0.1, 100);
+    camera.position.set(0, 2.6, 9);
+    camera.lookAt(0, -0.5, -6);
+
+    // Pitch-style grid floor
+    var grid = new THREE.GridHelper(50, 34, 0x37B871, 0x14304F);
+    grid.position.y = -2.6;
+    grid.material.transparent = true;
+    grid.material.opacity = 0.45;
+    scene.add(grid);
+
+    // Floating wireframe icosahedron (soccer-ball-like)
+    var icoGeo = new THREE.IcosahedronGeometry(2.1, 1);
+    var icoMat = new THREE.MeshBasicMaterial({ color: 0xD9A93B, wireframe: true, transparent: true, opacity: 0.55 });
+    var ico = new THREE.Mesh(icoGeo, icoMat);
+    ico.position.set(2.8, 1.4, -3.5);
+    scene.add(ico);
+
+    var icoGeo2 = new THREE.IcosahedronGeometry(1.1, 1);
+    var icoMat2 = new THREE.MeshBasicMaterial({ color: 0x37B871, wireframe: true, transparent: true, opacity: 0.4 });
+    var ico2 = new THREE.Mesh(icoGeo2, icoMat2);
+    ico2.position.set(-3.2, 0.6, -2.5);
+    scene.add(ico2);
+
+    // Ambient particles
+    var particleCount = 140;
+    var positions = new Float32Array(particleCount * 3);
+    for(var i = 0; i < particleCount; i++){
+      positions[i*3] = (Math.random() - 0.5) * 20;
+      positions[i*3+1] = Math.random() * 8 - 1;
+      positions[i*3+2] = (Math.random() - 0.5) * 20 - 4;
+    }
+    var particleGeo = new THREE.BufferGeometry();
+    particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    var particleMat = new THREE.PointsMaterial({ color: 0xF0CD7A, size: 0.05, transparent: true, opacity: 0.6 });
+    var particles = new THREE.Points(particleGeo, particleMat);
+    scene.add(particles);
+
+    function resize(){
+      var w = heroSection.clientWidth, h = heroSection.clientHeight;
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    var clock = new THREE.Clock();
+    function animate(){
+      var t = clock.getElapsedTime();
+      ico.rotation.x = t * 0.12;
+      ico.rotation.y = t * 0.18;
+      ico2.rotation.x = -t * 0.1;
+      ico2.rotation.y = t * 0.14;
+      particles.rotation.y = t * 0.02;
+      grid.position.z = (t * 0.6) % (50/34);
+      renderer.render(scene, camera);
+      if(!reduceMotion) requestAnimationFrame(animate);
+    }
+
+    if(reduceMotion){
+      renderer.render(scene, camera);
+    } else {
+      requestAnimationFrame(animate);
+    }
+  }
+
+  if(document.readyState === 'complete' || document.readyState === 'interactive'){
+    setTimeout(initHero3D, 0);
+  } else {
+    window.addEventListener('DOMContentLoaded', initHero3D);
+  }
+  window.addEventListener('load', function(){ if(!window.__hero3dInit){ window.__hero3dInit = true; initHero3D(); } });
+})();
+</script>
