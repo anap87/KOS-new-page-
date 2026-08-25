@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kick Off Scholars — Pitch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0C0B09;
+    --bg-panel:#161310;
+    --bg-panel-2:#1E1A15;
+    --turf:#C9A227;
+    --turf-bright:#E3BE55;
+    --gold:#F4E4C1;
+    --gold-dim:#8C6F2E;
+    --chalk:#F8F6F0;
+    --chalk-dim:#B7AC9A;
+    --line: rgba(248,246,240,0.14);
+    --line-bright: rgba(248,246,240,0.28);
+    --red:#D9614F;
+    --maxw: 1080px;
+  }
+  .theme-dark{
+    --bg:#0C0B09; --bg-panel:#161310; --bg-panel-2:#1E1A15;
+    --turf:#C9A227; --turf-bright:#E3BE55; --gold:#F4E4C1; --gold-dim:#8C6F2E;
+    --chalk:#F8F6F0; --chalk-dim:#B7AC9A; --line:rgba(248,246,240,0.14); --line-bright:rgba(248,246,240,0.28);
+    background:var(--bg); color:var(--chalk);
+  }
+  .theme-light{
+    --bg:#FFFFFF; --bg-panel:#F7F3EA; --bg-panel-2:#EFE6D2;
+    --turf:#A8781E; --turf-bright:#8C6413; --gold:#8C6412; --gold-dim:#6B4E0E;
+    --chalk:#171310; --chalk-dim:#6E6455; --line:rgba(23,19,16,0.12); --line-bright:rgba(23,19,16,0.24);
+    background:var(--bg); color:var(--chalk);
+  }
+  [data-lang="es"]{}
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--chalk);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
+  }
+  h1,h2,h3{font-family:'Anton',sans-serif; font-weight:400; letter-spacing:0.01em; margin:0;}
+  .eyebrow{
+    font-family:'Oswald',sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.18em;
+    font-size:12px;
+    color:var(--turf-bright);
+    font-weight:600;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:''; width:22px; height:2px; background:var(--turf-bright); display:inline-block;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
+  section{position:relative; padding:120px 0;}
+  @media (max-width:720px){ section{padding:80px 0;} }
+
+  /* progress bar */
+  #progress{position:fixed; top:0; left:0; height:3px; background:linear-gradient(90deg,var(--turf),var(--gold)); z-index:999; width:0%;}
+
+  /* top bar */
+  #topbar{
+    position:fixed; top:0; left:0; right:0; z-index:998;
+    background:rgba(8,23,18,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    padding:3px 0;
+  }
+  #topbar .inner{
+    max-width:var(--maxw); margin:0 auto; padding:12px 28px;
+    display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
+  }
+  .brand{display:flex; align-items:center; gap:10px;}
+  .brand img{height:26px; width:auto; display:block;}
+  .brand span{font-family:'Oswald'; font-weight:600; font-size:14px; letter-spacing:0.04em; color:var(--chalk);}
+  .toggles{display:flex; gap:10px; align-items:center; flex-wrap:wrap;}
+  .toggle-group{
+    display:flex; background:var(--bg-panel); border:1px solid var(--line); border-radius:999px; padding:3px;
+  }
+  .toggle-group button{
+    font-family:'Oswald'; font-weight:600; font-size:12px; letter-spacing:0.05em; text-transform:uppercase;
+    border:none; background:transparent; color:var(--chalk-dim); padding:7px 14px; border-radius:999px; cursor:pointer;
+    transition:all .25s ease;
+  }
+  .toggle-group button.active{background:var(--turf); color:#06140D;}
+  .toggle-group button:not(.active):hover{color:var(--chalk);}
+
+  /* hero */
+  #hero{
+    min-height:100svh; display:flex; flex-direction:column; justify-content:center; align-items:flex-start;
+    padding-top:140px;
+    background:
+      radial-gradient(ellipse 900px 500px at 15% 0%, rgba(201,162,39,0.20), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 90% 30%, rgba(244,228,193,0.09), transparent 60%),
+      var(--bg);
+    overflow:hidden;
+  }
+  #hero::after{
+    content:'';
+    position:absolute; inset:0; pointer-events:none;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 78px, var(--line) 78px, var(--line) 79px);
+    mask-image:linear-gradient(180deg, transparent, black 30%, black 70%, transparent);
+    opacity:0.5;
+  }
+  .pitch-arc{
+    position:absolute; right:-220px; top:50%; transform:translateY(-50%);
+    width:640px; height:640px; border-radius:50%;
+    border:1px solid var(--line-bright);
+    pointer-events:none;
+  }
+  .pitch-arc::before{
+    content:''; position:absolute; inset:90px; border-radius:50%; border:1px solid var(--line);
+  }
+  .hero-inner{position:relative; z-index:2; max-width:var(--maxw); margin:0 auto; width:100%; padding:0 28px;}
+  #hero h1{font-size:clamp(52px,9vw,108px); line-height:0.95; color:var(--chalk); margin-top:18px;}
+  #hero h1 em{font-style:normal; color:var(--turf-bright);}
+  .hero-sub{font-size:clamp(17px,2.4vw,22px); color:var(--chalk-dim); max-width:560px; margin-top:22px; line-height:1.5;}
+  .hero-line{font-family:'Oswald'; font-size:14px; letter-spacing:0.04em; color:var(--gold); margin-top:26px; display:flex; align-items:center; gap:10px;}
+  .hero-line::before{content:'●'; font-size:8px;}
+  .scroll-cue{position:absolute; bottom:36px; left:28px; display:flex; align-items:center; gap:10px; font-family:'Oswald'; font-size:11px; text-transform:uppercase; letter-spacing:0.15em; color:var(--chalk-dim);}
+  .scroll-cue .line{width:1px; height:30px; background:linear-gradient(var(--turf-bright), transparent); animation:pulse-line 2s ease-in-out infinite;}
+  @keyframes pulse-line{0%,100%{opacity:.3;}50%{opacity:1;}}
+
+  /* reveal */
+  .reveal{opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+  .reveal.d1{transition-delay:.08s;} .reveal.d2{transition-delay:.16s;} .reveal.d3{transition-delay:.24s;} .reveal.d4{transition-delay:.32s;} .reveal.d5{transition-delay:.4s;}
+
+  /* section heads */
+  .section-head{max-width:640px; margin-bottom:56px;}
+  .section-head h2{font-size:clamp(32px,5vw,52px); color:var(--chalk); margin-top:14px; line-height:1.02;}
+  .section-head p{color:var(--chalk-dim); font-size:16px; margin-top:14px; line-height:1.6;}
+
+  /* PROCESS */
+  #process{}
+  .steps{display:flex; flex-direction:column;}
+  .step{
+    display:grid; grid-template-columns:90px 1fr; gap:26px;
+    padding:26px 0; border-top:1px solid var(--line);
+    align-items:start;
+  }
+  .step:last-child{border-bottom:1px solid var(--line);}
+  .step .num{font-family:'Anton'; font-size:40px; color:transparent; -webkit-text-stroke:1.5px var(--line-bright); line-height:1;}
+  .step.active-step .num{-webkit-text-stroke:1.5px var(--turf-bright); color:transparent;}
+  .step h3{font-family:'Oswald'; font-weight:600; font-size:19px; text-transform:none; color:var(--chalk); letter-spacing:0.01em;}
+  .step p{color:var(--chalk-dim); font-size:15px; margin-top:8px; line-height:1.55; max-width:560px;}
+  .step .tag{display:inline-block; margin-top:10px; font-family:'Oswald'; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--gold); border:1px solid var(--turf); padding:3px 10px; border-radius:999px;}
+  @media (max-width:600px){ .step{grid-template-columns:46px 1fr; gap:16px;} .step .num{font-size:26px;} }
+
+  /* tool cards */
+  .tool-card{
+    background:var(--bg-panel-2); border:1px solid var(--line); border-radius:18px; padding:34px;
+    display:grid; grid-template-columns:1fr auto; gap:24px; align-items:center;
+    margin-top:18px;
+  }
+  .tool-card h3{font-family:'Oswald'; font-weight:600; font-size:20px; color:var(--chalk);}
+  .tool-card p{color:var(--chalk-dim); font-size:14.5px; margin-top:8px; line-height:1.55;}
+  .btn{
+    font-family:'Oswald'; font-weight:600; font-size:13px; letter-spacing:0.06em; text-transform:uppercase;
+    background:var(--turf); color:#06140D; border:none; padding:14px 22px; border-radius:10px; cursor:pointer;
+    text-decoration:none; display:inline-flex; align-items:center; gap:8px; white-space:nowrap;
+    transition:transform .2s ease, background .2s ease;
+  }
+  .btn:hover{background:var(--turf-bright); transform:translateY(-2px);}
+  .btn.ghost{background:transparent; border:1px solid var(--line-bright); color:var(--chalk);}
+  .btn.ghost:hover{border-color:var(--turf-bright); color:var(--turf-bright);}
+  @media (max-width:640px){ .tool-card{grid-template-columns:1fr;} }
+
+  /* level cards */
+  .levels-scroller{display:flex; gap:16px; overflow-x:auto; padding:8px 2px 20px; margin:0 -4px; scroll-snap-type:x proximity;}
+  .levels-scroller::-webkit-scrollbar{height:6px;}
+  .levels-scroller::-webkit-scrollbar-thumb{background:var(--line-bright); border-radius:10px;}
+  .level-card{
+    scroll-snap-align:start;
+    min-width:250px; flex:0 0 250px;
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:16px; padding:24px;
+    position:relative; overflow:hidden;
+  }
+  .level-card .badge{
+    font-family:'Anton'; font-size:22px; color:var(--chalk); letter-spacing:0.01em;
+  }
+  .level-card .path-tag{position:absolute; top:16px; right:16px; font-family:'Oswald'; font-size:10px; letter-spacing:.08em; text-transform:uppercase; background:var(--turf); color:#06140D; padding:3px 8px; border-radius:6px; font-weight:600;}
+  .level-card .stat{margin-top:18px;}
+  .level-card .stat .k{font-family:'Oswald'; font-size:10.5px; text-transform:uppercase; letter-spacing:.1em; color:var(--chalk-dim);}
+  .level-card .stat .v{font-family:'Anton'; font-size:26px; color:var(--gold); margin-top:2px;}
+  .level-card .desc{margin-top:14px; font-size:13.5px; color:var(--chalk-dim); line-height:1.5; padding-top:14px; border-top:1px solid var(--line);}
+  .level-note{margin-top:22px; font-size:14px; color:var(--chalk-dim); border-left:2px solid var(--gold); padding-left:16px; line-height:1.6;}
+
+  /* cost grid */
+  .cost-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin-top:8px;}
+  .cost-item{background:var(--bg-panel); border:1px solid var(--line); border-radius:14px; padding:20px;}
+  .cost-item .ico{width:34px; height:34px; border-radius:9px; background:rgba(201,162,39,0.16); display:flex; align-items:center; justify-content:center; margin-bottom:12px;}
+  .cost-item .ico span{width:10px; height:10px; border-radius:3px; background:var(--turf-bright);}
+  .cost-item h4{font-family:'Oswald'; font-weight:600; font-size:14.5px; color:var(--chalk); margin:0;}
+  .cost-item p{font-size:13px; color:var(--chalk-dim); margin-top:6px; line-height:1.5;}
+  .fee-callout{margin-top:26px; background:rgba(201,162,39,0.08); border:1px solid rgba(201,162,39,0.3); border-radius:14px; padding:20px 22px; font-size:14px; color:var(--chalk); line-height:1.6;}
+  .pct-note{margin-top:16px; font-size:14px; color:var(--chalk-dim); line-height:1.6;}
+
+  /* CC vs 4-year */
+  .cc-cols{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:8px;}
+  @media (max-width:760px){ .cc-cols{grid-template-columns:1fr;} }
+  .cc-col{background:var(--bg-panel); border:1px solid var(--line); border-radius:16px; padding:26px;}
+  .cc-col .cc-name{font-family:'Oswald'; font-weight:700; font-size:17px; color:var(--chalk);}
+  .cc-col .cc-tag{display:inline-block; margin-top:8px; font-family:'Oswald'; font-size:10.5px; text-transform:uppercase; letter-spacing:.08em; color:var(--turf); border:1px solid var(--turf); padding:3px 10px; border-radius:999px;}
+  .cc-row{padding:14px 0; border-top:1px solid var(--line);}
+  .cc-row .k{font-family:'Oswald'; font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--gold);}
+  .cc-row .v{font-size:13.5px; color:var(--chalk-dim); margin-top:5px; line-height:1.55;}
+  .cc-rows-wrap{margin-top:18px;}
+  .cc-path{display:flex; flex-wrap:wrap; gap:0; margin-top:36px;}
+  .cc-step{flex:1 1 190px; background:var(--bg-panel-2); border:1px solid var(--line); border-radius:14px; padding:18px;}
+  .cc-step .n{font-family:'Anton'; font-size:13px; color:var(--turf);}
+  .cc-step h5{font-family:'Oswald'; font-weight:600; font-size:15px; color:var(--chalk); margin:6px 0 0;}
+  .cc-step p{font-size:12.5px; color:var(--chalk-dim); margin-top:6px; line-height:1.5;}
+  .cc-arrow{display:flex; align-items:center; justify-content:center; padding:0 10px; color:var(--turf-bright); font-size:18px; flex:0 0 auto;}
+  @media (max-width:700px){ .cc-arrow{transform:rotate(90deg); padding:6px 0; width:100%;} .cc-path{flex-direction:column;} }
+  .cc-path-title{font-family:'Oswald'; font-weight:600; font-size:13px; text-transform:uppercase; letter-spacing:.08em; color:var(--chalk-dim); margin-top:44px;}
+  .fee-callout b{color:var(--gold);}
+
+  /* highlights section */
+  #highlights{}
+  .hl-grid{display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start;}
+  @media (max-width:760px){ .hl-grid{grid-template-columns:1fr;} }
+  .checklist{list-style:none; padding:0; margin:0;}
+  .checklist li{display:flex; gap:12px; padding:12px 0; border-top:1px solid var(--line); font-size:14.5px; color:var(--chalk-dim); line-height:1.5;}
+  .checklist li:last-child{border-bottom:1px solid var(--line);}
+  .checklist li::before{content:'✓'; color:var(--turf-bright); font-weight:700; flex:0 0 auto;}
+  .zoom-note{background:var(--bg-panel-2); border:1px solid var(--line); border-radius:16px; padding:26px;}
+  .zoom-note h4{font-family:'Oswald'; font-weight:600; font-size:15px; color:var(--gold); text-transform:uppercase; letter-spacing:.05em; margin:0 0 10px;}
+  .zoom-note p{font-size:14.5px; color:var(--chalk-dim); line-height:1.6; margin:0;}
+
+  /* player cards */
+  .cards-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:18px; margin-top:8px;}
+  .pcard{
+    background:linear-gradient(160deg, var(--bg-panel-2), var(--bg-panel));
+    border:1px solid var(--line); border-radius:18px; padding:0; overflow:hidden; position:relative;
+  }
+  .pcard .top{padding:20px 22px 0; display:flex; justify-content:space-between; align-items:flex-start;}
+  .pcard .flag{font-size:22px;}
+  .pcard .status{font-family:'Oswald'; font-size:10px; text-transform:uppercase; letter-spacing:.08em; padding:4px 9px; border-radius:999px; font-weight:600; display:inline-flex; align-items:center; gap:6px; background:transparent;}
+  .pcard .statuses{display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end;}
+  .pcard .status.tracking{color:var(--turf); border:1px solid var(--turf);}
+  .pcard .status.signed{color:var(--chalk-dim); border:1px solid var(--line-bright);}
+  .pcard .status.live{color:var(--red); border:1px solid var(--red);}
+  .pcard .status.live::before{content:''; width:6px; height:6px; border-radius:50%; background:var(--red); animation:live-pulse 1.4s ease-in-out infinite;}
+  @keyframes live-pulse{0%,100%{opacity:1;}50%{opacity:0.35;}}
+  .pcard .name{font-family:'Oswald'; font-weight:700; font-size:19px; color:var(--chalk); margin-top:14px; padding:0 22px;}
+  .pcard .origin{font-size:12.5px; color:var(--chalk-dim); padding:0 22px; margin-top:2px;}
+  .pcard .divider{height:1px; background:var(--line); margin:16px 0;}
+  .pcard .row{display:flex; justify-content:space-between; padding:0 22px; margin-bottom:12px;}
+  .pcard .row .k{font-family:'Oswald'; font-size:10.5px; text-transform:uppercase; letter-spacing:.08em; color:var(--chalk-dim);}
+  .pcard .row .v{font-family:'Anton'; font-size:16px; color:var(--chalk);}
+  .pcard .scholarship{padding:16px 22px 22px; background:rgba(201,162,39,0.07); margin-top:10px;}
+  .pcard .scholarship .v{font-family:'Anton'; font-size:30px; color:var(--gold);}
+  .pcard .scholarship .k{font-family:'Oswald'; font-size:10.5px; text-transform:uppercase; letter-spacing:.08em; color:var(--chalk-dim);}
+
+  .journey-card{
+    background:linear-gradient(160deg, var(--bg-panel-2), var(--bg-panel));
+    border:1px solid var(--line); border-radius:18px; padding:26px 26px 28px;
+  }
+  .journey-card .jtop{display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px;}
+  .journey-card .jname{font-family:'Oswald'; font-weight:700; font-size:22px; color:var(--chalk);}
+  .journey-card .jorigin{font-size:13px; color:var(--chalk-dim); margin-top:2px;}
+  .timeline{display:flex; align-items:stretch; gap:0; margin-top:26px; flex-wrap:wrap;}
+  .tl-stop{flex:1 1 240px; background:rgba(248,246,240,0.03); border:1px solid var(--line); border-radius:14px; padding:18px 20px; position:relative;}
+  .tl-stop .tl-school{font-family:'Oswald'; font-weight:600; font-size:15px; color:var(--chalk);}
+  .tl-stop .tl-level{font-size:12.5px; color:var(--chalk-dim); margin-top:3px;}
+  .tl-stop .tl-budget{margin-top:14px; padding-top:14px; border-top:1px solid var(--line);}
+  .tl-stop .tl-budget .k{font-family:'Oswald'; font-size:10px; text-transform:uppercase; letter-spacing:.08em; color:var(--chalk-dim);}
+  .tl-stop .tl-budget .v{font-family:'Anton'; font-size:20px; color:var(--gold); margin-top:2px;}
+  .tl-stats{display:grid; grid-template-columns:1fr 1fr; gap:10px 14px; margin-top:14px; padding-top:14px; border-top:1px solid var(--line);}
+  .tl-stats .s .k{font-family:'Oswald'; font-size:9.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--chalk-dim);}
+  .tl-stats .s .v{font-family:'Anton'; font-size:18px; color:var(--chalk); margin-top:2px;}
+  .tl-stop .tl-link{display:inline-block; margin-top:14px; font-family:'Oswald'; font-size:11px; color:var(--turf-bright); text-decoration:none; border-bottom:1px solid transparent;}
+  .tl-stop .tl-link:hover{border-bottom-color:var(--turf-bright);}
+  .tl-arrow{display:flex; align-items:center; justify-content:center; padding:0 14px; color:var(--turf-bright); font-size:20px; flex:0 0 auto;}
+  @media (max-width:600px){.tl-arrow{transform:rotate(90deg); padding:8px 0;}}
+  .journey-target{margin-top:20px; display:flex; justify-content:space-between; align-items:center; padding-top:18px; border-top:1px solid var(--line);}
+  .journey-target .k{font-family:'Oswald'; font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--chalk-dim);}
+  .journey-target .v{font-family:'Anton'; font-size:19px; color:var(--chalk);}
+
+  .lesson{margin-top:30px; background:var(--bg-panel-2); border:1px solid var(--line); border-radius:16px; padding:26px 28px; display:flex; gap:18px; align-items:flex-start;}
+  .lesson .mark{font-family:'Anton'; font-size:34px; color:var(--turf-bright); line-height:1;}
+  .lesson p{font-size:14.5px; color:var(--chalk-dim); line-height:1.65; margin:0;}
+  .lesson b{color:var(--chalk);}
+
+  /* rules */
+  .rule-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px;}
+  .rule-card{background:var(--bg-panel); border:1px solid var(--line); border-radius:16px; padding:24px;}
+  .rule-card.warn{border-color:rgba(217,97,79,0.35); background:rgba(217,97,79,0.06);}
+  .rule-card .ico{font-family:'Anton'; font-size:22px; color:var(--turf-bright); margin-bottom:10px;}
+  .rule-card.warn .ico{color:var(--red);}
+  .rule-card h4{font-family:'Oswald'; font-weight:600; font-size:15px; color:var(--chalk); margin:0;}
+  .rule-card p{font-size:13.5px; color:var(--chalk-dim); margin-top:8px; line-height:1.55;}
+
+  /* pricing */
+  #pricing{}
+  .price-card{
+    background:linear-gradient(160deg, rgba(201,162,39,0.12), var(--bg-panel-2));
+    border:1px solid var(--line-bright); border-radius:20px; padding:40px;
+  }
+  .price-card .top-row{display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px; border-bottom:1px solid var(--line); padding-bottom:26px;}
+  .price-card .amount{font-family:'Anton'; font-size:64px; color:var(--gold); line-height:1;}
+  .price-card .amount span{font-size:22px; color:var(--chalk-dim); font-family:'Oswald';}
+  .includes{margin-top:26px; display:grid; grid-template-columns:1fr 1fr; gap:10px 24px;}
+  @media (max-width:560px){.includes{grid-template-columns:1fr;}}
+  .includes li{list-style:none; font-size:14px; color:var(--chalk-dim); display:flex; gap:10px; padding:8px 0;}
+  .includes li::before{content:'+'; color:var(--turf-bright); font-weight:700;}
+  .not-includes{margin-top:18px; font-size:13.5px; color:var(--chalk-dim); background:rgba(243,241,231,0.04); border-radius:10px; padding:14px 16px; line-height:1.6;}
+
+  /* final cta */
+  #final{text-align:left; padding-bottom:160px;}
+  #final h2{font-size:clamp(36px,6vw,64px); color:var(--chalk);}
+  .contact-row{display:flex; gap:14px; flex-wrap:wrap; margin-top:34px;}
+  .contact-row a.chip{
+    display:flex; align-items:center; gap:10px; border:1px solid var(--line-bright); border-radius:999px; padding:12px 20px;
+    color:var(--chalk); text-decoration:none; font-family:'Oswald'; font-size:13.5px; font-weight:500;
+    transition:border-color .2s ease, color .2s ease;
+  }
+  .contact-row a.chip:hover{border-color:var(--turf-bright); color:var(--turf-bright);}
+
+  footer{border-top:1px solid var(--line); padding:34px 0; }
+  footer .wrap{display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; font-size:12.5px; color:var(--chalk-dim); font-family:'Oswald';}
+
+  [data-show]{}
+  body.aud-primer [data-show="transfer"]{display:none !important;}
+  body.aud-transfer [data-show="primer"]{display:none !important;}
+</style>
+</head>
+<body class="aud-primer lang-es">
+
+<div id="progress"></div>
+<div id="topbar">
+  <div class="inner">
+    <div class="brand">
+      <img src="https://www.kickoffscholars.com/img/logo.png" alt="Kick Off Scholars">
+      <span>Kick Off Scholars</span>
+    </div>
+    <div class="toggles">
+      <div class="toggle-group" id="aud-toggle">
+        <button data-aud="primer" class="active" data-i18n="tg_primer">Primer Año</button>
+        <button data-aud="transfer" data-i18n="tg_transfer">Transfer</button>
+      </div>
+      <div class="toggle-group" id="lang-toggle">
+        <button data-lang="es" class="active">ES</button>
+        <button data-lang="en">EN</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section id="hero" class="theme-dark">
+  <div class="pitch-arc"></div>
+  <div class="hero-inner">
+    <div class="eyebrow" data-i18n="hero_eyebrow">Becas Deportivas · USA</div>
+    <h1>Kick Off <em>Scholars</em></h1>
+    <p class="hero-sub" data-i18n-aud="true" data-i18n="hero_sub">Tu camino del primer XI al campus en Estados Unidos, paso a paso.</p>
+    <div class="hero-line" data-i18n="hero_line">Conectamos talento de fútbol latinoamericano y europeo con +600 entrenadores universitarios en Estados Unidos.</div>
+  </div>
+  <div class="scroll-cue"><span data-i18n="scroll_cue">Empezamos</span><div class="line"></div></div>
+</section>
+
+<!-- PROCESS -->
+<section id="process" class="theme-light">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow" data-i18n="proc_eyebrow">Cómo trabajamos</div>
+      <h2 data-i18n="proc_title">El proceso, de punta a punta</h2>
+      <p data-i18n="proc_sub">Siete pasos. Nada se salta, nada se cobra antes de tiempo.</p>
+    </div>
+    <div class="steps" id="steps"></div>
+  </div>
+</section>
+
+<!-- EVALUATION TOOL -->
+<section id="evaluation" class="theme-dark">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow" data-i18n="eval_eyebrow">Paso 01</div>
+      <h2 data-i18n="eval_title">Así evaluamos a cada jugador</h2>
+      <p data-i18n="eval_sub">Todo firmante pasa por la misma ficha: nivel técnico, físico, académico y de idioma. Con eso definimos a qué liga apuntar.</p>
+    </div>
+    <div class="tool-card reveal">
+      <div>
+        <h3 data-i18n="eval_card_h">Ficha de evaluación del jugador</h3>
+        <p data-i18n="eval_card_p">La misma herramienta que usamos contigo en la reunión de firma, para dejar claro en qué nivel encajas hoy y hacia dónde puedes crecer.</p>
+      </div>
+      <a class="btn" href="https://canva.link/0l1g6nktgtxn3qc" target="_blank" rel="noopener" data-i18n="eval_card_btn">Ver ficha de ejemplo ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- LEVELS -->
+<section id="levels" class="theme-light">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow" data-i18n="lvl_eyebrow">El sistema universitario</div>
+      <h2 data-i18n-aud="true" data-i18n="lvl_title">Los 5 niveles del soccer en USA</h2>
+      <p data-i18n-aud="true" data-i18n="lvl_sub">Cada nivel tiene su propio ritmo, presupuesto y camino de beca. Así se compara.</p>
+    </div>
+    <div class="levels-scroller reveal" id="levels-scroller"></div>
+    <p class="level-note reveal" data-i18n-aud="true" data-i18n="lvl_note">La mayoría de nuestros jugadores empieza en JUCO (NJCAA) y usa esos 1–2 años para dar el salto a NAIA o NCAA con más ofertas sobre la mesa.</p>
+  </div>
+</section>
+
+<!-- CC VS 4-YEAR (primer año only) -->
+<section id="ccvsuni" class="theme-dark" data-show="primer">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow" data-i18n="cc_eyebrow">La decisión que define tu presupuesto</div>
+      <h2 data-i18n="cc_title">Community College vs. universidad de 4 años</h2>
+      <p data-i18n="cc_sub">Por qué muchos de nuestros jugadores empiezan en un community college — y cómo eso reduce el costo total sin sacrificar la meta.</p>
+    </div>
+    <div id="cc-cols" class="reveal"></div>
+    <div class="cc-path-title reveal" data-i18n="cc_path_title">El camino inteligente</div>
+    <div id="cc-path" class="reveal"></div>
+    <div class="fee-callout reveal" id="cc-callout" style="margin-top:26px;"></div>
+  </div>
+</section>
+
+<!-- COSTS -->
+<section id="costs" class="theme-dark">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow" data-i18n="cost_eyebrow">Lo que implica estudiar aquí</div>
+      <h2 data-i18n-aud="true" data-i18n="cost_title">Desglose de costos</h2>
+      <p data-i18n-aud="true" data-i18n="cost_sub">Esto es lo que compone el costo real de estudiar en USA — aparte de nuestro servicio.</p>
+    </div>
+    <div class="cost-grid reveal" id="cost-grid"></div>
+    <p class="pct-note reveal" data-i18n="cost_pct_note">El porcentaje de tu beca se calcula sobre el costo total — que incluye colegiatura, matrícula, comida, alojamiento, seguro médico y fees.</p>
+    <div class="fee-callout reveal" data-i18n-aud="true" data-i18n="cost_callout">
+      Nuestro fee de servicio es aparte y no cubre estos costos con terceros — pero te acompañamos en todo el proceso de admisión, visa y trámites migratorios (I-20, SEVIS).
+    </div>
+    <div class="tool-card reveal" style="margin-top:26px;">
+      <div>
+        <h3 data-i18n="offers_card_h">Catálogo de ofertas</h3>
+        <p data-i18n-aud="true" data-i18n="offers_card_p">Aquí desglosamos cada oferta real: matrícula, seguro médico, fees, y — si aplica tu caso — créditos transferidos. Se personaliza contigo en la llamada.</p>
+      </div>
+      <a class="btn ghost" href="https://canva.link/k91wpb273yefvtk" target="_blank" rel="noopener" data-i18n="offers_card_btn">Ver catálogo de ejemplo ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- HIGHLIGHTS (primer año only) -->
+<section id="highlights" class="theme-light" data-show="primer">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow" data-i18n="hl_eyebrow">Tu carta de presentación</div>
+      <h2 data-i18n="hl_title">Tus highlights son tu primera impresión</h2>
+      <p data-i18n="hl_sub">Antes de cualquier llamada, un coach ve tu video. Así debe verse.</p>
+    </div>
+    <div class="hl-grid">
+      <ul class="checklist reveal" id="hl-checklist"></ul>
+      <div class="zoom-note reveal">
+        <h4 data-i18n="hl_zoom_h">Llamadas con coaches por Zoom</h4>
+        <p data-i18n="hl_zoom_p">Coordinamos videollamadas con los coaches interesados para que tú y tu familia los conozcan, resuelvan dudas directamente, y escuchen de primera mano cómo es el programa antes de decidir.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUCCESS STORIES -->
+<section id="stories" class="theme-dark">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow" data-i18n="st_eyebrow">Resultados reales</div>
+      <h2 data-i18n-aud="true" data-i18n="st_title">Trayectorias en marcha</h2>
+      <p data-i18n-aud="true" data-i18n="st_sub">Así se ve el proceso funcionando.</p>
+    </div>
+    <div class="reveal" id="journey-wrap" data-show="primer"></div>
+    <div class="cards-grid reveal" id="cards-grid" data-show="transfer"></div>
+    <div class="lesson reveal" data-show="transfer">
+      <div class="mark">”</div>
+      <p data-i18n="lesson_p"><b data-i18n="lesson_b">El rendimiento en cancha cambia tu beca —</b> para bien y para mal. Entre nuestros jugadores de transferencia hemos visto a algunos llegar a distinciones como All-American, y a otros llegar sin minutos en su primer programa. En ambos casos, el trabajo es el mismo: encontrar el nivel exacto donde tu juego se traduce en beca.</p>
+    </div>
+  </div>
+</section>
+
+<!-- RULES -->
+<section id="rules" class="theme-light">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow" data-i18n="rl_eyebrow">Reglas claras</div>
+      <h2 data-i18n="rl_title">Cómo funciona nuestro compromiso</h2>
+      <p data-i18n="rl_sub">Protege al jugador y a la agencia, en ese orden.</p>
+    </div>
+    <div class="rule-grid reveal" id="rule-grid"></div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" class="theme-dark">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow" data-i18n="pr_eyebrow">Inversión</div>
+      <h2 data-i18n="pr_title">Nuestro plan de servicio</h2>
+    </div>
+    <div class="price-card reveal">
+      <div class="top-row">
+        <div>
+          <div class="eyebrow" data-i18n-aud="true" data-i18n="pr_plan_name">Plan Primer Año</div>
+          <div class="amount" data-i18n-aud="true" data-i18n="pr_amount">$1,500 <span data-i18n="pr_amount_span">USD</span></div>
+        </div>
+        <div class="hero-line" style="margin-top:0;" data-i18n="pr_payment_note">Se paga solo tras firmar el contrato — nunca antes.</div>
+      </div>
+      <ul class="includes" id="pr-includes"></ul>
+      <div class="not-includes" data-i18n="pr_not_includes">No incluye costos con terceros (admisión, visa, elegibilidad) — pero te guiamos en cada trámite.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section id="final" class="theme-light">
+  <div class="wrap">
+    <div class="eyebrow reveal" data-i18n="final_eyebrow">¿Damos el siguiente paso?</div>
+    <h2 class="reveal" data-i18n="final_h">Hablemos de tu futuro.</h2>
+    <p class="hero-sub reveal" data-i18n="final_sub">Escríbenos y seguimos la conversación.</p>
+    <div class="contact-row reveal">
+      <a class="chip" href="https://wa.me/17869223853" target="_blank" rel="noopener">💬 WhatsApp</a>
+      <a class="chip" href="mailto:kickoffscholars@gmail.com">✉️ kickoffscholars@gmail.com</a>
+      <a class="chip" href="https://instagram.com/kickoffscholars.usa" target="_blank" rel="noopener">📷 @kickoffscholars.usa</a>
+    </div>
+  </div>
+</section>
+
+<footer class="theme-light">
+  <div class="wrap">
+    <span>© 2024 Kick Off Scholars</span>
+    <span data-i18n="footer_note">Resumen de precios y servicios Kick Off Scholars.</span>
+  </div>
+</footer>
+
+<script>
+/* ---------------- CONTENT ---------------- */
+const T = {
+es:{
+  tg_primer:"Primer Año", tg_transfer:"Transfer",
+  hero_eyebrow:"Becas Deportivas · USA",
+  hero_sub_primer:"Tu camino a un campus en Estados Unidos, paso a paso.",
+  hero_sub_transfer:"Tu siguiente nivel empieza con la oferta correcta.",
+  hero_line:"Conectamos talento deportivo latinoamericano y europeo con +600 entrenadores universitarios en Estados Unidos.",
+  scroll_cue:"Empezamos",
+  proc_eyebrow:"Cómo trabajamos", proc_title:"El proceso, de punta a punta",
+  proc_sub:"Siete pasos. Nada se salta, nada se cobra antes de tiempo.",
+  eval_eyebrow:"Paso 01", eval_title:"Así evaluamos a cada jugador",
+  eval_sub:"Todo firmante pasa por la misma ficha: nivel técnico, físico, académico y de idioma. Con eso definimos a qué liga apuntar.",
+  eval_card_h:"Ficha de evaluación del jugador",
+  eval_card_p:"La misma herramienta que usamos contigo en la reunión de firma, para dejar claro en qué nivel encajas hoy y hacia dónde puedes crecer.",
+  eval_card_btn:"Ver ficha de ejemplo ↗",
+  lvl_eyebrow:"El sistema universitario",
+  lvl_title_primer:"Los niveles del sistema universitario en USA",
+  lvl_title_transfer:"Tus opciones de transferencia",
+  lvl_sub_primer:"Cada nivel tiene su propio ritmo, presupuesto y camino de beca. Así se compara.",
+  lvl_sub_transfer:"Ya conoces el sistema — esto es lo que importa al decidir tu próximo salto.",
+  lvl_note_primer:"La mayoría de nuestros jugadores empieza en JUCO (NJCAA) y usa esos 1–2 años para dar el salto a NAIA o NCAA con más ofertas sobre la mesa.",
+  lvl_note_transfer:"El número exacto de créditos que se transfieren depende de cada universidad — lo confirmamos oferta por oferta, contigo, en tu catálogo personalizado.",
+  cc_eyebrow:"La decisión que define tu presupuesto",
+  cc_title:"Community college vs. universidad de 4 años",
+  cc_sub:"Por qué muchos de nuestros jugadores empiezan en un community college — y cómo eso reduce el costo total sin sacrificar la meta.",
+  cc_path_title:"El camino inteligente",
+  cost_eyebrow:"Lo que implica estudiar aquí",
+  cost_title_primer:"Desglose de costos",
+  cost_title_transfer:"Costos de tu transferencia",
+  cost_sub_primer:"Esto es lo que compone el costo real de estudiar en USA — aparte de nuestro servicio.",
+  cost_sub_transfer:"Esto es lo que se revisa en cada oferta de transferencia, además de tus créditos.",
+  cost_callout_primer:"Nuestro fee de servicio es aparte y no cubre estos costos con terceros — pero te acompañamos en todo el proceso de admisión, visa y trámites migratorios (I-20, SEVIS).",
+  cost_callout_transfer:"Nuestro fee de servicio es aparte y no cubre estos costos con terceros — pero te acompañamos en todo el proceso de admisión, visa y trámites migratorios (I-20, SEVIS).",
+  cost_pct_note:"El porcentaje de tu beca se calcula sobre el costo total — que incluye colegiatura, matrícula, comida, alojamiento, seguro médico y fees.",
+  offers_card_h:"Catálogo de ofertas",
+  offers_card_p_primer:"Aquí desglosamos cada oferta real: matrícula, seguro médico y fees. Se personaliza contigo en la llamada.",
+  offers_card_p_transfer:"Aquí desglosamos cada oferta real: matrícula, seguro médico, fees, y los créditos que se transfieren. Se personaliza contigo en la llamada.",
+  offers_card_btn:"Ver catálogo de ejemplo ↗",
+  hl_eyebrow:"Tu carta de presentación",
+  hl_title:"Tus highlights son tu primera impresión",
+  hl_sub:"Antes de cualquier llamada, un coach ve tu video. Así debe verse.",
+  hl_zoom_h:"Llamadas con coaches por Zoom",
+  hl_zoom_p:"Coordinamos videollamadas con los coaches interesados para que tú y tu familia los conozcan, resuelvan dudas directamente, y escuchen de primera mano cómo es el programa antes de decidir.",
+  st_eyebrow:"Resultados reales",
+  st_title_primer:"Así se ve un jugador en seguimiento",
+  st_title_transfer:"Trayectorias de transferencia",
+  st_sub_primer:"Del primer contrato al siguiente salto de nivel.",
+  st_sub_transfer:"Beca completa, medio tiempo, o el ajuste perfecto — cada caso es distinto.",
+  lesson_b:"El rendimiento en cancha cambia tu beca —",
+  lesson_p:"para bien y para mal. Entre nuestros jugadores de transferencia hemos visto a algunos llegar a distinciones como All-American, y a otros llegar sin minutos en su primer programa. En ambos casos, el trabajo es el mismo: encontrar el nivel exacto donde tu juego se traduce en beca.",
+  rl_eyebrow:"Reglas claras", rl_title:"Cómo funciona nuestro compromiso",
+  rl_sub:"Protege al jugador y a la agencia, en ese orden.",
+  pr_eyebrow:"Inversión", pr_title:"Nuestro plan de servicio",
+  pr_plan_name_primer:"Plan Primer Año", pr_plan_name_transfer:"Plan Transfer",
+  pr_amount_primer:"$1,500", pr_amount_transfer:"$1,100", pr_amount_span:"USD",
+  pr_payment_note:"Se paga una vez el jugador escoge su oferta — antes de firmar oficialmente con la universidad.",
+  pr_not_includes:"No incluye costos con terceros (admisión, visa, elegibilidad) — pero te guiamos en cada trámite.",
+  final_eyebrow:"¿Damos el siguiente paso?",
+  final_h:"Hablemos de tu futuro.",
+  final_sub:"Escríbenos y seguimos la conversación.",
+  footer_note:"Resumen de precios y servicios Kick Off Scholars.",
+},
+en:{
+  tg_primer:"First-Year", tg_transfer:"Transfer",
+  hero_eyebrow:"Athletic Scholarships · USA",
+  hero_sub_primer:"Your path to a U.S. campus, step by step.",
+  hero_sub_transfer:"Your next level starts with the right offer.",
+  hero_line:"We connect Latin American and European athletic talent with 600+ college coaches across the U.S.",
+  scroll_cue:"Let's start",
+  proc_eyebrow:"How we work", proc_title:"The process, start to finish",
+  proc_sub:"Seven steps. Nothing skipped, nothing charged early.",
+  eval_eyebrow:"Step 01", eval_title:"How we evaluate every player",
+  eval_sub:"Every signed athlete goes through the same profile: technical, physical, academic, and language level. That's how we define which league to target.",
+  eval_card_h:"Player evaluation profile",
+  eval_card_p:"The same tool we use with you in the signing meeting, to make clear where you stand today — and where you can grow.",
+  eval_card_btn:"See a sample profile ↗",
+  lvl_eyebrow:"The U.S. college system",
+  lvl_title_primer:"The levels of the U.S. college system",
+  lvl_title_transfer:"Your transfer options",
+  lvl_sub_primer:"Each level has its own pace, budget, and scholarship path. Here's how they compare.",
+  lvl_sub_transfer:"You already know the system — here's what matters when deciding your next move.",
+  lvl_note_primer:"Most of our players start at a JUCO (NJCAA) and use those 1–2 years to jump to NAIA or NCAA with more offers on the table.",
+  lvl_note_transfer:"The exact number of transferable credits depends on each school — we confirm it offer by offer, with you, in your personalized catalog.",
+  cc_eyebrow:"The decision that shapes your budget",
+  cc_title:"Community college vs. 4-year university",
+  cc_sub:"Why many of our players start at a community college — and how that lowers the total cost without giving up the goal.",
+  cc_path_title:"The smart path",
+  cost_eyebrow:"What studying here actually involves",
+  cost_title_primer:"Cost breakdown",
+  cost_title_transfer:"Your transfer costs",
+  cost_sub_primer:"This is what makes up the real cost of studying in the U.S. — separate from our service.",
+  cost_sub_transfer:"This is what we review in every transfer offer, on top of your credits.",
+  cost_callout_primer:"Our service fee is separate and doesn't cover these third-party costs — but we guide you through the full admission, visa, and immigration process (I-20, SEVIS).",
+  cost_callout_transfer:"Our service fee is separate and doesn't cover these third-party costs — but we guide you through the full admission, visa, and immigration process (I-20, SEVIS).",
+  cost_pct_note:"Your scholarship percentage is calculated over the total cost — which includes tuition, fees, food, housing, and health insurance.",
+  offers_card_h:"Offers catalog",
+  offers_card_p_primer:"Here we break down every real offer: tuition, health insurance, and fees. Personalized with you on the call.",
+  offers_card_p_transfer:"Here we break down every real offer: tuition, health insurance, fees, and transferable credits. Personalized with you on the call.",
+  offers_card_btn:"See a sample catalog ↗",
+  hl_eyebrow:"Your first impression",
+  hl_title:"Your highlights are your first impression",
+  hl_sub:"Before any call happens, a coach watches your video. Here's what it needs.",
+  hl_zoom_h:"Zoom calls with coaches",
+  hl_zoom_p:"We set up video calls with interested coaches so you and your family can meet them, ask questions directly, and hear firsthand what the program is like before deciding.",
+  st_eyebrow:"Real results",
+  st_title_primer:"What an in-progress player looks like",
+  st_title_transfer:"Transfer trajectories",
+  st_sub_primer:"From first contract to the next level up.",
+  st_sub_transfer:"Full ride, partial, or the perfect fit — every case is different.",
+  lesson_b:"On-field performance changes your scholarship —",
+  lesson_p:"for better or worse. Among our transfer players we've seen some reach honors like All-American, and others arrive with no playing time at their first program. Either way, the job is the same: find the exact level where your game translates into a scholarship.",
+  rl_eyebrow:"Clear rules", rl_title:"How our commitment works",
+  rl_sub:"It protects the player and the agency, in that order.",
+  pr_eyebrow:"Investment", pr_title:"Our service plan",
+  pr_plan_name_primer:"First-Year Plan", pr_plan_name_transfer:"Transfer Plan",
+  pr_amount_primer:"$1,500", pr_amount_transfer:"$1,100", pr_amount_span:"USD",
+  pr_payment_note:"Paid once the player chooses their offer — before officially signing with the university.",
+  pr_not_includes:"Doesn't include third-party costs (admission, visa, eligibility) — but we guide you through every step.",
+  final_eyebrow:"Ready for the next step?",
+  final_h:"Let's talk about your future.",
+  final_sub:"Reach out and we'll continue the conversation.",
+  footer_note:"Kick Off Scholars pricing & services summary.",
+}
+};
+
+/* structured content: steps, levels, costs, cards, rules, includes */
+const STEPS = {
+es:[
+ {n:"01",h:"Evaluación",p:"Analizamos tu perfil deportivo y académico con nuestra ficha de evaluación para definir a qué nivel puedes aspirar.",tag:"Ficha de evaluación"},
+ {n:"02",h:"Precontrato",p:"Firmas un precontrato: nos das permiso de compartir tu perfil con nuestra red de entrenadores. Sin costo.",tag:"Sin costo"},
+ {n:"03",h:"Búsqueda activa",p:"Presentamos tu perfil a nuestros +600 contactos y coordinamos videollamadas con los coaches interesados.",tag:"+600 coaches"},
+ {n:"04",h:"Mínimo 2 ofertas",p:"Esperamos a tener al menos dos ofertas confirmadas antes de que decidas.",tag:"Sin presión"},
+ {n:"05",h:"Escoges tu oferta",p:"Eliges el programa que mejor encaja contigo. Aquí firmamos el contrato de servicio con la agencia y se realiza el pago.",tag:"Pago aquí"},
+ {n:"06",h:"Firma oficial con la universidad",p:"El compromiso se formaliza con la universidad, dejando todo listo para tu llegada.",tag:"Compromiso oficial"},
+ {n:"07",h:"Te acompañamos hasta graduarte",p:"Seguimos representándote durante toda tu carrera universitaria, incluidas futuras transferencias.",tag:"Hasta el final"},
+],
+en:[
+ {n:"01",h:"Evaluation",p:"We assess your athletic and academic profile with our evaluation sheet to define which level you can realistically target.",tag:"Evaluation sheet"},
+ {n:"02",h:"Pre-contract",p:"You sign a pre-contract giving us permission to share your profile with our coach network. No cost.",tag:"No cost"},
+ {n:"03",h:"Active outreach",p:"We present your profile to our 600+ contacts and set up video calls with interested coaches.",tag:"600+ coaches"},
+ {n:"04",h:"At least 2 offers",p:"We wait until you have at least two confirmed offers before you decide.",tag:"No pressure"},
+ {n:"05",h:"You choose your offer",p:"You pick the program that fits you best. This is when we sign the service contract with the agency and payment is made.",tag:"Paid here"},
+ {n:"06",h:"Official signing with the university",p:"The commitment is formalized with the university, getting everything ready for your arrival.",tag:"Official commitment"},
+ {n:"07",h:"We stay with you to graduation",p:"We keep representing you through your entire college career, including future transfers.",tag:"All the way"},
+]
+};
+
+const LEVELS = {
+primer:{
+es:[
+ {badge:"NJCAA / JUCO",path:"Punto de partida",sK:"Beca",sV:"Hasta 100%",desc:"2 años, roster grande, nivel alto de juego. El trampolín más común hacia una universidad de 4 años."},
+ {badge:"NAIA",path:null,sK:"Beca",sV:"Hasta 90%",desc:"Universidades más pequeñas, trato directo con el coach, reglas de elegibilidad menos rígidas que NCAA."},
+ {badge:"NCAA DII",path:null,sK:"Beca",sV:"Hasta 80%",desc:"Buen nivel competitivo, campus mediano, viajes regionales por partidos fuera de casa."},
+ {badge:"NCAA DI",path:"Nivel máximo",sK:"Beca",sV:"Hasta 100%",desc:"El nivel más competitivo: viajes nacionales, exposición en streaming/TV, y campeonatos de alto perfil."},
+],
+en:[
+ {badge:"NJCAA / JUCO",path:"Starting point",sK:"Scholarship",sV:"Up to 100%",desc:"2 years, large roster, high level of play. The most common springboard into a 4-year school."},
+ {badge:"NAIA",path:null,sK:"Scholarship",sV:"Up to 90%",desc:"Smaller schools, direct relationship with the coach, less rigid eligibility rules than NCAA."},
+ {badge:"NCAA DII",path:null,sK:"Scholarship",sV:"Up to 80%",desc:"Strong competitive level, mid-size campus, regional travel for away games."},
+ {badge:"NCAA DI",path:"Top level",sK:"Scholarship",sV:"Up to 100%",desc:"The most competitive level: national travel, streaming/TV exposure, and high-profile championships."},
+]
+},
+transfer:{
+es:[
+ {badge:"NAIA",path:"Más flexible",sK:"Transferencia",sV:"Proceso rápido",desc:"Reglas de transferencia más flexibles. Buena opción si buscas minutos inmediatos."},
+ {badge:"NCAA DII",path:null,sK:"Créditos",sV:"Mayoría equivalentes",desc:"Usualmente se transfiere la mayoría de créditos de cursos equivalentes a tu programa anterior."},
+ {badge:"NCAA DI",path:"Portal NCAA",sK:"Requisito",sV:"GPA + créditos",desc:"Pasa por el Portal de Transferencia NCAA. Buscamos programas donde realmente vayas a tener minutos."},
+],
+en:[
+ {badge:"NAIA",path:"Most flexible",sK:"Transfer",sV:"Fast process",desc:"More flexible transfer rules. A strong option if you're looking for immediate playing time."},
+ {badge:"NCAA DII",path:null,sK:"Credits",sV:"Most transfer",desc:"Most equivalent-course credits usually transfer from your previous program."},
+ {badge:"NCAA DI",path:"NCAA Portal",sK:"Requirement",sV:"GPA + credits",desc:"Goes through the NCAA Transfer Portal. We target programs where you'll actually get minutes."},
+]
+}
+};
+
+const COSTS = {
+primer:{
+es:[
+ {h:"Matrícula",p:"Varía muchísimo entre un community college y una universidad de 4 años — la beca reduce esto de forma directa."},
+ {h:"Alojamiento y comida",p:"Depende del campus; casi siempre incluido dentro del paquete de beca en niveles altos."},
+ {h:"Seguro médico",p:"Obligatorio para estudiantes internacionales, se cotiza según la universidad."},
+ {h:"Fees institucionales",p:"Admisión y elegibilidad (NCAA/NAIA) — se pagan directamente a la universidad o asociación."},
+ {h:"Libros y materiales",p:"Costo variable por programa académico."},
+],
+en:[
+ {h:"Tuition",p:"Varies a lot between a community college and a 4-year university — the scholarship reduces this directly."},
+ {h:"Housing & meals",p:"Depends on the campus; almost always included in the scholarship package at higher levels."},
+ {h:"Health insurance",p:"Mandatory for international students, quoted per school."},
+ {h:"Institutional fees",p:"Admission and eligibility (NCAA/NAIA) — paid directly to the university or association."},
+ {h:"Books & materials",p:"Variable cost depending on your academic program."},
+]
+},
+transfer:{
+es:[
+ {h:"Seguro médico",p:"Obligatorio para estudiantes internacionales, se cotiza según la nueva universidad."},
+ {h:"Fee de admisión",p:"Se paga a la nueva universidad al momento de aplicar."},
+ {h:"Fee de elegibilidad",p:"NCAA Eligibility Center o NAIA — requisito para poder competir."},
+ {h:"Créditos transferidos",p:"Varía por oferta — se confirma caso a caso en tu catálogo personalizado."},
+],
+en:[
+ {h:"Health insurance",p:"Mandatory for international students, quoted per the new school."},
+ {h:"Admission fee",p:"Paid to the new university at the time of application."},
+ {h:"Eligibility fee",p:"NCAA Eligibility Center or NAIA — required to compete."},
+ {h:"Transferred credits",p:"Varies by offer — confirmed case by case in your personalized catalog."},
+]
+}
+};
+
+const CCUNI = {
+es:{
+  cols:[
+    {name:"Community College (JUCO)", tag:"2 años · Associate Degree",
+      rows:[
+        {k:"Costo", v:"La opción financieramente más inteligente — matrícula muy por debajo de una universidad de 4 años."},
+        {k:"Tamaño de clase", v:"Clases pequeñas, trato cercano con profesores y con tu coach."},
+        {k:"Nivel deportivo", v:"Tu primera exposición real al ritmo y nivel físico de USA — el mejor punto de partida antes de dar el salto."},
+        {k:"Al graduarte", v:"Obtienes un Associate Degree."},
+      ]},
+    {name:"Universidad de 4 años", tag:"4 años · Bachelor's Degree",
+      rows:[
+        {k:"Costo", v:"Matrícula más alta — se compensa con mayor % de beca en niveles como NCAA DI."},
+        {k:"Tamaño de clase", v:"Clases y campus más grandes, con más recursos e instalaciones."},
+        {k:"Nivel deportivo", v:"Mayor exposición nacional, viajes por todo el país y mayor nivel de competencia."},
+        {k:"Al completar", v:"Obtienes tu Bachelor's Degree (licenciatura)."},
+      ]},
+  ],
+  path:[
+    {n:"01",h:"JUCO",p:"2 años de estudio y competencia, con un costo mucho más bajo."},
+    {n:"02",h:"Associate Degree",p:"Te gradúas del community college con tu título asociado."},
+    {n:"03",h:"Transferencia",p:"Te mueves a una universidad de 4 años con créditos ya adelantados."},
+    {n:"04",h:"Bachelor's",p:"Completas tu licenciatura con menos años pagando el costo alto de una universidad de 4 años."},
+  ],
+  callout:"Con tu Associate Degree, muchas universidades de 4 años te permiten vivir fuera del campus (off-campus) — algo que normalmente cuesta menos que el alojamiento dentro del campus, reduciendo aún más tu costo total.",
+},
+en:{
+  cols:[
+    {name:"Community College (JUCO)", tag:"2 years · Associate Degree",
+      rows:[
+        {k:"Cost", v:"The financially smartest option — tuition far below a 4-year university."},
+        {k:"Class size", v:"Small classes, close relationships with professors and your coach."},
+        {k:"Athletic level", v:"Your first real exposure to the pace and physical level of U.S. play — the best starting point before making the jump."},
+        {k:"When you graduate", v:"You earn an Associate Degree."},
+      ]},
+    {name:"4-year University", tag:"4 years · Bachelor's Degree",
+      rows:[
+        {k:"Cost", v:"Higher tuition — offset by a higher scholarship % at levels like NCAA DI."},
+        {k:"Class size", v:"Larger classes and campus, with more resources and facilities."},
+        {k:"Athletic level", v:"Greater national exposure, cross-country travel, and a higher level of competition."},
+        {k:"When you finish", v:"You earn your Bachelor's Degree."},
+      ]},
+  ],
+  path:[
+    {n:"01",h:"JUCO",p:"2 years of study and competition, at a much lower cost."},
+    {n:"02",h:"Associate Degree",p:"You graduate from the community college with your associate degree."},
+    {n:"03",h:"Transfer",p:"You move to a 4-year university with credits already completed."},
+    {n:"04",h:"Bachelor's",p:"You finish your degree with fewer years paying the higher cost of a 4-year university."},
+  ],
+  callout:"With your Associate Degree, many 4-year universities let you live off-campus — which usually costs less than on-campus housing, cutting your total cost even further.",
+}
+};
+
+const JOURNEY = {
+es:{
+  flag:"🇫🇷", name:"Emma Fournié", origin:"Francia",
+  statuses:[{label:"En seguimiento",type:"tracking"},{label:"En vivo",type:"live"}],
+  stops:[
+    {school:"Iowa Lakes CC",level:"NJCAA DII",budgetK:"Presupuesto",budgetV:"$10,000/año",
+      stats:[{k:"Partidos",v:"19"},{k:"Titular",v:"16"},{k:"Goles",v:"3"},{k:"Asistencias",v:"12"},{k:"Puntos",v:"18"},{k:"Tiros",v:"9"}],
+      link:"https://www.iowalakesathletics.com/sports/wsoc/2025-26/bios/fournie_emma_mgtn?view=profile"},
+    {school:"Eastern Arizona College",level:"NJCAA DI",budgetK:"Presupuesto",budgetV:"Full ride · $0/año",
+      stats:[{k:"Partidos",v:"2"},{k:"Titular",v:"2"},{k:"Goles",v:"0"},{k:"Asistencias",v:"1"},{k:"Puntos",v:"1"},{k:"Tiros",v:"0"}],
+      link:"https://www.eacmonsters.com/sports/wsoc/2026-27/bios/fournie_emma_p0nn"},
+  ],
+  note:"Con este salto, Emma pasó de pagar $10,000 al año en Iowa Lakes (JUCO DII) a $0 en Eastern Arizona (JUCO DI), gracias a una beca completa.",
+  targetK:"Objetivo", targetV:"NCAA DI/DII Top 10",
+},
+en:{
+  flag:"🇫🇷", name:"Emma Fournié", origin:"France",
+  statuses:[{label:"In progress",type:"tracking"},{label:"Live",type:"live"}],
+  stops:[
+    {school:"Iowa Lakes CC",level:"NJCAA DII",budgetK:"Budget",budgetV:"$10,000/yr",
+      stats:[{k:"Games",v:"19"},{k:"Started",v:"16"},{k:"Goals",v:"3"},{k:"Assists",v:"12"},{k:"Points",v:"18"},{k:"Shots",v:"9"}],
+      link:"https://www.iowalakesathletics.com/sports/wsoc/2025-26/bios/fournie_emma_mgtn?view=profile"},
+    {school:"Eastern Arizona College",level:"NJCAA DI",budgetK:"Budget",budgetV:"Full ride · $0/yr",
+      stats:[{k:"Games",v:"2"},{k:"Started",v:"2"},{k:"Goals",v:"0"},{k:"Assists",v:"1"},{k:"Points",v:"1"},{k:"Shots",v:"0"}],
+      link:"https://www.eacmonsters.com/sports/wsoc/2026-27/bios/fournie_emma_p0nn"},
+  ],
+  note:"With this jump, Emma went from paying $10,000/year at Iowa Lakes (JUCO DII) to $0 at Eastern Arizona (JUCO DI), on a full-ride scholarship.",
+  targetK:"Target", targetV:"NCAA DI/DII Top 10",
+}
+};
+
+const CARDS = {
+transfer:{
+es:[
+ {flag:"🇨🇴",status:"signed",statusLabel:"Firmada",name:"Valeria Agudelo",origin:"Colombia · UTEP",r1k:"División",r1v:"NCAA DI",r2k:"Categoría",r2v:"Femenil",schK:"Beca",schV:"100%"},
+ {flag:"🇩🇪",status:"signed",statusLabel:"Firmada",name:"Amelie Prie",origin:"Alemania · SFA",r1k:"División",r1v:"NCAA DI",r2k:"Categoría",r2v:"Femenil",schK:"Beca",schV:"100%"},
+ {flag:"🇩🇪",status:"signed",statusLabel:"Firmada",name:"Louis Kruger",origin:"Alemania · SIUE",r1k:"División",r1v:"NCAA DI",r2k:"Categoría",r2v:"Masculino",schK:"Beca",schV:"100%"},
+ {flag:"🇪🇨",status:"signed",statusLabel:"Firmada",name:"Felipe López",origin:"Ecuador · Doane Univ.",r1k:"División",r1v:"NAIA",r2k:"Categoría",r2v:"Masculino",schK:"Beca",schV:"80%"},
+],
+en:[
+ {flag:"🇨🇴",status:"signed",statusLabel:"Signed",name:"Valeria Agudelo",origin:"Colombia · UTEP",r1k:"Division",r1v:"NCAA DI",r2k:"Category",r2v:"Women's",schK:"Scholarship",schV:"100%"},
+ {flag:"🇩🇪",status:"signed",statusLabel:"Signed",name:"Amelie Prie",origin:"Germany · SFA",r1k:"Division",r1v:"NCAA DI",r2k:"Category",r2v:"Women's",schK:"Scholarship",schV:"100%"},
+ {flag:"🇩🇪",status:"signed",statusLabel:"Signed",name:"Louis Kruger",origin:"Germany · SIUE",r1k:"Division",r1v:"NCAA DI",r2k:"Category",r2v:"Men's",schK:"Scholarship",schV:"100%"},
+ {flag:"🇪🇨",status:"signed",statusLabel:"Signed",name:"Felipe López",origin:"Ecuador · Doane Univ.",r1k:"Division",r1v:"NAIA",r2k:"Category",r2v:"Men's",schK:"Scholarship",schV:"80%"},
+]
+}
+};
+
+const RULES = {
+es:[
+ {ico:"01",h:"Te representamos hasta que te gradúes",p:"El contrato con la agencia cubre toda tu carrera universitaria — no solo la primera firma."},
+ {ico:"02",h:"Te acompañamos en la llegada",p:"Si eres de primer año, seguimos contigo en tu adaptación al campus y al equipo."},
+ {ico:"03",h:"Incluye futuras transferencias",p:"Si más adelante necesitas cambiar de programa, seguimos siendo tu agencia — sin volver a empezar de cero."},
+ {ico:"⚠",h:"Excepción: pérdida de beca por causa propia",warn:true,p:"Si pierdes tu beca por responsabilidad propia (bajo rendimiento por indisciplina, mala conducta, etc.), el contrato se da por terminado."},
+],
+en:[
+ {ico:"01",h:"We represent you until you graduate",p:"Our agency contract covers your entire college career — not just the first signing."},
+ {ico:"02",h:"We support your arrival",p:"If you're a first-year, we stay with you through your adjustment to campus and the team."},
+ {ico:"03",h:"Includes future transfers",p:"If you need to change programs later on, we remain your agency — no starting over from scratch."},
+ {ico:"⚠",h:"Exception: losing your scholarship by your own fault",warn:true,p:"If you lose your scholarship due to your own responsibility (poor discipline, misconduct, etc.), the contract is terminated."},
+]
+};
+
+const INCLUDES = {
+es:["Evaluación completa de tu perfil","Acceso a nuestra red de +600 coaches","Negociación de tu oferta de beca","Guía en el proceso de admisión","Acompañamiento en visa y trámites migratorios (I-20, SEVIS)","Representación hasta tu graduación"],
+en:["Full profile evaluation","Access to our network of 600+ coaches","Scholarship offer negotiation","Guidance through the admission process","Support with visa and immigration paperwork (I-20, SEVIS)","Representation through graduation"]
+};
+
+/* ---------------- STATE + RENDER ---------------- */
+let state = {aud:'primer', lang:'es'};
+
+function el(html){const d=document.createElement('div'); d.innerHTML=html.trim(); return d.firstElementChild;}
+
+function renderSteps(){
+  const c = document.getElementById('steps'); c.innerHTML='';
+  STEPS[state.lang].forEach(s=>{
+    c.appendChild(el(`<div class="step reveal">
+      <div class="num">${s.n}</div>
+      <div><h3>${s.h}</h3><p>${s.p}</p><span class="tag">${s.tag}</span></div>
+    </div>`));
+  });
+}
+
+function renderLevels(){
+  const c = document.getElementById('levels-scroller'); c.innerHTML='';
+  LEVELS[state.aud][state.lang].forEach(l=>{
+    c.appendChild(el(`<div class="level-card">
+      ${l.path?`<span class="path-tag">${l.path}</span>`:''}
+      <div class="badge">${l.badge}</div>
+      <div class="stat"><div class="k">${l.sK}</div><div class="v">${l.sV}</div></div>
+      <div class="desc">${l.desc}</div>
+    </div>`));
+  });
+}
+
+function renderCosts(){
+  const c = document.getElementById('cost-grid'); c.innerHTML='';
+  COSTS[state.aud][state.lang].forEach(item=>{
+    c.appendChild(el(`<div class="cost-item"><div class="ico"><span></span></div><h4>${item.h}</h4><p>${item.p}</p></div>`));
+  });
+}
+
+function renderCards(){
+  const c = document.getElementById('cards-grid'); c.innerHTML='';
+  CARDS.transfer[state.lang].forEach(p=>{
+    c.appendChild(el(`<div class="pcard">
+      <div class="top"><div class="flag">${p.flag}</div><div class="status ${p.status}">${p.statusLabel}</div></div>
+      <div class="name">${p.name}</div>
+      <div class="origin">${p.origin}</div>
+      <div class="divider"></div>
+      <div class="row"><span class="k">${p.r1k}</span><span class="v">${p.r1v}</span></div>
+      <div class="row"><span class="k">${p.r2k}</span><span class="v">${p.r2v}</span></div>
+      <div class="scholarship"><div class="k">${p.schK}</div><div class="v">${p.schV}</div></div>
+    </div>`));
+  });
+}
+
+function renderCCUni(){
+  const data = CCUNI[state.lang];
+  const colsC = document.getElementById('cc-cols'); colsC.innerHTML='';
+  data.cols.forEach(col=>{
+    const rowsHtml = col.rows.map(r=>`<div class="cc-row"><div class="k">${r.k}</div><div class="v">${r.v}</div></div>`).join('');
+    colsC.appendChild(el(`<div class="cc-col">
+      <div class="cc-name">${col.name}</div>
+      <span class="cc-tag">${col.tag}</span>
+      <div class="cc-rows-wrap">${rowsHtml}</div>
+    </div>`));
+  });
+  const pathC = document.getElementById('cc-path'); pathC.innerHTML='';
+  data.path.forEach((s,i)=>{
+    if(i>0) pathC.appendChild(el(`<div class="cc-arrow">→</div>`));
+    pathC.appendChild(el(`<div class="cc-step"><div class="n">${s.n}</div><h5>${s.h}</h5><p>${s.p}</p></div>`));
+  });
+  document.getElementById('cc-callout').textContent = data.callout;
+}
+
+function renderJourney(){
+  const c = document.getElementById('journey-wrap'); c.innerHTML='';
+  const j = JOURNEY[state.lang];
+  const linkLabel = state.lang === 'es' ? 'Ver perfil completo ↗' : 'View full profile ↗';
+  const statusesHtml = j.statuses.map(s=>`<div class="status ${s.type}">${s.label}</div>`).join('');
+  const stopsHtml = j.stops.map((s,i)=>`
+    ${i>0?'<div class="tl-arrow">→</div>':''}
+    <div class="tl-stop">
+      <div class="tl-school">${s.school}</div>
+      <div class="tl-level">${s.level}</div>
+      <div class="tl-budget"><div class="k">${s.budgetK}</div><div class="v">${s.budgetV}</div></div>
+      <div class="tl-stats">${s.stats.map(st=>`<div class="s"><div class="k">${st.k}</div><div class="v">${st.v}</div></div>`).join('')}</div>
+      <a class="tl-link" href="${s.link}" target="_blank" rel="noopener">${linkLabel}</a>
+    </div>`).join('');
+  c.appendChild(el(`<div class="journey-card">
+    <div class="jtop">
+      <div><div class="jname">${j.flag} ${j.name}</div><div class="jorigin">${j.origin}</div></div>
+      <div class="statuses">${statusesHtml}</div>
+    </div>
+    <div class="timeline">${stopsHtml}</div>
+    <p style="font-size:13.5px;color:var(--chalk-dim);line-height:1.6;margin-top:16px;">${j.note}</p>
+    <div class="journey-target"><span class="k">${j.targetK}</span><span class="v">${j.targetV}</span></div>
+  </div>`));
+}
+
+function renderRules(){
+  const c = document.getElementById('rule-grid'); c.innerHTML='';
+  RULES[state.lang].forEach(r=>{
+    c.appendChild(el(`<div class="rule-card ${r.warn?'warn':''}"><div class="ico">${r.ico}</div><h4>${r.h}</h4><p>${r.p}</p></div>`));
+  });
+}
+
+function renderIncludes(){
+  const c = document.getElementById('pr-includes'); c.innerHTML='';
+  INCLUDES[state.lang].forEach(t=>{ c.appendChild(el(`<li>${t}</li>`)); });
+}
+
+function renderHighlights(){
+  const list = {
+    es:["Muestra jugadas clave en tu posición real, no solo goles","Minutos de partido real — no entrenamientos sueltos","Buena calidad de cámara y luz, sin ediciones exageradas","Idealmente 3–5 minutos, directo al punto"],
+    en:["Show key plays in your actual position, not just goals","Real match minutes — not isolated training clips","Good camera quality and lighting, no excessive editing","Ideally 3–5 minutes, straight to the point"]
+  };
+  const c = document.getElementById('hl-checklist'); c.innerHTML='';
+  list[state.lang].forEach(t=>{ c.appendChild(el(`<li>${t}</li>`)); });
+}
+
+function applyI18n(){
+  document.documentElement.lang = state.lang;
+  document.querySelectorAll('[data-i18n]').forEach(node=>{
+    const key = node.getAttribute('data-i18n');
+    const hasAud = node.hasAttribute('data-i18n-aud');
+    const finalKey = hasAud ? `${key}_${state.aud}` : key;
+    const dict = T[state.lang];
+    const text = dict[finalKey] !== undefined ? dict[finalKey] : dict[key];
+    if(text !== undefined) node.textContent = text;
+  });
+}
+
+function render(){
+  document.body.className = `aud-${state.aud} lang-${state.lang}`;
+  applyI18n();
+  renderSteps(); renderLevels(); renderCCUni(); renderCosts(); renderCards(); renderJourney(); renderRules(); renderIncludes(); renderHighlights();
+  observeReveals();
+}
+
+document.getElementById('aud-toggle').addEventListener('click', e=>{
+  const b = e.target.closest('button'); if(!b) return;
+  state.aud = b.dataset.aud;
+  [...b.parentElement.children].forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');
+  render();
+});
+document.getElementById('lang-toggle').addEventListener('click', e=>{
+  const b = e.target.closest('button'); if(!b) return;
+  state.lang = b.dataset.lang;
+  [...b.parentElement.children].forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');
+  render();
+});
+
+/* scroll progress */
+window.addEventListener('scroll', ()=>{
+  const h = document.documentElement;
+  const pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+  document.getElementById('progress').style.width = pct + '%';
+});
+
+/* reveal on scroll */
+function observeReveals(){
+  const items = document.querySelectorAll('.reveal:not(.in)');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+  }, {threshold:0.12});
+  items.forEach(i=>io.observe(i));
+}
+
+render();
+</script>
+</body>
+</html>
