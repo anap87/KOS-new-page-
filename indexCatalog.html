@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Player Catalog 2027 | Kick Off Scholars</title>
+<meta name="description" content="Women's and men's soccer student-athletes available for Spring and Fall 2027, presented by Kick Off Scholars.">
+<style>
+@font-face{font-family:"Montserrat";font-weight:700;font-style:normal;font-display:swap;src:url("assets/fonts/montserrat-latin-700-normal.woff2") format("woff2")}
+@font-face{font-family:"Montserrat";font-weight:800;font-style:normal;font-display:swap;src:url("assets/fonts/montserrat-latin-800-normal.woff2") format("woff2")}
+@font-face{font-family:"Montserrat";font-weight:900;font-style:normal;font-display:swap;src:url("assets/fonts/montserrat-latin-900-normal.woff2") format("woff2")}
+@font-face{font-family:"Open Sans";font-weight:400;font-style:normal;font-display:swap;src:url("assets/fonts/open-sans-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"Open Sans";font-weight:600;font-style:normal;font-display:swap;src:url("assets/fonts/open-sans-latin-600-normal.woff2") format("woff2")}
+
+:root{
+  --gold:#C9A84C;
+  --gold-light:#F0C040;
+  --gold-dark:#9A7A1A;
+  --dark:#111111;
+  --dark2:#1a1a1a;
+  --white:#ffffff;
+  --gray-light:#f5f5f5;
+  --gray:#888888;
+  --head:"Montserrat",sans-serif;
+  --body:"Open Sans",sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--white);color:var(--dark);font-family:var(--body);font-size:16px;line-height:1.6}
+a{color:inherit}
+img{max-width:100%}
+.wrap{max-width:1000px;margin:0 auto;padding:0 40px}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+
+/* Nav (same bar as the main site) */
+.navbar{position:sticky;top:0;z-index:20;height:72px;background:rgba(255,255,255,.97);border-bottom:2px solid var(--gold);display:flex;align-items:center;justify-content:space-between;padding:0 40px}
+.nav-logo{display:flex;align-items:center;text-decoration:none;height:72px}
+.nav-logo img{height:64px;width:64px;object-fit:contain;display:block}
+.wordmark{display:none;font-family:var(--head);font-weight:900;font-size:20px;text-transform:uppercase;letter-spacing:.5px;line-height:1}
+.wordmark b{color:var(--gold-dark);font-weight:900}
+.nav-links{display:flex;gap:34px;list-style:none;margin:0;padding:0}
+.nav-links a{font-family:var(--head);font-weight:600;font-size:14px;letter-spacing:.5px;text-transform:uppercase;text-decoration:none;color:var(--dark);padding:6px 0;border-bottom:2px solid transparent}
+.nav-links a:hover{border-bottom-color:var(--gold)}
+.nav-cta{background:var(--gold);color:var(--white);font-family:var(--head);font-weight:700;font-size:13px;letter-spacing:.5px;text-transform:uppercase;text-decoration:none;padding:9px 20px;border-radius:4px}
+.nav-cta:hover{background:var(--gold-dark)}
+
+/* Shared type */
+.eyebrow{display:inline-block;font-family:var(--head);font-weight:800;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-dark)}
+.sec-head{text-align:center;margin-bottom:34px}
+.sec-head h2,.h2{font-family:var(--head);font-weight:900;font-size:48px;line-height:1.1;text-transform:uppercase;margin:8px 0 0}
+.gold{color:var(--gold)}
+.divider{width:60px;height:3px;background:var(--gold);margin:16px auto 0}
+.btn-primary,.btn-outline{display:inline-block;font-family:var(--head);text-transform:uppercase;text-decoration:none;letter-spacing:1px;border-radius:4px}
+.btn-primary{background:var(--gold);color:var(--dark);border:2px solid var(--gold);font-weight:800;font-size:15px;padding:16px 36px}
+.btn-primary:hover{background:var(--gold-light);border-color:var(--gold-light)}
+.btn-outline{background:transparent;color:var(--white);border:2px solid rgba(255,255,255,.6);font-weight:700;font-size:15px;padding:16px 36px}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+
+/* Hero */
+.hero{background:var(--dark);color:var(--white);text-align:center;padding:96px 40px 88px;background-image:linear-gradient(180deg,rgba(201,168,76,.10),rgba(17,17,17,0) 60%)}
+.hero-badge{display:inline-block;background:var(--gold);color:var(--dark);font-family:var(--head);font-weight:800;font-size:12px;letter-spacing:3px;text-transform:uppercase;padding:6px 18px;border-radius:2px;margin-bottom:26px}
+.hero h1{font-family:var(--head);font-weight:900;font-size:80px;line-height:1.02;letter-spacing:-1px;text-transform:uppercase;margin:0 0 22px}
+.hero h1 span{display:block;color:var(--gold)}
+.hero p{max-width:560px;margin:0 auto 34px;font-size:19px;color:rgba(255,255,255,.88)}
+.hero-btns{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+
+/* Stats */
+.stats{background:var(--dark);border-top:1px solid rgba(255,255,255,.12);padding:56px 40px}
+.stats ul{list-style:none;margin:0 auto;padding:0;max-width:900px;display:flex;flex-wrap:wrap;justify-content:space-around;gap:28px}
+.stats li{text-align:center;min-width:140px}
+.stats strong{display:block;font-family:var(--head);font-weight:900;font-size:56px;line-height:1;color:var(--gold)}
+.stats span{display:block;margin-top:8px;font-family:var(--head);font-weight:700;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.7)}
+
+/* Roster table */
+.roster{padding:90px 0 70px;background:var(--white)}
+.table-card{background:var(--white);border:1px solid #e6e6e6;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,.06);overflow:hidden}
+table.lineup{width:100%;border-collapse:collapse;font-size:15px}
+.lineup th{text-align:left;font-family:var(--head);font-weight:800;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray);background:var(--gray-light);padding:12px 16px}
+.lineup td{padding:12px 16px;border-top:1px solid #eee;vertical-align:middle}
+.lineup td.n a{font-family:var(--head);font-weight:800;font-size:15px;text-transform:uppercase;text-decoration:none}
+.lineup td.n a:hover{color:var(--gold-dark)}
+.lineup td.pc{font-family:var(--head);font-weight:800;font-size:14px;color:var(--gold-dark);white-space:nowrap}
+
+/* Chips */
+.chip{display:inline-block;font-family:var(--head);font-weight:700;font-size:11px;letter-spacing:.5px;text-transform:uppercase;line-height:1;padding:7px 12px;border-radius:999px;border:1.5px solid var(--gold-dark);color:var(--gold-dark);white-space:nowrap}
+.chip.avail{background:var(--gold);border-color:var(--gold);color:var(--dark)}
+.chip.done{background:#e8e8e8;border-color:#e8e8e8;color:#555}
+
+/* Filters */
+.filters{position:sticky;top:74px;z-index:10;background:var(--white);border-bottom:1px solid #e6e6e6}
+.filters .wrap{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;padding-top:12px;padding-bottom:12px}
+.filters button{font-family:var(--head);font-weight:700;font-size:12px;letter-spacing:.5px;text-transform:uppercase;color:var(--dark);background:transparent;border:1px solid var(--gold);border-radius:3px;padding:8px 14px;cursor:pointer}
+.filters button:hover{background:rgba(201,168,76,.15)}
+.filters button[aria-pressed="true"]{background:var(--gold);color:var(--white)}
+.filters .sep{width:1px;height:24px;background:#ddd;margin:0 6px}
+
+/* Player sections and themes */
+.group{padding:100px 0 60px}
+.theme-light{background:var(--gray-light);--card:#ffffff;--text:#111111;--muted:#6b6b6b;--line:#e8e8e8;--accent:#8a6a10;--pos-bg:#111111;--pos-code:#C9A84C;--shadow:0 4px 20px rgba(0,0,0,.06)}
+.theme-dark{background:var(--dark);color:var(--white);--card:#1a1a1a;--text:#ffffff;--muted:#a8a8a8;--line:#2e2e2e;--accent:#C9A84C;--pos-bg:#000000;--pos-code:#C9A84C;--shadow:none}
+.theme-dark .sec-head h2{color:var(--white)}
+.theme-dark .eyebrow{color:var(--gold)}
+.theme-dark .chip{border-color:var(--gold);color:var(--gold)}
+.theme-dark .chip.avail{background:var(--gold);color:var(--dark)}
+.theme-dark .chip.done{background:#333;border-color:#333;color:#c8c8c8}
+.term{margin:34px 0 0}
+.term h3{font-family:var(--head);font-weight:800;font-size:24px;text-transform:uppercase;margin:0 0 16px;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px;padding-bottom:10px;border-bottom:2px solid var(--gold)}
+.term h3 span{font-family:var(--body);font-weight:600;font-size:14px;text-transform:none;color:var(--muted)}
+.empty{margin:0;padding:20px 24px;border:2px dashed var(--line);border-radius:8px;color:var(--muted)}
+
+/* Player card */
+.card{display:flex;background:var(--card);color:var(--text);border-radius:8px;box-shadow:var(--shadow);border:1px solid var(--line);margin:0 0 22px;overflow:hidden;scroll-margin-top:140px}
+.card .pos{flex:0 0 200px;padding:28px 22px;background:var(--pos-bg);color:var(--white)}
+.pos-code{display:block;font-family:var(--head);font-weight:900;font-size:38px;line-height:1;color:var(--pos-code);letter-spacing:-1px}
+.pos-name{display:block;margin-top:10px;font-size:13px;line-height:1.4;color:rgba(255,255,255,.7)}
+.pos-country{display:inline-block;margin-top:20px;padding-top:12px;border-top:3px solid var(--gold);font-family:var(--head);font-weight:800;font-size:15px;letter-spacing:1px;text-transform:uppercase;color:var(--white)}
+.card .body{flex:1;padding:24px 28px 26px;min-width:0}
+.card header{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;margin-bottom:18px}
+.name{font-family:var(--head);font-weight:900;font-size:30px;line-height:1.1;margin:0;text-transform:uppercase}
+.tags{display:flex;gap:8px;flex-wrap:wrap}
+.facts{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px 20px;margin:0}
+.facts div{border-top:1px solid var(--line);padding-top:8px}
+.facts dt{font-size:12px;color:var(--muted);margin:0 0 2px}
+.facts dd{margin:0;font-size:15px;font-weight:600}
+.facts dd.req{color:var(--muted);font-weight:400}
+.card h5{font-family:var(--head);font-weight:800;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin:24px 0 10px}
+.timeline{list-style:none;margin:0;padding:0 0 0 16px;border-left:3px solid var(--gold)}
+.timeline li{margin:0 0 10px}
+.timeline li:last-child{margin-bottom:0}
+.timeline .when{display:block;font-size:13px;color:var(--muted)}
+.timeline .where{display:block;font-weight:600}
+.note{margin:14px 0 0;font-size:14px}
+.note b{color:var(--accent);font-weight:600}
+.videos{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:11px 18px;background:var(--gold);color:var(--dark);border:2px solid var(--gold);border-radius:4px;font-family:var(--head);font-weight:800;font-size:12px;letter-spacing:1px;text-transform:uppercase;text-decoration:none}
+.btn::before{content:"";display:inline-block;width:0;height:0;border-left:8px solid currentColor;border-top:5px solid transparent;border-bottom:5px solid transparent}
+.btn:hover{background:var(--gold-light);border-color:var(--gold-light)}
+
+/* Committed */
+.card.committed .pos-code{color:#8a8a8a}
+.card.committed .pos-country{border-top-color:#8a8a8a}
+.card.committed .pos{background:#2a2a2a}
+
+/* Filter states */
+body[data-gender="women"] [data-gender="men"],
+body[data-gender="men"] [data-gender="women"]{display:none}
+body[data-avail="1"] [data-status="committed"]{display:none}
+
+/* Closing call to action */
+.cta{background:var(--dark);color:var(--white);text-align:center;padding:90px 40px}
+.cta .h2{color:var(--white)}
+.cta p{max-width:540px;margin:20px auto 32px;font-size:18px;color:rgba(255,255,255,.8)}
+.cta .hero-btns{margin-top:0}
+
+/* Footer (same as main site) */
+.footer{background:var(--dark2);border-top:3px solid var(--gold);color:rgba(255,255,255,.5);padding:48px 40px 24px}
+.footer-grid{max-width:1000px;margin:0 auto;display:flex;flex-wrap:wrap;gap:36px 60px;justify-content:space-between}
+.footer-brand{max-width:300px;font-size:14px}
+.footer-brand .wm{display:block;font-family:var(--head);font-weight:900;font-size:20px;text-transform:uppercase;color:var(--white);margin-bottom:10px}
+.footer-brand .wm b{color:var(--gold)}
+.footer h4{font-family:var(--head);font-weight:800;font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
+.footer ul{list-style:none;margin:0;padding:0;font-size:14px}
+.footer li{margin:0 0 8px}
+.footer a{color:rgba(255,255,255,.5);text-decoration:none}
+.footer a:hover{color:var(--gold)}
+.footer-bottom{max-width:1000px;margin:34px auto 0;padding-top:18px;border-top:1px solid rgba(255,255,255,.1);font-size:12px}
+
+/* Tablet and phone */
+@media (max-width:860px){
+  .nav-links{display:none}
+  .navbar{padding:0 20px}
+  .wrap{padding:0 20px}
+  .hero{padding:72px 20px 64px}
+  .hero h1{font-size:46px}
+  .sec-head h2,.h2{font-size:34px}
+  .group{padding:72px 0 40px}
+}
+@media (max-width:720px){
+  .card{flex-direction:column}
+  .card .pos{flex:none;display:flex;flex-wrap:wrap;align-items:flex-end;gap:6px 18px;padding:18px 20px}
+  .pos-name{margin:0;flex:1 1 100%}
+  .pos-country{margin:0;border-top:0;padding-top:0}
+  .card .body{padding:20px}
+  .name{font-size:26px}
+  .lineup .hide-s{display:none}
+  .stats strong{font-size:44px}
+}
+
+/* Print / PDF */
+@page{size:Letter;margin:.4in;background:#f5f5f5}
+@media print{
+  html{scroll-behavior:auto}
+  body{background:#f5f5f5;font-size:12px;line-height:1.45}
+  .filters,.hero-btns,.nav-links,.nav-cta,.footer-nav{display:none!important}
+  .wrap{max-width:none;padding:0}
+  .navbar{position:static;height:56px;padding:0 20px}
+  .nav-logo{height:56px}
+  .nav-logo img{display:none}
+  .wordmark{display:block;font-size:18px}
+  .hero{padding:26px 24px 22px;background-image:none}
+  .hero-badge{margin-bottom:12px;font-size:10px;padding:5px 14px}
+  .hero h1{font-size:46px;margin-bottom:10px}
+  .hero p{font-size:13px;margin-bottom:0}
+  .stats{padding:18px 24px}
+  .stats ul{flex-wrap:nowrap;gap:12px}
+  .stats li{min-width:0}
+  .stats strong{font-size:30px}
+  .stats span{font-size:10px;margin-top:4px}
+  .roster{background:transparent;padding:22px 0 0}
+  .sec-head{margin-bottom:12px}
+  .sec-head h2,.h2{font-size:26px}
+  .divider{display:none}
+  .table-card{box-shadow:none}
+  table.lineup{font-size:11.5px}
+  .lineup th{padding:6px 10px;font-size:9px}
+  .lineup td{padding:6px 10px}
+  .lineup td.n a{font-size:12px}
+  .chip{font-size:9px;padding:5px 9px}
+  .group{padding:0}
+  .theme-dark{background:transparent;color:var(--dark);--card:#ffffff;--text:#111111;--muted:#6b6b6b;--line:#e8e8e8;--accent:#8a6a10;--pos-bg:#111111;--shadow:none}
+  .theme-light{background:transparent;--shadow:none}
+  .theme-dark .sec-head h2{color:var(--dark)}
+  .theme-dark .eyebrow{color:var(--gold-dark)}
+  .theme-dark .chip{border-color:var(--gold-dark);color:var(--gold-dark)}
+  .theme-dark .chip.avail{background:var(--gold);border-color:var(--gold);color:var(--dark)}
+  .theme-dark .chip.done{background:#e8e8e8;border-color:#e8e8e8;color:#555}
+  .group.break{break-before:page}
+  .group.first{break-before:page}
+  .term{margin-top:12px}
+  .term h3{font-size:17px;margin-bottom:10px;padding-bottom:6px}
+  .term h3 span{font-size:11px}
+  .term.none{display:none}
+  .card{break-inside:avoid;margin-bottom:12px}
+  .card .pos{flex-basis:130px;padding:14px 12px}
+  .pos-code{font-size:25px}
+  .pos-name{font-size:10.5px;margin-top:6px}
+  .pos-country{font-size:12px;margin-top:12px;padding-top:8px}
+  .card .body{padding:14px 16px 14px}
+  .card header{margin-bottom:10px}
+  .name{font-size:20px}
+  .facts{grid-template-columns:repeat(5,1fr);gap:7px 10px}
+  .facts div{padding-top:5px}
+  .facts dt{font-size:10px}
+  .facts dd{font-size:12px}
+  .card h5{margin:12px 0 6px;font-size:10px}
+  .timeline li{margin-bottom:6px}
+  .timeline .when{font-size:10.5px}
+  .timeline .where{font-size:11.5px}
+  .note{margin-top:8px;font-size:11.5px}
+  .videos{margin-top:10px;gap:8px}
+  .btn{padding:6px 10px;font-size:10px;gap:7px}
+  .btn::before{border-left-width:7px;border-top-width:4px;border-bottom-width:4px}
+  .empty{padding:10px 14px;font-size:12px}
+  .cta{break-inside:avoid;padding:26px 24px;margin-top:10px}
+  .cta .h2{font-size:26px}
+  .cta p{font-size:13px;margin:10px auto 0}
+  .footer{break-inside:avoid;padding:20px 24px 14px}
+  .footer-grid{gap:20px 40px}
+  .footer-bottom{margin-top:14px;padding-top:10px}
+}
+
+</style>
+</head>
+<body data-gender="all" data-avail="0">
+<nav class="navbar">
+  <a class="nav-logo" href="../index.html" aria-label="Kick Off Scholars home"><img src="../img/logo.png" alt="Kick Off Scholars"><span class="wordmark">Kick Off <b>Scholars</b></span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../quienes-somos.html">About</a></li>
+    <li><a href="../nuestros-servicios.html">Services</a></li>
+    <li><a href="../index.html#contact">Contact</a></li>
+  </ul>
+  <a class="nav-cta" href="mailto:recruiting@kickoffscholars.com">Contact us</a>
+</nav>
+
+<header class="hero">
+  <div class="hero-badge">Spring &amp; Fall 2027</div>
+  <h1>Player Catalog <span>2027</span></h1>
+  <p>Women's and men's soccer student-athletes, ready to enroll in Spring or Fall 2027. Open any profile to see their details and watch their video.</p>
+  <div class="hero-btns">
+    <a class="btn-primary" href="#roster">View the roster</a>
+    <a class="btn-outline" href="mailto:recruiting@kickoffscholars.com">Contact us</a>
+  </div>
+</header>
+
+<section class="stats" aria-label="Catalog summary">
+  <ul>
+    <li><strong>9</strong><span>Student-athletes</span></li>
+    <li><strong>8</strong><span>Available</span></li>
+    <li><strong>5</strong><span>Women's soccer</span></li>
+    <li><strong>4</strong><span>Men's soccer</span></li>
+  </ul>
+</section>
+
+<main>
+<section class="roster" id="roster"><div class="wrap">
+  <div class="sec-head"><span class="eyebrow">Class of 2027</span><h2>Roster at a <span class="gold">glance</span></h2><div class="divider"></div></div>
+  <div class="table-card">
+  <table class="lineup">
+    <thead><tr><th>Player</th><th>Position</th><th class="hide-s">Country</th><th>Start</th><th class="hide-s">Class</th><th>Status</th></tr></thead>
+    <tbody><tr data-gender="women" data-status="available"><td class="n"><a href="#claudia-beaujon">Claudia Beaujon</a></td><td class="pc">LB/CB</td><td class="hide-s">Venezuela</td><td>Spring 2027</td><td class="hide-s">Transfer</td><td><span class="chip avail">Available</span></td></tr><tr data-gender="women" data-status="available"><td class="n"><a href="#mariana-ruiz">Mariana Ruiz</a></td><td class="pc">MF/RB</td><td class="hide-s">Colombia</td><td>Spring 2027</td><td class="hide-s">Transfer</td><td><span class="chip avail">Available</span></td></tr><tr data-gender="women" data-status="available"><td class="n"><a href="#isabella-corredor">Isabella Corredor</a></td><td class="pc">RW/RB</td><td class="hide-s">Colombia</td><td>Spring 2027</td><td class="hide-s">First-year</td><td><span class="chip avail">Available</span></td></tr><tr data-gender="women" data-status="committed"><td class="n"><a href="#sofia-ardila">Sofía Ardila</a></td><td class="pc">FW/W</td><td class="hide-s">Colombia</td><td>Spring 2027</td><td class="hide-s">First-year</td><td><span class="chip done">Committed</span></td></tr><tr data-gender="women" data-status="available"><td class="n"><a href="#chanell-makusu">Chanell Makusu</a></td><td class="pc">FB/WB</td><td class="hide-s">Germany</td><td>Spring 2027</td><td class="hide-s">Transfer</td><td><span class="chip avail">Available</span></td></tr><tr data-gender="men" data-status="available"><td class="n"><a href="#daniel-montoya">Daniel Montoya</a></td><td class="pc">MF/RB</td><td class="hide-s">Colombia</td><td>Spring 2027</td><td class="hide-s">First-year</td><td><span class="chip avail">Available</span></td></tr><tr data-gender="men" data-status="available"><td class="n"><a href="#nicolas-chavez">Nicolas Chavez</a></td><td class="pc">MF</td><td class="hide-s">Ecuador</td><td>Fall 2027</td><td class="hide-s">Transfer</td><td><span class="chip avail">Available</span></td></tr><tr data-gender="men" data-status="available"><td class="n"><a href="#camilo-chavez">Camilo Chavez</a></td><td class="pc">CAM</td><td class="hide-s">Ecuador</td><td>Fall 2027</td><td class="hide-s">First-year</td><td><span class="chip avail">Available</span></td></tr><tr data-gender="men" data-status="available"><td class="n"><a href="#lionel-zapata">Lionel Zapata</a></td><td class="pc">AM/W</td><td class="hide-s">Ecuador</td><td>Fall 2027</td><td class="hide-s">First-year</td><td><span class="chip avail">Available</span></td></tr></tbody>
+  </table>
+  </div>
+</div></section>
+
+<nav class="filters" id="filters" aria-label="Filter players" hidden>
+  <div class="wrap">
+    <button type="button" data-set-gender="all" aria-pressed="true">All players</button>
+    <button type="button" data-set-gender="women" aria-pressed="false">Women's soccer</button>
+    <button type="button" data-set-gender="men" aria-pressed="false">Men's soccer</button>
+    <span class="sep" aria-hidden="true"></span>
+    <button type="button" id="avail-only" aria-pressed="false">Available only</button>
+  </div>
+</nav>
+
+<section class="group theme-light first" data-gender="women"><div class="wrap"><div class="sec-head"><span class="eyebrow">Class of 2027</span><h2>Women's <span class="gold">Soccer</span></h2><div class="divider"></div></div><div class="term"><h3>Spring 2027<span>5 players, 4 available</span></h3><article class="card" id="claudia-beaujon" data-gender="women" data-status="available">
+  <div class="pos"><span class="pos-code">LB/CB</span><span class="pos-name">Left back / center back</span><span class="pos-country">Venezuela</span></div>
+  <div class="body">
+    <header><h4 class="name">Claudia Beaujon</h4><div class="tags"><span class="chip">Transfer</span><span class="chip avail">Available</span></div></header>
+    <dl class="facts"><div><dt>Age</dt><dd>20</dd></div><div><dt>Class</dt><dd>Transfer</dd></div><div><dt>Dominant foot</dt><dd>Right</dd></div><div><dt>Height</dt><dd>5&#x27;3&quot; (1.60 m)</dd></div><div><dt>Weight</dt><dd class="req">On request</dd></div><div><dt>GPA</dt><dd class="req">On request</dd></div><div><dt>English level</dt><dd>B2</dd></div><div><dt>College credits</dt><dd class="req">On request</dd></div><div><dt>Associate degree</dt><dd>Expected Fall 2026</dd></div><div><dt>Major</dt><dd class="req">On request</dd></div></dl>
+    <h5>Background</h5><ul class="timeline"><li><span class="when">Current</span><span class="where">Iowa Lakes Community College | NJCAA</span></li></ul>
+    <div class="videos"><a class="btn" href="https://youtu.be/xe0GzaS542c" target="_blank" rel="noopener">Watch: Highlights</a><a class="btn" href="https://live.veo.co/web-app/matches/20261014-womens-soccer-vs-iowa-central-v3c8454a/" target="_blank" rel="noopener">Watch: Full match vs Iowa Central (jersey #14)</a></div>
+  </div>
+</article><article class="card" id="mariana-ruiz" data-gender="women" data-status="available">
+  <div class="pos"><span class="pos-code">MF/RB</span><span class="pos-name">Midfielder / right back</span><span class="pos-country">Colombia</span></div>
+  <div class="body">
+    <header><h4 class="name">Mariana Ruiz</h4><div class="tags"><span class="chip">Transfer</span><span class="chip avail">Available</span></div></header>
+    <dl class="facts"><div><dt>Age</dt><dd>19</dd></div><div><dt>Class</dt><dd>Transfer</dd></div><div><dt>Dominant foot</dt><dd>Right</dd></div><div><dt>Height</dt><dd>5&#x27;0&quot; (1.52 m)</dd></div><div><dt>Weight</dt><dd>137 lbs (62 kg)</dd></div><div><dt>GPA</dt><dd>3.79</dd></div><div><dt>English level</dt><dd>B2</dd></div><div><dt>College credits</dt><dd>58</dd></div><div><dt>Associate degree</dt><dd>N/A</dd></div><div><dt>Major</dt><dd>General Studies</dd></div></dl>
+    <h5>Background</h5><ul class="timeline"><li><span class="when">College</span><span class="where">Alcorn State University | NCAA Division I</span></li><li><span class="when">Fall 2026</span><span class="where">Colombia | Back home and training</span></li></ul><p class="note"><b>Eligibility:</b> Would start her junior year.</p>
+    <div class="videos"><a class="btn" href="https://www.youtube.com/watch?v=NiN1Jx7wb8o" target="_blank" rel="noopener">Watch: Highlights in the USA</a><a class="btn" href="https://youtu.be/nGjyMozRGjM" target="_blank" rel="noopener">Watch: Highlights in Colombia</a></div>
+  </div>
+</article><article class="card" id="isabella-corredor" data-gender="women" data-status="available">
+  <div class="pos"><span class="pos-code">RW/RB</span><span class="pos-name">Right wing / right back</span><span class="pos-country">Colombia</span></div>
+  <div class="body">
+    <header><h4 class="name">Isabella Corredor</h4><div class="tags"><span class="chip">First-year</span><span class="chip avail">Available</span></div></header>
+    <dl class="facts"><div><dt>Age</dt><dd>20</dd></div><div><dt>Class</dt><dd>First-year</dd></div><div><dt>Dominant foot</dt><dd>Right</dd></div><div><dt>Height</dt><dd>5&#x27;4&quot; (1.63 m)</dd></div><div><dt>Weight</dt><dd>126 lbs (57 kg)</dd></div><div><dt>GPA</dt><dd>3.0</dd></div><div><dt>English level</dt><dd>B2</dd></div></dl>
+    <h5>Background</h5><ul class="timeline"><li><span class="when">November 2022 to January 2023</span><span class="where">Wembley F.C. | Bogotá, Colombia</span></li><li><span class="when">March 2023 to July 2025</span><span class="where">Ricardo Rozo F.C. / Fortín Vélez | Player development and college placement program, Colombia</span></li><li><span class="when">August 2025 to present</span><span class="where">Inter de Bogotá | Youth academy of a Colombian professional club</span></li></ul>
+    <div class="videos"><a class="btn" href="https://www.youtube.com/watch?v=NN6TgrsYDbY" target="_blank" rel="noopener">Watch: Highlights</a></div>
+  </div>
+</article><article class="card committed" id="sofia-ardila" data-gender="women" data-status="committed">
+  <div class="pos"><span class="pos-code">FW/W</span><span class="pos-name">Forward / winger</span><span class="pos-country">Colombia</span></div>
+  <div class="body">
+    <header><h4 class="name">Sofía Ardila</h4><div class="tags"><span class="chip">First-year</span><span class="chip done">Committed</span></div></header>
+    <dl class="facts"><div><dt>Age</dt><dd>17</dd></div><div><dt>Class</dt><dd>First-year</dd></div><div><dt>Dominant foot</dt><dd>Right</dd></div><div><dt>Height</dt><dd>5&#x27;1&quot; (1.56 m)</dd></div><div><dt>Weight</dt><dd>110 lbs (50 kg)</dd></div><div><dt>GPA</dt><dd class="req">On request</dd></div><div><dt>English level</dt><dd>B2</dd></div></dl>
+    <h5>Background</h5><ul class="timeline"><li><span class="when">Current</span><span class="where">Santa Fe | Professional club, Bogotá, Colombia</span></li></ul>
+    <div class="videos"><a class="btn" href="https://www.youtube.com/watch?v=unAcb4ommac" target="_blank" rel="noopener">Watch: Highlights</a></div>
+  </div>
+</article><article class="card" id="chanell-makusu" data-gender="women" data-status="available">
+  <div class="pos"><span class="pos-code">FB/WB</span><span class="pos-name">Fullback / wingback</span><span class="pos-country">Germany</span></div>
+  <div class="body">
+    <header><h4 class="name">Chanell Makusu</h4><div class="tags"><span class="chip">Transfer</span><span class="chip avail">Available</span></div></header>
+    <dl class="facts"><div><dt>Age</dt><dd>21</dd></div><div><dt>Class</dt><dd>Transfer</dd></div><div><dt>Dominant foot</dt><dd>Right</dd></div><div><dt>Height</dt><dd>5&#x27;5&quot; (1.65 m)</dd></div><div><dt>Weight</dt><dd>154 lbs (70 kg)</dd></div><div><dt>GPA</dt><dd>3.2</dd></div><div><dt>English level</dt><dd>B2</dd></div><div><dt>College credits</dt><dd>61 (Iowa Lakes CC 46, Niagara 15)</dd></div><div><dt>Associate degree</dt><dd>Not completed</dd></div><div><dt>Major</dt><dd class="req">On request</dd></div></dl>
+    <h5>Background</h5><ul class="timeline"><li><span class="when">August 2024 to August 2025</span><span class="where">Iowa Lakes Community College | NJCAA, nationally ranked at the time</span></li><li><span class="when">Spring 2026</span><span class="where">Niagara University | NCAA Division I</span></li><li><span class="when">Fall 2026</span><span class="where">Germany | Full-time training</span></li></ul><p class="note"><b>Career highlight:</b> All-Region Honorable Mention.</p>
+    <div class="videos"><a class="btn" href="https://www.youtube.com/watch?v=vpBM2dIuyck" target="_blank" rel="noopener">Watch: Highlights in the USA</a><a class="btn" href="https://www.youtube.com/watch?v=XVzraaLBopc" target="_blank" rel="noopener">Watch: Highlights, summer and fall 2026 in Germany</a></div>
+  </div>
+</article></div><div class="term none"><h3>Fall 2027</h3><p class="empty">No players listed for Fall 2027 yet.</p></div></div></section>
+<section class="group theme-dark break" data-gender="men"><div class="wrap"><div class="sec-head"><span class="eyebrow">Class of 2027</span><h2>Men's <span class="gold">Soccer</span></h2><div class="divider"></div></div><div class="term"><h3>Spring 2027<span>1 player, 1 available</span></h3><article class="card" id="daniel-montoya" data-gender="men" data-status="available">
+  <div class="pos"><span class="pos-code">MF/RB</span><span class="pos-name">Midfielder / right back</span><span class="pos-country">Colombia</span></div>
+  <div class="body">
+    <header><h4 class="name">Daniel Montoya</h4><div class="tags"><span class="chip">First-year</span><span class="chip avail">Available</span></div></header>
+    <dl class="facts"><div><dt>Age</dt><dd>16</dd></div><div><dt>Class</dt><dd>First-year</dd></div><div><dt>Dominant foot</dt><dd>Right</dd></div><div><dt>Height</dt><dd>6&#x27;1&quot; (1.85 m)</dd></div><div><dt>Weight</dt><dd class="req">On request</dd></div><div><dt>GPA</dt><dd class="req">On request</dd></div><div><dt>English level</dt><dd>B2</dd></div></dl>
+    <h5>Background</h5><p class="note">Club history available on request.</p>
+    <div class="videos"><a class="btn" href="https://www.youtube.com/watch?v=nYrvlK342nw" target="_blank" rel="noopener">Watch: Highlights</a></div>
+  </div>
+</article></div><div class="term"><h3>Fall 2027<span>3 players, 3 available</span></h3><article class="card" id="nicolas-chavez" data-gender="men" data-status="available">
+  <div class="pos"><span class="pos-code">MF</span><span class="pos-name">Midfielder</span><span class="pos-country">Ecuador</span></div>
+  <div class="body">
+    <header><h4 class="name">Nicolas Chavez</h4><div class="tags"><span class="chip">Transfer</span><span class="chip avail">Available</span></div></header>
+    <dl class="facts"><div><dt>Age</dt><dd class="req">On request</dd></div><div><dt>Class</dt><dd>Transfer</dd></div><div><dt>Dominant foot</dt><dd>Left</dd></div><div><dt>Height</dt><dd>5&#x27;7&quot; (1.70 m)</dd></div><div><dt>Weight</dt><dd>139 lbs (63 kg)</dd></div><div><dt>GPA</dt><dd>3.3</dd></div><div><dt>English level</dt><dd>B2</dd></div><div><dt>College credits</dt><dd>58</dd></div><div><dt>Associate degree</dt><dd class="req">On request</dd></div><div><dt>Major</dt><dd>International Business / Sport Management</dd></div></dl>
+    <h5>Background</h5><ul class="timeline"><li><span class="when">Hometown</span><span class="where">Quito, Ecuador</span></li></ul>
+    <div class="videos"><a class="btn" href="https://youtu.be/HITgCkF0v7Q" target="_blank" rel="noopener">Watch: Highlights</a></div>
+  </div>
+</article><article class="card" id="camilo-chavez" data-gender="men" data-status="available">
+  <div class="pos"><span class="pos-code">CAM</span><span class="pos-name">Attacking midfielder</span><span class="pos-country">Ecuador</span></div>
+  <div class="body">
+    <header><h4 class="name">Camilo Chavez</h4><div class="tags"><span class="chip">First-year</span><span class="chip avail">Available</span></div></header>
+    <dl class="facts"><div><dt>Age</dt><dd>18</dd></div><div><dt>Class</dt><dd>First-year</dd></div><div><dt>Dominant foot</dt><dd>Right</dd></div><div><dt>Height</dt><dd>5&#x27;7&quot; (1.71 m)</dd></div><div><dt>Weight</dt><dd>141 lbs (64 kg)</dd></div><div><dt>GPA</dt><dd class="req">On request</dd></div><div><dt>English level</dt><dd>B2</dd></div></dl>
+    <h5>Background</h5><ul class="timeline"><li><span class="when">2026</span><span class="where">Club Da Encarnacao | Leones de Carcelén, Pichincha Professional Second Division</span></li></ul><p class="note"><b>Career highlight:</b> Professional debut with the first team on June 6, 2026.</p>
+    <div class="videos"><a class="btn" href="https://www.youtube.com/watch?v=EeBh4eWCMsc" target="_blank" rel="noopener">Watch: Highlights</a></div>
+  </div>
+</article><article class="card" id="lionel-zapata" data-gender="men" data-status="available">
+  <div class="pos"><span class="pos-code">AM/W</span><span class="pos-name">Attacking midfielder / winger (LW, RW)</span><span class="pos-country">Ecuador</span></div>
+  <div class="body">
+    <header><h4 class="name">Lionel Zapata</h4><div class="tags"><span class="chip">First-year</span><span class="chip avail">Available</span></div></header>
+    <dl class="facts"><div><dt>Age</dt><dd class="req">On request</dd></div><div><dt>Class</dt><dd>First-year</dd></div><div><dt>Dominant foot</dt><dd class="req">On request</dd></div><div><dt>Height</dt><dd>5&#x27;11&quot; (1.80 m)</dd></div><div><dt>Weight</dt><dd>146 lbs (66 kg)</dd></div><div><dt>GPA</dt><dd class="req">On request</dd></div><div><dt>English level</dt><dd>B2</dd></div></dl>
+    <h5>Background</h5><ul class="timeline"><li><span class="when">Current</span><span class="where">Club Da Encarnacao | Leones de Carcelén, Ecuador</span></li></ul>
+    <div class="videos"><a class="btn" href="https://www.youtube.com/watch?v=jVN34Aif-qw" target="_blank" rel="noopener">Watch: Highlights</a></div>
+  </div>
+</article></div></div></section>
+</main>
+
+<section class="cta" id="contact">
+  <span class="eyebrow" style="color:var(--gold)">Interested in a player?</span>
+  <h2 class="h2">Let's talk <span class="gold">roster fit</span></h2>
+  <p>If any of these student-athletes could be a fit for your program, reach out and we will send you more information right away.</p>
+  <div class="hero-btns">
+    <a class="btn-primary" href="mailto:recruiting@kickoffscholars.com">Email our team</a>
+    <a class="btn-outline" href="../index.html">Visit our website</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand"><span class="wm">Kick Off <b>Scholars</b></span>Serving student-athletes worldwide.</div>
+    <div class="footer-nav"><h4>Navigate</h4><ul>
+      <li><a href="../index.html">Home</a></li><li><a href="../quienes-somos.html">About</a></li>
+      <li><a href="../nuestros-servicios.html">Services</a></li><li><a href="../index.html#contact">Contact</a></li></ul></div>
+    <div><h4>Contact</h4><ul>
+      <li><a href="mailto:recruiting@kickoffscholars.com">recruiting@kickoffscholars.com</a></li>
+      <li>Mahee Montenegro, CEO</li>
+      <li>+1 (786) 922-3853</li>
+      <li>Instagram @kickoffscholars.usa</li></ul></div>
+  </div>
+  <div class="footer-bottom">&copy; 2026 Kick Off Scholars. Profile information as of October 21, 2026.</div>
+</footer>
+<script>
+(function(){
+  var b=document.body, bar=document.getElementById('filters');
+  if(!bar) return;
+  bar.hidden=false;
+  var g=bar.querySelectorAll('[data-set-gender]');
+  g.forEach(function(btn){btn.addEventListener('click',function(){
+    b.setAttribute('data-gender',btn.getAttribute('data-set-gender'));
+    g.forEach(function(x){x.setAttribute('aria-pressed',x===btn?'true':'false')});
+  })});
+  var a=document.getElementById('avail-only');
+  a.addEventListener('click',function(){
+    var on=a.getAttribute('aria-pressed')!=='true';
+    a.setAttribute('aria-pressed',on?'true':'false');
+    b.setAttribute('data-avail',on?'1':'0');
+  });
+})();
+</script>
+</body>
+</html>
